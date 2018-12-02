@@ -33,8 +33,8 @@ package ::= package_opt  END .
 
 package_opt ::= /* empty */ .
 package_opt ::= package_opt function_def .
-package_opt ::= package_opt var_inst SEMICOLON .
-package_opt ::= package_opt var_decl SEMICOLON .
+package_opt ::= package_opt var_inst .
+package_opt ::= package_opt var_decl .
 package_opt ::= package_opt struct_def .
 
 /*----------------------------------------------------+
@@ -42,8 +42,8 @@ package_opt ::= package_opt struct_def .
 +----------------------------------------------------*/
 
 struct_def ::= struct_def_opt R_C_BRACKET .
-struct_def_opt ::= ID L_C_BRACKET var_decl SEMICOLON .
-struct_def_opt ::= struct_def_opt var_decl SEMICOLON .
+struct_def_opt ::= ID L_C_BRACKET var_decl .
+struct_def_opt ::= struct_def_opt var_decl .
 
 /*----------------------------------------------------+
 |                       FUNCTION                      |
@@ -88,7 +88,7 @@ function_param_opt ::= function_param_opt COMMA var_decl .
 
 type ::= type ASTERIX . [POINTER_TYPE]
 type ::= type_qualifier type . [POINTER_TYPE]
-type ::= L_S_BRACKET type SEMICOLON INTEGER R_S_BRACKET .
+type ::= L_S_BRACKET type COMMA INTEGER R_S_BRACKET .
 type ::= U8 .
 type ::= U16 .
 type ::= U32 .
@@ -111,25 +111,10 @@ block_statement ::= block_statement_opt R_C_BRACKET .
 
 block_statement_opt ::= L_C_BRACKET .
 block_statement_opt ::= block_statement_opt statement .
-block_statement_opt ::= block_statement_opt var_statement .
 
-var_statement ::= vars_inst SEMICOLON .
-var_statement ::= vars_decl SEMICOLON .
-var_statement ::= var_inst SEMICOLON .
-var_statement ::= var_decl SEMICOLON .
-
-statement ::= struct_def .
-statement ::= enum_def .
-statement ::= union_def .
-statement ::= function_def .
-statement ::= loop_statement .
-statement ::= conditional_statement .
-statement ::= switch_statement .
-statement ::= RETURN expression SEMICOLON .
-statement ::= BREAK SEMICOLON .
-statement ::= CONTINUE SEMICOLON .
 statement ::= SEMICOLON .
-statement ::= expression SEMICOLON .
+statement ::= var_decl .
+statement ::= var_inst .
 
 /*----------------------------------------------------+
 |                       EXPRESSION                    |
@@ -139,30 +124,24 @@ statement ::= expression SEMICOLON .
 
 compound_literal ::= compound_literal_opt R_C_BRACKET .
 
-compound_literal_opt ::= L_R_BRACKET type R_R_BRACKET L_C_BRACKET expression .
-compound_literal_opt ::= L_R_BRACKET type R_R_BRACKET L_C_BRACKET DOT ID EQUALS expression .
-compound_literal_opt ::= L_R_BRACKET type R_R_BRACKET L_C_BRACKET L_S_BRACKET INTEGER R_S_BRACKET EQUALS expression .
+compound_literal_opt ::= L_C_BRACKET expression .
+compound_literal_opt ::= DOT ID expression .
+compound_literal_opt ::= L_S_BRACKET INTEGER R_S_BRACKET expression .
 compound_literal_opt ::= compound_literal_opt COMMA expression .
-compound_literal_opt ::= compound_literal_opt COMMA DOT ID EQUALS expression .
-compound_literal_opt ::= compound_literal_opt COMMA L_S_BRACKET INTEGER R_S_BRACKET EQUALS expression .
+compound_literal_opt ::= compound_literal_opt COMMA DOT ID expression .
+compound_literal_opt ::= compound_literal_opt COMMA L_S_BRACKET INTEGER R_S_BRACKET expression .
 
 /* -------------------- EXPRESSION_PREC --------------- */
 
 expression ::= conditional_expresion . [EXP]
-expression ::= expression_list . [EXP]
 expression ::= STRING .
 
-primary_expression ::= INTEGER .
-primary_expression ::= FLOAT .
-primary_expression ::= L_R_BRACKET expression R_R_BRACKET .
+primary_expression ::= ID .
 
 postfix_expression ::= primary_expression . [EXP]
-postfix_expression ::= postfix_expression L_S_BRACKET expression R_S_BRACKET .
+postfix_expression ::= postfix_expression L_S_BRACKET INTEGER R_S_BRACKET .
 postfix_expression ::= postfix_expression DOT ID .
 postfix_expression ::= postfix_expression ARROW ID .
-postfix_expression ::= ID L_S_BRACKET expression R_S_BRACKET .
-postfix_expression ::= ID DOT ID .
-postfix_expression ::= ID ARROW ID .
 
 unary_expression ::= postfix_expression . [EXP]
 unary_expression ::= ID .
@@ -177,6 +156,8 @@ unary_operator ::= TILDE .
 unary_operator ::= EXCLAMATIONMARK .
 
 cast_expression ::= unary_expression . [EXP]
+cast_expression ::= INTERGER .
+cast_expression ::= FLOAT .
 cast_expression ::= L_R_BRACKET type R_R_BRACKET cast_expression .
 
 multiplicative_expression ::= cast_expression . [EXP]

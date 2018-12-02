@@ -1,0 +1,41 @@
+
+//defining a namespace for a file
+package foo
+
+//defining structures
+bar {
+  i : i32
+  name : char*
+}
+
+//arrays
+marray : [int, 10]
+
+//initialized variables that are placed in .data section
+var : int (10);
+iarra : [int, 10] (10, 10, 10);
+msg : [char,5] ("sdfs", 10);
+
+//functions
+main (argc : i32, argv : char**) {
+
+  // either
+  print(argv[0])
+
+  //or
+  push argv[0]
+  call print
+
+label:
+  i : i32
+
+  x : sometype
+
+  push 0
+  ret
+}
+
+print (msg : char*) {
+  push msg
+  call putstr
+}
