@@ -16,6 +16,45 @@
 +----------------------------------------------------*/
 
 
+%right              WHITESPACE END OTHER TAB NEW_LINE CARRIAGE_RETURN CHAR MULTICHAR LINE_COMMENT
+                    MULTILINE_COMMENT INTEGER FLOAT STRING USE AS RET
+                    U8 U16 U32 U64 I8 I16 I32 I64 F32 F64
+                    EXCALAMATIONMARK_EQUALS
+                    COLON SEMICOLON
+                    EXCLAMATIONMARK QUESTIONMARK .
+
+%left               EXP .
+
+%right              COMMA
+                    PIPE
+                    CIRCUMFLEX
+                    DOUBLE_LESS_THAN
+                    DOUBLE_GREATER_THAN
+                    SLASH
+                    PERCENT
+                    MINUS
+                    PLUS
+                    EXCLAMATION_MARK
+                    TILDE
+                    ASTERIX
+                    AMPERSAND
+                    L_C_BRACKET
+                    R_C_BRACKET
+                    L_S_BRACKET
+                    R_S_BRACKET
+                    L_R_BRACKET
+                    R_R_BRACKET
+                    DOT
+                    ARROW
+                    DOUBLE_COLON .
+
+%left               POINTER_TYPE .
+
+%right              VOID .
+
+%right              ID .
+
+
 /*----------------------------------------------------+
 |                      TYPES                          |
 +----------------------------------------------------*/
@@ -65,7 +104,7 @@ function_def_opt ::= function_def_opt COMMA var_inst .
 
 var_decl ::= ID COLON type .
 
-var_inst ::= var_decl compound_literal .
+var_inst ::= var_decl literal .
 
 /*----------------------------------------------------+
 |                       TYPES                         |
@@ -87,7 +126,6 @@ function_param_opt ::= function_param_opt COMMA var_decl .
 /* -------------------- TYPE -------------------------- */
 
 type ::= type ASTERIX . [POINTER_TYPE]
-type ::= type_qualifier type . [POINTER_TYPE]
 type ::= L_S_BRACKET type COMMA INTEGER R_S_BRACKET .
 type ::= U8 .
 type ::= U16 .
@@ -115,6 +153,14 @@ block_statement_opt ::= block_statement_opt statement .
 statement ::= SEMICOLON .
 statement ::= var_decl .
 statement ::= var_inst .
+statement ::= u_mnemonic operand .
+statement ::= d_mnemonic operand COMMA operand .
+
+u_mnemonic ::= PUSH .
+
+d_mnemonic ::= MOV .
+d_mnemonic ::= ADD .
+
 
 /*----------------------------------------------------+
 |                       EXPRESSION                    |
@@ -122,81 +168,57 @@ statement ::= var_inst .
 
 /* -------------------- COMPOUND_LITERAL -------------- */
 
-compound_literal ::= compound_literal_opt R_C_BRACKET .
+literal ::= literal_opt R_C_BRACKET .
 
-compound_literal_opt ::= L_C_BRACKET expression .
-compound_literal_opt ::= DOT ID expression .
-compound_literal_opt ::= L_S_BRACKET INTEGER R_S_BRACKET expression .
-compound_literal_opt ::= compound_literal_opt COMMA expression .
-compound_literal_opt ::= compound_literal_opt COMMA DOT ID expression .
-compound_literal_opt ::= compound_literal_opt COMMA L_S_BRACKET INTEGER R_S_BRACKET expression .
+literal_opt ::= L_C_BRACKET INTEGER .
+literal_opt ::= L_C_BRACKET FLOAT .
+literal_opt ::= L_C_BRACKET STRING .
+literal_opt ::= L_C_BRACKET ID .
+literal_opt ::= literal_opt COMMA INTEGER .
+literal_opt ::= literal_opt COMMA FLOAT .
+literal_opt ::= literal_opt COMMA STRING .
+literal_opt ::= literal_opt COMMA ID .
 
-/* -------------------- EXPRESSION_PREC --------------- */
+/* -------------------- OPERAND ----------------------- */
 
-expression ::= conditional_expresion . [EXP]
-expression ::= STRING .
+operand ::= postfix_operand . [EXP]
+operand ::= STRING .
+operand ::= FLOAT .
+operand ::= scalar_operand .
+operand ::= L_S_BRACKET scalar_operand R_S_BRACKET .
 
-primary_expression ::= ID .
+primary_operand ::= ID .
+primary_operand ::= CAST LESS_THAN type GREATER_THAN L_R_BRACKET ID R_R_BRACKET .
 
-postfix_expression ::= primary_expression . [EXP]
-postfix_expression ::= postfix_expression L_S_BRACKET INTEGER R_S_BRACKET .
-postfix_expression ::= postfix_expression DOT ID .
-postfix_expression ::= postfix_expression ARROW ID .
+postfix_operand ::= primary_operand . [EXP]
+postfix_operand ::= postfix_operand L_S_BRACKET INTEGER R_S_BRACKET .
+postfix_operand ::= postfix_operand DOT ID .
+postfix_operand ::= postfix_operand ARROW ID .
 
-unary_expression ::= postfix_expression . [EXP]
-unary_expression ::= ID .
-unary_expression ::= unary_operator cast_expression .
-unary_expression ::= SIZEOF L_R_BRACKET type R_R_BRACKET .
+/* -------------------- SCALAR_OPERAND ---------------- */
 
-unary_operator ::= AMPERSAND .
-unary_operator ::= ASTERIX .
-unary_operator ::= PLUS .
-unary_operator ::= MINUS .
-unary_operator ::= TILDE .
-unary_operator ::= EXCLAMATIONMARK .
+scalar_operand_int ::= INTEGER .
 
-cast_expression ::= unary_expression . [EXP]
-cast_expression ::= INTERGER .
-cast_expression ::= FLOAT .
-cast_expression ::= L_R_BRACKET type R_R_BRACKET cast_expression .
+multiplicative_operand ::= scalar_operand_int . [EXP]
+multiplicative_operand ::= multiplicative_operand ASTERIX scalar_operand.
+multiplicative_operand ::= multiplicative_operand SLASH scalar_operand .
+multiplicative_operand ::= multiplicative_operand PERCENT scalar_operand .
 
-multiplicative_expression ::= cast_expression . [EXP]
-multiplicative_expression ::= multiplicative_expression ASTERIX cast_expression .
-multiplicative_expression ::= multiplicative_expression SLASH cast_expression .
-multiplicative_expression ::= multiplicative_expression PERCENT cast_expression .
+additive_operand ::= multiplicative_operand . [EXP]
+additive_operand ::= additive_operand PLUS multiplicative_operand .
+additive_operand ::= additive_operand MINUS multiplicative_operand .
 
-additive_expression ::= multiplicative_expression . [EXP]
-additive_expression ::= additive_expression PLUS multiplicative_expression .
-additive_expression ::= additive_expression MINUS multiplicative_expression .
+shift_operand ::= additive_operand . [EXP]
+shift_operand ::= shift_operand DOUBLE_LESS_THAN additive_operand .
+shift_operand ::= shift_operand DOUBLE_GREATER_THAN additive_operand .
 
-shift_expression ::= additive_expression . [EXP]
-shift_expression ::= shift_expression DOUBLE_LESS_THAN additive_expression .
-shift_expression ::= shift_expression DOUBLE_GREATER_THAN additive_expression .
+and_operand ::= shift_operand . [EXP]
+and_operand ::= and_operand AMPERSAND shift_operand .
 
-relational_expression ::= shift_expression . [EXP]
-relational_expression ::= relational_expression LESS_THAN shift_expression .
-relational_expression ::= relational_expression GREATER_THAN shift_expression .
-relational_expression ::= relational_expression LESS_EQUALS shift_expression .
-relational_expression ::= relational_expression GREATER_EQUALS shift_expression .
+exclusive_or_operand ::= and_operand . [EXP]
+exclusive_or_operand ::= exclusive_or_operand CIRCUMFLEX and_operand .
 
-equality_expression ::= relational_expression . [EXP]
-equality_expression ::= equality_expression DOUBLE_EQUALS relational_expression .
-equality_expression ::= equality_expression EXCLAMATIONMARK_EQUALS relational_expression .
+inclusive_or_operand ::= exclusive_or_operand . [EXP]
+inclusive_or_operand ::= inclusive_or_operand PIPE exclusive_or_operand .
 
-and_expression ::= equality_expression . [EXP]
-and_expression ::= and_expression AMPERSAND equality_expression .
-
-exclusive_or_expression ::= and_expression . [EXP]
-exclusive_or_expression ::= exclusive_or_expression CIRCUMFLEX and_expression .
-
-inclusive_or_expression ::= exclusive_or_expression . [EXP]
-inclusive_or_expression ::= inclusive_or_expression PIPE exclusive_or_expression .
-
-logical_and_expression ::= inclusive_or_expression . [EXP]
-logical_and_expression ::= logical_and_expression DOUBLE_AMPERSAND inclusive_or_expression .
-
-logical_or_expression ::= logical_and_expression . [EXP]
-logical_or_expression ::= logical_or_expression DOUBLE_PIPE logical_and_expression .
-
-conditional_expression ::= logical_or_expression . [EXP]
-conditional_expression ::= logical_or_expression QUESTIONMARK expression COLON conditional_expression .
+scalar_operand ::= inclusive_or_operand . [EXP]

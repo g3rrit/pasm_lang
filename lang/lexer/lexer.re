@@ -56,27 +56,8 @@ token& lex(std::ifstream &in, bool keep)
                                                 return *current_token;
                                             }
 
-        "struct"                            {
-                                                *current_token = token(STRUCT);
-                                                return *current_token;
-                                            }
-
-        "union"                             {
-                                                *current_token = token(UNION);
-                                                return *current_token;
-                                            }
-
-        "enum"                              {
-                                                *current_token = token(ENUM);
-                                                return *current_token;
-                                            }
-
-        "sizeof"                            {
-                                                *current_token = token(SIZEOF);
-                                                return *current_token;
-                                            }
         "ret"                               {
-                                                *current_token = token(RETURN);
+                                                *current_token = token(RET);
                                                 return *current_token;
                                             }
 
@@ -212,11 +193,6 @@ token& lex(std::ifstream &in, bool keep)
 
         [\x2e]                              {
                                                 *current_token = token(DOT);
-                                                return *current_token;
-                                            }
-
-        [\x3d]                              {
-                                                *current_token = token(EQUALS);
                                                 return *current_token;
                                             }
 

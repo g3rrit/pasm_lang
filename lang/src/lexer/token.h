@@ -1,5 +1,11 @@
 #pragma once
 
+#include "token_types.h"
+
+#include <iostream>
+#include <string>
+#include <cstring>
+
 struct token {
     int type;
 
@@ -51,7 +57,7 @@ struct token {
     std::string get_str() const;
 
     friend std::ostream& operator<<(std::ostream &out, const token &token) {
-        out << "token type: " << get_str(token) << " val_type: ";
+        out << "token type: " << token.get_str() << " val_type: ";
         switch(token.vt) {
           case val_type::NONE_VAL:
             out << "NONE ";

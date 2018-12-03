@@ -3,7 +3,7 @@ BUILD ?= ./build
 
 CC := clang++
 
-LEMON := ./../parser_generator/build/lemon
+LEMON := lemon
 RE2C := re2c
 COPY := cp
 

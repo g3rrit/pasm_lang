@@ -8,7 +8,7 @@
 #include <fstream>
 
 
-#include "toke.h"
+#include "token.h"
 #include "token_types.h"
 
 token& lex(std::ifstream &in, bool keep);
