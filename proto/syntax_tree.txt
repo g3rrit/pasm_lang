@@ -1,0 +1,38 @@
+Syntax Tree:
+
+package:
+  types : map(type)
+  functions : map(function)
+  vars : (var)
+
+type:
+
+p_type(type):
+  e_type : enum(INT,FLOAT...)
+
+c_type(type):
+  id : id_token
+  member : map(var_decl)
+
+var:
+  id : id_token
+  t : type
+  v : value
+
+value:
+
+c_value(value):
+  vl : list(value)
+
+i_value(value):
+  v : int
+
+f_value(value):
+  v : float
+
+id_ref:
+
+l_id_ref:
+  id : id_token
+
+  
