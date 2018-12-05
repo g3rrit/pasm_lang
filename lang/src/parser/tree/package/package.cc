@@ -2,7 +2,7 @@
 
 namespace tree {
 
-  package::package(std::string& _id)
+  package::package(char *_id)
     : id(_id) {
   }
 

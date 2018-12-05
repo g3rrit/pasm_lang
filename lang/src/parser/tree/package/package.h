@@ -1,14 +1,14 @@
 #pragma once
 
-#include <string>
+#include <vector>
 
 namespace tree {
 
   struct package {
 
-    std::string id;
+    char *id;
 
-    package(std::string& _id);
+    package(char*);
   };
 
 }

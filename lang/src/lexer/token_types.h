@@ -55,10 +55,9 @@
 #define POINTER_TYPE                    55
 #define VOID                            56
 #define ID                              57
-#define TRIPLE_DOT                      58
-#define PUSH                            59
-#define MOV                             60
-#define ADD                             61
-#define CAST                            62
-#define LESS_THAN                       63
-#define GREATER_THAN                    64
+#define PUSH                            58
+#define MOV                             59
+#define ADD                             60
+#define CAST                            61
+#define LESS_THAN                       62
+#define GREATER_THAN                    63

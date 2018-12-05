@@ -112,16 +112,11 @@ var_inst ::= var_decl literal .
 
 /* -------------------- FUNCTION_TYPE ----------------- */
 
-function_type ::= function_param ARROW type .
-function_type ::= function_param .
+function_type ::= function_type_opt R_R_BRACKET .
+function_type ::= L_R_BRACKET R_R_BRACKET .
 
-function_param ::= function_param_opt R_R_BRACKET .
-function_param ::= function_param_opt COMMA TRIPLE_DOT R_R_BRACKET .
-function_param ::= L_R_BRACKET R_R_BRACKET .
-function_param ::= L_R_BRACKET VOID R_R_BRACKET .
-
-function_param_opt ::= L_R_BRACKET var_decl .
-function_param_opt ::= function_param_opt COMMA var_decl .
+function_type_opt ::= L_R_BRACKET var_decl .
+function_type_opt ::= function_type_opt COMMA var_decl .
 
 /* -------------------- TYPE -------------------------- */
 
@@ -137,7 +132,6 @@ type ::= I32 .
 type ::= I64 .
 type ::= F32 .
 type ::= F64 .
-type ::= VOID .
 type ::= function_type .
 type ::= struct_def .
 

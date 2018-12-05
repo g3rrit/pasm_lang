@@ -111,11 +111,6 @@ token& lex(std::ifstream &in, bool keep)
                                                 return *current_token;
                                             }
 
-        "void"                              {
-                                                *current_token = token(VOID);
-                                                return *current_token;
-                                            }
-
         [&]                                 {
                                                 *current_token = token(AMPERSAND);
                                                 return *current_token;

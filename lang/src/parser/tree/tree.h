@@ -4,15 +4,15 @@
 #include <map>
 
 #include "package.h"
+#include "util.h"
 
 namespace tree {
   struct tree {
-      std::map<std::string, package> package_map;
+      std::map<char*, package, util::cmp_str> package_map;
 
-
-      void packge_add(std::string name);
-      package* package_get(std::string &name);
-      bool package_exists(std::string &name);
+      void packge_add(char*);
+      package* package_get(char*);
+      bool package_exists(char*);
 
   };
 }

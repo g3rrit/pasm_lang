@@ -93,7 +93,7 @@
 #endif
 /************* Begin control #defines *****************************************/
 #define YYCODETYPE unsigned char
-#define YYNOCODE 95
+#define YYNOCODE 93
 #define YYACTIONTYPE unsigned short int
 #define ImplParseTOKENTYPE token*
 typedef union {
@@ -113,17 +113,17 @@ typedef union {
 #define ImplParseCTX_PARAM
 #define ImplParseCTX_FETCH
 #define ImplParseCTX_STORE
-#define YYNSTATE             74
-#define YYNRULE              89
-#define YYNTOKEN             65
-#define YY_MAX_SHIFT         73
-#define YY_MIN_SHIFTREDUCE   140
-#define YY_MAX_SHIFTREDUCE   228
-#define YY_ERROR_ACTION      229
-#define YY_ACCEPT_ACTION     230
-#define YY_NO_ACTION         231
-#define YY_MIN_REDUCE        232
-#define YY_MAX_REDUCE        320
+#define YYNSTATE             69
+#define YYNRULE              84
+#define YYNTOKEN             64
+#define YY_MAX_SHIFT         68
+#define YY_MIN_SHIFTREDUCE   132
+#define YY_MAX_SHIFTREDUCE   215
+#define YY_ERROR_ACTION      216
+#define YY_ACCEPT_ACTION     217
+#define YY_NO_ACTION         218
+#define YY_MIN_REDUCE        219
+#define YY_MAX_REDUCE        302
 /************* End control #defines *******************************************/
 #define YY_NLOOKAHEAD ((int)(sizeof(yy_lookahead)/sizeof(yy_lookahead[0])))
 
@@ -190,97 +190,91 @@ typedef union {
 **  yy_default[]       Default action for each state.
 **
 *********** Begin parsing tables **********************************************/
-#define YY_ACTTAB_COUNT (237)
+#define YY_ACTTAB_COUNT (220)
 static const YYACTIONTYPE yy_action[] = {
- /*     0 */   279,  274,   26,   39,  279,   39,   38,   38,   45,   44,
- /*    10 */    58,   57,   55,  274,    3,  211,    2,  167,  168,  169,
- /*    20 */   170,  171,  172,  173,  174,  175,  176,   49,  246,   22,
- /*    30 */    39,   49,   39,   38,   38,   45,   44,   58,   57,   55,
- /*    40 */   255,  234,  235,   28,  237,   32,   20,  256,    9,  165,
- /*    50 */    30,   38,   38,   45,   42,  278,  177,   71,   39,  278,
- /*    60 */    39,   38,   38,   45,   44,   58,   57,   55,  307,   52,
- /*    70 */    38,   38,   45,   44,   58,   57,   55,  306,  146,   38,
- /*    80 */    38,   45,   44,   58,   57,   55,   73,  305,   72,   38,
- /*    90 */    38,   45,   44,   58,   57,   55,   59,   34,   38,   38,
- /*   100 */    45,   44,   58,   57,   55,  211,  202,  201,   40,   32,
- /*   110 */   230,   12,   40,   40,   21,   69,   47,   69,   47,   46,
- /*   120 */    32,   36,   36,   46,   46,  161,   69,   47,   68,   32,
- /*   130 */    66,   72,   68,   68,   72,   69,   47,  183,    1,   70,
- /*   140 */    32,   17,    7,   70,   70,   23,   69,   47,  192,  193,
- /*   150 */   194,  205,  196,  197,  198,  180,   53,   11,  181,   38,
- /*   160 */    38,   45,   44,   58,   54,   72,  240,  188,  189,  190,
- /*   170 */    38,   38,   45,   44,   56,   33,   38,   38,   41,   30,
- /*   180 */    38,   38,   43,    5,    4,   27,   63,  241,  239,    6,
- /*   190 */    61,   60,  248,   14,  195,   37,   37,  181,  199,  242,
- /*   200 */    48,  244,   29,   72,   67,   14,   24,   25,   19,   18,
- /*   210 */    65,   31,   35,  206,   50,   51,    8,   15,   13,   16,
- /*   220 */   204,  165,  208,   62,  210,  209,  191,   64,   10,  159,
- /*   230 */   166,  162,  165,   33,  160,   11,  232,
+ /*     0 */   261,  217,    8,   38,  261,   38,   37,   37,   44,   43,
+ /*    10 */    57,   56,   54,   37,   37,   44,   41,  155,  156,  157,
+ /*    20 */   158,  159,  160,  161,  162,  163,  164,   48,  233,   21,
+ /*    30 */    38,   48,   38,   37,   37,   44,   43,   57,   56,   54,
+ /*    40 */   221,  222,   27,  224,   30,   19,   20,  235,   11,   46,
+ /*    50 */    29,   37,   37,   40,   47,  260,   33,   66,   38,  260,
+ /*    60 */    38,   37,   37,   44,   43,   57,   56,   54,  289,   68,
+ /*    70 */    37,   37,   44,   43,   57,   56,   54,  288,   64,   37,
+ /*    80 */    37,   44,   43,   57,   56,   54,  231,   28,  287,  153,
+ /*    90 */    37,   37,   44,   43,   57,   56,   54,   58,  170,   37,
+ /*   100 */    37,   44,   43,   57,   56,   54,  198,  189,  188,   37,
+ /*   110 */    37,   44,   43,   57,   53,  150,  167,  153,   39,   30,
+ /*   120 */    12,   67,   39,   39,   18,   46,   67,  175,  176,  177,
+ /*   130 */    45,   30,   35,   35,   45,   45,   51,   46,   32,  198,
+ /*   140 */    65,   30,   29,    7,   65,   65,   62,   46,  256,   25,
+ /*   150 */    60,   59,  192,  179,  180,  181,   52,   23,   24,  256,
+ /*   160 */     3,   67,    2,   37,   37,   44,   43,   55,  183,  184,
+ /*   170 */   185,   37,   37,   42,    5,    4,   22,  228,   26,  229,
+ /*   180 */     6,  138,   13,   31,   13,   36,   36,   17,   16,  168,
+ /*   190 */   168,   67,   34,  238,  227,  239,    1,  226,  193,  182,
+ /*   200 */    10,  149,   49,   50,   14,    9,  178,   15,   61,  191,
+ /*   210 */   195,  197,  196,  154,  186,   63,  153,   12,  219,   32,
 };
 static const YYCODETYPE yy_lookahead[] = {
- /*     0 */    82,   68,   69,   85,   86,   87,   88,   89,   90,   91,
- /*    10 */    92,   93,   94,   80,   81,   11,   83,   17,   18,   19,
- /*    20 */    20,   21,   22,   23,   24,   25,   26,   82,   68,   69,
- /*    30 */    85,   86,   87,   88,   89,   90,   91,   92,   93,   94,
- /*    40 */    69,   67,   68,   69,   70,   71,   72,   69,   48,   44,
- /*    50 */    50,   88,   89,   90,   91,   82,   56,   57,   85,   86,
- /*    60 */    87,   88,   89,   90,   91,   92,   93,   94,   86,   64,
- /*    70 */    88,   89,   90,   91,   92,   93,   94,   86,   47,   88,
- /*    80 */    89,   90,   91,   92,   93,   94,    2,   86,   57,   88,
- /*    90 */    89,   90,   91,   92,   93,   94,   86,   46,   88,   89,
- /*   100 */    90,   91,   92,   93,   94,   11,   12,   13,   70,   71,
- /*   110 */    65,   66,   74,   75,   74,   77,   78,   77,   78,   70,
- /*   120 */    71,   88,   89,   74,   75,   51,   77,   78,   70,   71,
- /*   130 */    56,   57,   74,   75,   57,   77,   78,   29,   33,   70,
- /*   140 */    71,   57,   48,   74,   75,   33,   77,   78,   11,   12,
- /*   150 */    13,   57,   11,   12,   13,   47,   62,   28,   46,   88,
- /*   160 */    89,   90,   91,   92,   93,   57,   69,   59,   60,   61,
- /*   170 */    88,   89,   90,   91,   92,   46,   88,   89,   90,   50,
- /*   180 */    88,   89,   90,   38,   39,   34,   48,   73,   69,   44,
- /*   190 */    52,   53,   76,   79,   57,   88,   89,   46,   57,   73,
- /*   200 */    84,   68,   69,   57,   58,   79,   40,   41,   36,   37,
- /*   210 */    33,   33,   33,   51,   57,   50,   63,   35,   34,   45,
- /*   220 */    49,   44,   49,   11,   57,   57,   47,   11,   53,   51,
- /*   230 */    49,   51,   44,   46,   51,   28,    0,   95,   95,   95,
- /*   240 */    95,   95,   95,   95,   95,   95,   95,   95,   95,   95,
- /*   250 */    95,   95,   95,   95,   95,   95,   95,   95,   95,   95,
- /*   260 */    95,   95,   95,   95,   95,   95,   95,   95,   95,   95,
- /*   270 */    95,   95,   95,   95,   95,   95,   95,   95,   95,   95,
- /*   280 */    95,   95,   95,   95,   95,   95,   95,   95,   95,   95,
- /*   290 */    95,   95,   95,   95,   95,   95,   95,   95,   95,   95,
- /*   300 */    95,   95,
+ /*     0 */    80,   64,   65,   83,   84,   85,   86,   87,   88,   89,
+ /*    10 */    90,   91,   92,   86,   87,   88,   89,   17,   18,   19,
+ /*    20 */    20,   21,   22,   23,   24,   25,   26,   80,   67,   68,
+ /*    30 */    83,   84,   85,   86,   87,   88,   89,   90,   91,   92,
+ /*    40 */    66,   67,   68,   69,   70,   71,   73,   75,   48,   76,
+ /*    50 */    50,   86,   87,   88,   82,   80,   46,   57,   83,   84,
+ /*    60 */    85,   86,   87,   88,   89,   90,   91,   92,   84,    2,
+ /*    70 */    86,   87,   88,   89,   90,   91,   92,   84,   33,   86,
+ /*    80 */    87,   88,   89,   90,   91,   92,   67,   68,   84,   44,
+ /*    90 */    86,   87,   88,   89,   90,   91,   92,   84,   29,   86,
+ /*   100 */    87,   88,   89,   90,   91,   92,   11,   12,   13,   86,
+ /*   110 */    87,   88,   89,   90,   91,   51,   47,   44,   69,   70,
+ /*   120 */    28,   57,   73,   74,   57,   76,   57,   58,   59,   60,
+ /*   130 */    69,   70,   86,   87,   73,   74,   63,   76,   46,   11,
+ /*   140 */    69,   70,   50,   48,   73,   74,   48,   76,   67,   68,
+ /*   150 */    52,   53,   57,   11,   12,   13,   61,   40,   41,   78,
+ /*   160 */    79,   57,   81,   86,   87,   88,   89,   90,   11,   12,
+ /*   170 */    13,   86,   87,   88,   38,   39,   33,   72,   34,   72,
+ /*   180 */    44,   47,   77,   33,   77,   86,   87,   36,   37,   46,
+ /*   190 */    46,   57,   33,   68,   68,   68,   33,   68,   51,   57,
+ /*   200 */    62,   51,   57,   50,   35,   34,   47,   45,   11,   49,
+ /*   210 */    49,   57,   57,   49,   57,   11,   44,   28,    0,   46,
+ /*   220 */    93,   93,   93,   93,   93,   93,   93,   93,   93,   93,
+ /*   230 */    93,   93,   93,   93,   93,   93,   93,   93,   93,   93,
+ /*   240 */    93,   93,   93,   93,   93,   93,   93,   93,   93,   93,
+ /*   250 */    93,   93,   93,   93,   93,   93,   93,   93,   93,   93,
+ /*   260 */    93,   93,   93,   93,   93,   93,   93,   93,   93,   93,
+ /*   270 */    93,   93,   93,   93,   93,   93,   93,   93,   93,   93,
+ /*   280 */    93,   93,   93,   93,
 };
-#define YY_SHIFT_COUNT    (73)
+#define YY_SHIFT_COUNT    (68)
 #define YY_SHIFT_MIN      (0)
-#define YY_SHIFT_MAX      (236)
+#define YY_SHIFT_MAX      (218)
 static const unsigned short int yy_shift_ofst[] = {
- /*     0 */   237,   94,   94,   94,    4,    4,    4,    4,    0,    0,
- /*    10 */     0,    0,   84,    4,  108,    4,    4,  129,    4,    4,
- /*    20 */   112,  151,   51,   77,    4,    4,   51,   77,   51,  237,
- /*    30 */    74,  146,   31,   77,  137,  141,  145,  145,  145,  138,
- /*    40 */     5,  166,  172,  166,  172,  166,  177,  178,  179,  105,
- /*    50 */   162,  157,  165,  153,  182,  184,  174,  182,  174,  171,
- /*    60 */   167,  168,  173,  212,  181,  216,  180,  183,  188,  175,
- /*    70 */   188,  187,  207,  236,
+ /*     0 */   220,   95,   95,   95,  128,  128,  128,  128,   67,  128,
+ /*    10 */     0,    0,    0,   69,  128,  128,  128,  128,   92,  143,
+ /*    20 */   144,   10,  104,  128,  128,   10,  104,   10,  220,   64,
+ /*    30 */   134,  104,  104,  142,  157,  136,  136,  136,   98,   73,
+ /*    40 */   117,  151,  117,  151,  117,   45,  150,  159,  163,  147,
+ /*    50 */   145,  153,  138,  169,  171,  162,  169,  162,  160,  154,
+ /*    60 */   155,  161,  197,  164,  204,  172,  173,  189,  218,
 };
-#define YY_REDUCE_COUNT (33)
-#define YY_REDUCE_MIN   (-82)
-#define YY_REDUCE_MAX   (133)
+#define YY_REDUCE_COUNT (32)
+#define YY_REDUCE_MIN   (-80)
+#define YY_REDUCE_MAX   (129)
 static const short yy_reduce_ofst[] = {
- /*     0 */    45,  -82,  -55,  -27,  -18,   -9,    1,   10,   38,   49,
- /*    10 */    58,   69,  -26,   71,  -67,   82,  -37,   40,   88,   92,
- /*    20 */   114,  126,  116,  -40,   33,  107,  116,  133,  116,  116,
- /*    30 */   -29,  -22,   97,  119,
+ /*     0 */   -63,  -80,  -53,  -25,  -16,   -7,    4,   13,  -26,   23,
+ /*    10 */    49,   61,   71,   81,   77,  -73,  -35,   85,  -27,  105,
+ /*    20 */   107,  -28,  -39,   46,   99,  -28,   19,  -28,  -28,  125,
+ /*    30 */   126,  127,  129,
 };
 static const YYACTIONTYPE yy_default[] = {
- /*     0 */   233,  229,  229,  229,  229,  229,  229,  229,  229,  229,
- /*    10 */   229,  229,  229,  229,  229,  229,  229,  229,  229,  229,
- /*    20 */   229,  229,  245,  229,  229,  229,  276,  229,  236,  243,
- /*    30 */   229,  229,  229,  229,  229,  229,  310,  309,  308,  292,
- /*    40 */   229,  313,  315,  312,  314,  311,  229,  229,  229,  229,
- /*    50 */   229,  229,  229,  229,  319,  320,  317,  318,  316,  229,
- /*    60 */   229,  229,  229,  229,  229,  229,  229,  229,  249,  250,
- /*    70 */   247,  229,  229,  229,
+ /*     0 */   220,  216,  216,  216,  216,  216,  216,  216,  216,  216,
+ /*    10 */   216,  216,  216,  216,  216,  216,  216,  216,  216,  216,
+ /*    20 */   216,  232,  216,  216,  216,  258,  216,  223,  230,  216,
+ /*    30 */   216,  216,  216,  216,  216,  292,  291,  290,  274,  216,
+ /*    40 */   295,  297,  294,  296,  293,  216,  216,  216,  216,  216,
+ /*    50 */   216,  216,  216,  301,  302,  299,  300,  298,  216,  216,
+ /*    60 */   216,  216,  216,  216,  216,  234,  216,  216,  216,
 };
 /********** End of lemon-generated parsing tables *****************************/
 
@@ -445,43 +439,41 @@ static const char *const yyTokenName[] = {
   /*   55 */ "POINTER_TYPE",
   /*   56 */ "VOID",
   /*   57 */ "ID",
-  /*   58 */ "TRIPLE_DOT",
-  /*   59 */ "PUSH",
-  /*   60 */ "MOV",
-  /*   61 */ "ADD",
-  /*   62 */ "CAST",
-  /*   63 */ "LESS_THAN",
-  /*   64 */ "GREATER_THAN",
-  /*   65 */ "package",
-  /*   66 */ "package_opt",
-  /*   67 */ "function_def",
-  /*   68 */ "var_inst",
-  /*   69 */ "var_decl",
-  /*   70 */ "struct_def",
-  /*   71 */ "struct_def_opt",
-  /*   72 */ "function_def_opt",
-  /*   73 */ "block_statement",
-  /*   74 */ "function_type",
-  /*   75 */ "type",
-  /*   76 */ "literal",
-  /*   77 */ "function_param",
-  /*   78 */ "function_param_opt",
-  /*   79 */ "block_statement_opt",
-  /*   80 */ "statement",
-  /*   81 */ "u_mnemonic",
-  /*   82 */ "operand",
-  /*   83 */ "d_mnemonic",
-  /*   84 */ "literal_opt",
-  /*   85 */ "postfix_operand",
-  /*   86 */ "scalar_operand",
-  /*   87 */ "primary_operand",
-  /*   88 */ "scalar_operand_int",
-  /*   89 */ "multiplicative_operand",
-  /*   90 */ "additive_operand",
-  /*   91 */ "shift_operand",
-  /*   92 */ "and_operand",
-  /*   93 */ "exclusive_or_operand",
-  /*   94 */ "inclusive_or_operand",
+  /*   58 */ "PUSH",
+  /*   59 */ "MOV",
+  /*   60 */ "ADD",
+  /*   61 */ "CAST",
+  /*   62 */ "LESS_THAN",
+  /*   63 */ "GREATER_THAN",
+  /*   64 */ "package",
+  /*   65 */ "package_opt",
+  /*   66 */ "function_def",
+  /*   67 */ "var_inst",
+  /*   68 */ "var_decl",
+  /*   69 */ "struct_def",
+  /*   70 */ "struct_def_opt",
+  /*   71 */ "function_def_opt",
+  /*   72 */ "block_statement",
+  /*   73 */ "function_type",
+  /*   74 */ "type",
+  /*   75 */ "literal",
+  /*   76 */ "function_type_opt",
+  /*   77 */ "block_statement_opt",
+  /*   78 */ "statement",
+  /*   79 */ "u_mnemonic",
+  /*   80 */ "operand",
+  /*   81 */ "d_mnemonic",
+  /*   82 */ "literal_opt",
+  /*   83 */ "postfix_operand",
+  /*   84 */ "scalar_operand",
+  /*   85 */ "primary_operand",
+  /*   86 */ "scalar_operand_int",
+  /*   87 */ "multiplicative_operand",
+  /*   88 */ "additive_operand",
+  /*   89 */ "shift_operand",
+  /*   90 */ "and_operand",
+  /*   91 */ "exclusive_or_operand",
+  /*   92 */ "inclusive_or_operand",
 };
 #endif /* defined(YYCOVERAGE) || !defined(NDEBUG) */
 
@@ -506,78 +498,73 @@ static const char *const yyRuleName[] = {
  /*  14 */ "function_def_opt ::= function_def_opt COMMA var_inst",
  /*  15 */ "var_decl ::= ID COLON type",
  /*  16 */ "var_inst ::= var_decl literal",
- /*  17 */ "function_type ::= function_param ARROW type",
- /*  18 */ "function_type ::= function_param",
- /*  19 */ "function_param ::= function_param_opt R_R_BRACKET",
- /*  20 */ "function_param ::= function_param_opt COMMA TRIPLE_DOT R_R_BRACKET",
- /*  21 */ "function_param ::= L_R_BRACKET R_R_BRACKET",
- /*  22 */ "function_param ::= L_R_BRACKET VOID R_R_BRACKET",
- /*  23 */ "function_param_opt ::= L_R_BRACKET var_decl",
- /*  24 */ "function_param_opt ::= function_param_opt COMMA var_decl",
- /*  25 */ "type ::= type ASTERIX",
- /*  26 */ "type ::= L_S_BRACKET type COMMA INTEGER R_S_BRACKET",
- /*  27 */ "type ::= U8",
- /*  28 */ "type ::= U16",
- /*  29 */ "type ::= U32",
- /*  30 */ "type ::= U64",
- /*  31 */ "type ::= I8",
- /*  32 */ "type ::= I16",
- /*  33 */ "type ::= I32",
- /*  34 */ "type ::= I64",
- /*  35 */ "type ::= F32",
- /*  36 */ "type ::= F64",
- /*  37 */ "type ::= VOID",
- /*  38 */ "type ::= function_type",
- /*  39 */ "type ::= struct_def",
- /*  40 */ "block_statement ::= block_statement_opt R_C_BRACKET",
- /*  41 */ "block_statement_opt ::= L_C_BRACKET",
- /*  42 */ "block_statement_opt ::= block_statement_opt statement",
- /*  43 */ "statement ::= SEMICOLON",
- /*  44 */ "statement ::= var_decl",
- /*  45 */ "statement ::= var_inst",
- /*  46 */ "statement ::= u_mnemonic operand",
- /*  47 */ "statement ::= d_mnemonic operand COMMA operand",
- /*  48 */ "u_mnemonic ::= PUSH",
- /*  49 */ "d_mnemonic ::= MOV",
- /*  50 */ "d_mnemonic ::= ADD",
- /*  51 */ "literal ::= literal_opt R_C_BRACKET",
- /*  52 */ "literal_opt ::= L_C_BRACKET INTEGER",
- /*  53 */ "literal_opt ::= L_C_BRACKET FLOAT",
- /*  54 */ "literal_opt ::= L_C_BRACKET STRING",
- /*  55 */ "literal_opt ::= L_C_BRACKET ID",
- /*  56 */ "literal_opt ::= literal_opt COMMA INTEGER",
- /*  57 */ "literal_opt ::= literal_opt COMMA FLOAT",
- /*  58 */ "literal_opt ::= literal_opt COMMA STRING",
- /*  59 */ "literal_opt ::= literal_opt COMMA ID",
- /*  60 */ "operand ::= postfix_operand",
- /*  61 */ "operand ::= STRING",
- /*  62 */ "operand ::= FLOAT",
- /*  63 */ "operand ::= scalar_operand",
- /*  64 */ "operand ::= L_S_BRACKET scalar_operand R_S_BRACKET",
- /*  65 */ "primary_operand ::= ID",
- /*  66 */ "primary_operand ::= CAST LESS_THAN type GREATER_THAN L_R_BRACKET ID R_R_BRACKET",
- /*  67 */ "postfix_operand ::= primary_operand",
- /*  68 */ "postfix_operand ::= postfix_operand L_S_BRACKET INTEGER R_S_BRACKET",
- /*  69 */ "postfix_operand ::= postfix_operand DOT ID",
- /*  70 */ "postfix_operand ::= postfix_operand ARROW ID",
- /*  71 */ "scalar_operand_int ::= INTEGER",
- /*  72 */ "multiplicative_operand ::= scalar_operand_int",
- /*  73 */ "multiplicative_operand ::= multiplicative_operand ASTERIX scalar_operand",
- /*  74 */ "multiplicative_operand ::= multiplicative_operand SLASH scalar_operand",
- /*  75 */ "multiplicative_operand ::= multiplicative_operand PERCENT scalar_operand",
- /*  76 */ "additive_operand ::= multiplicative_operand",
- /*  77 */ "additive_operand ::= additive_operand PLUS multiplicative_operand",
- /*  78 */ "additive_operand ::= additive_operand MINUS multiplicative_operand",
- /*  79 */ "shift_operand ::= additive_operand",
- /*  80 */ "shift_operand ::= shift_operand DOUBLE_LESS_THAN additive_operand",
- /*  81 */ "shift_operand ::= shift_operand DOUBLE_GREATER_THAN additive_operand",
- /*  82 */ "and_operand ::= shift_operand",
- /*  83 */ "and_operand ::= and_operand AMPERSAND shift_operand",
- /*  84 */ "exclusive_or_operand ::= and_operand",
- /*  85 */ "exclusive_or_operand ::= exclusive_or_operand CIRCUMFLEX and_operand",
- /*  86 */ "inclusive_or_operand ::= exclusive_or_operand",
- /*  87 */ "inclusive_or_operand ::= inclusive_or_operand PIPE exclusive_or_operand",
- /*  88 */ "scalar_operand ::= inclusive_or_operand",
+ /*  17 */ "function_type ::= function_type_opt R_R_BRACKET",
+ /*  18 */ "function_type ::= L_R_BRACKET R_R_BRACKET",
+ /*  19 */ "function_type_opt ::= L_R_BRACKET var_decl",
+ /*  20 */ "function_type_opt ::= function_type_opt COMMA var_decl",
+ /*  21 */ "type ::= type ASTERIX",
+ /*  22 */ "type ::= L_S_BRACKET type COMMA INTEGER R_S_BRACKET",
+ /*  23 */ "type ::= U8",
+ /*  24 */ "type ::= U16",
+ /*  25 */ "type ::= U32",
+ /*  26 */ "type ::= U64",
+ /*  27 */ "type ::= I8",
+ /*  28 */ "type ::= I16",
+ /*  29 */ "type ::= I32",
+ /*  30 */ "type ::= I64",
+ /*  31 */ "type ::= F32",
+ /*  32 */ "type ::= F64",
+ /*  33 */ "type ::= function_type",
+ /*  34 */ "type ::= struct_def",
+ /*  35 */ "block_statement ::= block_statement_opt R_C_BRACKET",
+ /*  36 */ "block_statement_opt ::= L_C_BRACKET",
+ /*  37 */ "block_statement_opt ::= block_statement_opt statement",
+ /*  38 */ "statement ::= SEMICOLON",
+ /*  39 */ "statement ::= var_decl",
+ /*  40 */ "statement ::= var_inst",
+ /*  41 */ "statement ::= u_mnemonic operand",
+ /*  42 */ "statement ::= d_mnemonic operand COMMA operand",
+ /*  43 */ "u_mnemonic ::= PUSH",
+ /*  44 */ "d_mnemonic ::= MOV",
+ /*  45 */ "d_mnemonic ::= ADD",
+ /*  46 */ "literal ::= literal_opt R_C_BRACKET",
+ /*  47 */ "literal_opt ::= L_C_BRACKET INTEGER",
+ /*  48 */ "literal_opt ::= L_C_BRACKET FLOAT",
+ /*  49 */ "literal_opt ::= L_C_BRACKET STRING",
+ /*  50 */ "literal_opt ::= L_C_BRACKET ID",
+ /*  51 */ "literal_opt ::= literal_opt COMMA INTEGER",
+ /*  52 */ "literal_opt ::= literal_opt COMMA FLOAT",
+ /*  53 */ "literal_opt ::= literal_opt COMMA STRING",
+ /*  54 */ "literal_opt ::= literal_opt COMMA ID",
+ /*  55 */ "operand ::= postfix_operand",
+ /*  56 */ "operand ::= STRING",
+ /*  57 */ "operand ::= FLOAT",
+ /*  58 */ "operand ::= scalar_operand",
+ /*  59 */ "operand ::= L_S_BRACKET scalar_operand R_S_BRACKET",
+ /*  60 */ "primary_operand ::= ID",
+ /*  61 */ "primary_operand ::= CAST LESS_THAN type GREATER_THAN L_R_BRACKET ID R_R_BRACKET",
+ /*  62 */ "postfix_operand ::= primary_operand",
+ /*  63 */ "postfix_operand ::= postfix_operand L_S_BRACKET INTEGER R_S_BRACKET",
+ /*  64 */ "postfix_operand ::= postfix_operand DOT ID",
+ /*  65 */ "postfix_operand ::= postfix_operand ARROW ID",
+ /*  66 */ "scalar_operand_int ::= INTEGER",
+ /*  67 */ "multiplicative_operand ::= scalar_operand_int",
+ /*  68 */ "multiplicative_operand ::= multiplicative_operand ASTERIX scalar_operand",
+ /*  69 */ "multiplicative_operand ::= multiplicative_operand SLASH scalar_operand",
+ /*  70 */ "multiplicative_operand ::= multiplicative_operand PERCENT scalar_operand",
+ /*  71 */ "additive_operand ::= multiplicative_operand",
+ /*  72 */ "additive_operand ::= additive_operand PLUS multiplicative_operand",
+ /*  73 */ "additive_operand ::= additive_operand MINUS multiplicative_operand",
+ /*  74 */ "shift_operand ::= additive_operand",
+ /*  75 */ "shift_operand ::= shift_operand DOUBLE_LESS_THAN additive_operand",
+ /*  76 */ "shift_operand ::= shift_operand DOUBLE_GREATER_THAN additive_operand",
+ /*  77 */ "and_operand ::= shift_operand",
+ /*  78 */ "and_operand ::= and_operand AMPERSAND shift_operand",
+ /*  79 */ "exclusive_or_operand ::= and_operand",
+ /*  80 */ "exclusive_or_operand ::= exclusive_or_operand CIRCUMFLEX and_operand",
+ /*  81 */ "inclusive_or_operand ::= exclusive_or_operand",
+ /*  82 */ "inclusive_or_operand ::= inclusive_or_operand PIPE exclusive_or_operand",
+ /*  83 */ "scalar_operand ::= inclusive_or_operand",
 };
 #endif /* NDEBUG */
 
@@ -997,95 +984,90 @@ static const struct {
   YYCODETYPE lhs;       /* Symbol on the left-hand side of the rule */
   signed char nrhs;     /* Negative of the number of RHS symbols in the rule */
 } yyRuleInfo[] = {
-  {   65,   -2 }, /* (0) package ::= package_opt END */
-  {   66,    0 }, /* (1) package_opt ::= */
-  {   66,   -2 }, /* (2) package_opt ::= package_opt function_def */
-  {   66,   -2 }, /* (3) package_opt ::= package_opt var_inst */
-  {   66,   -2 }, /* (4) package_opt ::= package_opt var_decl */
-  {   66,   -2 }, /* (5) package_opt ::= package_opt struct_def */
-  {   70,   -2 }, /* (6) struct_def ::= struct_def_opt R_C_BRACKET */
-  {   71,   -3 }, /* (7) struct_def_opt ::= ID L_C_BRACKET var_decl */
-  {   71,   -2 }, /* (8) struct_def_opt ::= struct_def_opt var_decl */
-  {   67,   -2 }, /* (9) function_def ::= function_def_opt block_statement */
-  {   67,   -3 }, /* (10) function_def ::= ID function_type block_statement */
-  {   72,   -4 }, /* (11) function_def_opt ::= ID function_type PIPE var_decl */
-  {   72,   -4 }, /* (12) function_def_opt ::= ID function_type PIPE var_inst */
-  {   72,   -3 }, /* (13) function_def_opt ::= function_def_opt COMMA var_decl */
-  {   72,   -3 }, /* (14) function_def_opt ::= function_def_opt COMMA var_inst */
-  {   69,   -3 }, /* (15) var_decl ::= ID COLON type */
-  {   68,   -2 }, /* (16) var_inst ::= var_decl literal */
-  {   74,   -3 }, /* (17) function_type ::= function_param ARROW type */
-  {   74,   -1 }, /* (18) function_type ::= function_param */
-  {   77,   -2 }, /* (19) function_param ::= function_param_opt R_R_BRACKET */
-  {   77,   -4 }, /* (20) function_param ::= function_param_opt COMMA TRIPLE_DOT R_R_BRACKET */
-  {   77,   -2 }, /* (21) function_param ::= L_R_BRACKET R_R_BRACKET */
-  {   77,   -3 }, /* (22) function_param ::= L_R_BRACKET VOID R_R_BRACKET */
-  {   78,   -2 }, /* (23) function_param_opt ::= L_R_BRACKET var_decl */
-  {   78,   -3 }, /* (24) function_param_opt ::= function_param_opt COMMA var_decl */
-  {   75,   -2 }, /* (25) type ::= type ASTERIX */
-  {   75,   -5 }, /* (26) type ::= L_S_BRACKET type COMMA INTEGER R_S_BRACKET */
-  {   75,   -1 }, /* (27) type ::= U8 */
-  {   75,   -1 }, /* (28) type ::= U16 */
-  {   75,   -1 }, /* (29) type ::= U32 */
-  {   75,   -1 }, /* (30) type ::= U64 */
-  {   75,   -1 }, /* (31) type ::= I8 */
-  {   75,   -1 }, /* (32) type ::= I16 */
-  {   75,   -1 }, /* (33) type ::= I32 */
-  {   75,   -1 }, /* (34) type ::= I64 */
-  {   75,   -1 }, /* (35) type ::= F32 */
-  {   75,   -1 }, /* (36) type ::= F64 */
-  {   75,   -1 }, /* (37) type ::= VOID */
-  {   75,   -1 }, /* (38) type ::= function_type */
-  {   75,   -1 }, /* (39) type ::= struct_def */
-  {   73,   -2 }, /* (40) block_statement ::= block_statement_opt R_C_BRACKET */
-  {   79,   -1 }, /* (41) block_statement_opt ::= L_C_BRACKET */
-  {   79,   -2 }, /* (42) block_statement_opt ::= block_statement_opt statement */
-  {   80,   -1 }, /* (43) statement ::= SEMICOLON */
-  {   80,   -1 }, /* (44) statement ::= var_decl */
-  {   80,   -1 }, /* (45) statement ::= var_inst */
-  {   80,   -2 }, /* (46) statement ::= u_mnemonic operand */
-  {   80,   -4 }, /* (47) statement ::= d_mnemonic operand COMMA operand */
-  {   81,   -1 }, /* (48) u_mnemonic ::= PUSH */
-  {   83,   -1 }, /* (49) d_mnemonic ::= MOV */
-  {   83,   -1 }, /* (50) d_mnemonic ::= ADD */
-  {   76,   -2 }, /* (51) literal ::= literal_opt R_C_BRACKET */
-  {   84,   -2 }, /* (52) literal_opt ::= L_C_BRACKET INTEGER */
-  {   84,   -2 }, /* (53) literal_opt ::= L_C_BRACKET FLOAT */
-  {   84,   -2 }, /* (54) literal_opt ::= L_C_BRACKET STRING */
-  {   84,   -2 }, /* (55) literal_opt ::= L_C_BRACKET ID */
-  {   84,   -3 }, /* (56) literal_opt ::= literal_opt COMMA INTEGER */
-  {   84,   -3 }, /* (57) literal_opt ::= literal_opt COMMA FLOAT */
-  {   84,   -3 }, /* (58) literal_opt ::= literal_opt COMMA STRING */
-  {   84,   -3 }, /* (59) literal_opt ::= literal_opt COMMA ID */
-  {   82,   -1 }, /* (60) operand ::= postfix_operand */
-  {   82,   -1 }, /* (61) operand ::= STRING */
-  {   82,   -1 }, /* (62) operand ::= FLOAT */
-  {   82,   -1 }, /* (63) operand ::= scalar_operand */
-  {   82,   -3 }, /* (64) operand ::= L_S_BRACKET scalar_operand R_S_BRACKET */
-  {   87,   -1 }, /* (65) primary_operand ::= ID */
-  {   87,   -7 }, /* (66) primary_operand ::= CAST LESS_THAN type GREATER_THAN L_R_BRACKET ID R_R_BRACKET */
-  {   85,   -1 }, /* (67) postfix_operand ::= primary_operand */
-  {   85,   -4 }, /* (68) postfix_operand ::= postfix_operand L_S_BRACKET INTEGER R_S_BRACKET */
-  {   85,   -3 }, /* (69) postfix_operand ::= postfix_operand DOT ID */
-  {   85,   -3 }, /* (70) postfix_operand ::= postfix_operand ARROW ID */
-  {   88,   -1 }, /* (71) scalar_operand_int ::= INTEGER */
-  {   89,   -1 }, /* (72) multiplicative_operand ::= scalar_operand_int */
-  {   89,   -3 }, /* (73) multiplicative_operand ::= multiplicative_operand ASTERIX scalar_operand */
-  {   89,   -3 }, /* (74) multiplicative_operand ::= multiplicative_operand SLASH scalar_operand */
-  {   89,   -3 }, /* (75) multiplicative_operand ::= multiplicative_operand PERCENT scalar_operand */
-  {   90,   -1 }, /* (76) additive_operand ::= multiplicative_operand */
-  {   90,   -3 }, /* (77) additive_operand ::= additive_operand PLUS multiplicative_operand */
-  {   90,   -3 }, /* (78) additive_operand ::= additive_operand MINUS multiplicative_operand */
-  {   91,   -1 }, /* (79) shift_operand ::= additive_operand */
-  {   91,   -3 }, /* (80) shift_operand ::= shift_operand DOUBLE_LESS_THAN additive_operand */
-  {   91,   -3 }, /* (81) shift_operand ::= shift_operand DOUBLE_GREATER_THAN additive_operand */
-  {   92,   -1 }, /* (82) and_operand ::= shift_operand */
-  {   92,   -3 }, /* (83) and_operand ::= and_operand AMPERSAND shift_operand */
-  {   93,   -1 }, /* (84) exclusive_or_operand ::= and_operand */
-  {   93,   -3 }, /* (85) exclusive_or_operand ::= exclusive_or_operand CIRCUMFLEX and_operand */
-  {   94,   -1 }, /* (86) inclusive_or_operand ::= exclusive_or_operand */
-  {   94,   -3 }, /* (87) inclusive_or_operand ::= inclusive_or_operand PIPE exclusive_or_operand */
-  {   86,   -1 }, /* (88) scalar_operand ::= inclusive_or_operand */
+  {   64,   -2 }, /* (0) package ::= package_opt END */
+  {   65,    0 }, /* (1) package_opt ::= */
+  {   65,   -2 }, /* (2) package_opt ::= package_opt function_def */
+  {   65,   -2 }, /* (3) package_opt ::= package_opt var_inst */
+  {   65,   -2 }, /* (4) package_opt ::= package_opt var_decl */
+  {   65,   -2 }, /* (5) package_opt ::= package_opt struct_def */
+  {   69,   -2 }, /* (6) struct_def ::= struct_def_opt R_C_BRACKET */
+  {   70,   -3 }, /* (7) struct_def_opt ::= ID L_C_BRACKET var_decl */
+  {   70,   -2 }, /* (8) struct_def_opt ::= struct_def_opt var_decl */
+  {   66,   -2 }, /* (9) function_def ::= function_def_opt block_statement */
+  {   66,   -3 }, /* (10) function_def ::= ID function_type block_statement */
+  {   71,   -4 }, /* (11) function_def_opt ::= ID function_type PIPE var_decl */
+  {   71,   -4 }, /* (12) function_def_opt ::= ID function_type PIPE var_inst */
+  {   71,   -3 }, /* (13) function_def_opt ::= function_def_opt COMMA var_decl */
+  {   71,   -3 }, /* (14) function_def_opt ::= function_def_opt COMMA var_inst */
+  {   68,   -3 }, /* (15) var_decl ::= ID COLON type */
+  {   67,   -2 }, /* (16) var_inst ::= var_decl literal */
+  {   73,   -2 }, /* (17) function_type ::= function_type_opt R_R_BRACKET */
+  {   73,   -2 }, /* (18) function_type ::= L_R_BRACKET R_R_BRACKET */
+  {   76,   -2 }, /* (19) function_type_opt ::= L_R_BRACKET var_decl */
+  {   76,   -3 }, /* (20) function_type_opt ::= function_type_opt COMMA var_decl */
+  {   74,   -2 }, /* (21) type ::= type ASTERIX */
+  {   74,   -5 }, /* (22) type ::= L_S_BRACKET type COMMA INTEGER R_S_BRACKET */
+  {   74,   -1 }, /* (23) type ::= U8 */
+  {   74,   -1 }, /* (24) type ::= U16 */
+  {   74,   -1 }, /* (25) type ::= U32 */
+  {   74,   -1 }, /* (26) type ::= U64 */
+  {   74,   -1 }, /* (27) type ::= I8 */
+  {   74,   -1 }, /* (28) type ::= I16 */
+  {   74,   -1 }, /* (29) type ::= I32 */
+  {   74,   -1 }, /* (30) type ::= I64 */
+  {   74,   -1 }, /* (31) type ::= F32 */
+  {   74,   -1 }, /* (32) type ::= F64 */
+  {   74,   -1 }, /* (33) type ::= function_type */
+  {   74,   -1 }, /* (34) type ::= struct_def */
+  {   72,   -2 }, /* (35) block_statement ::= block_statement_opt R_C_BRACKET */
+  {   77,   -1 }, /* (36) block_statement_opt ::= L_C_BRACKET */
+  {   77,   -2 }, /* (37) block_statement_opt ::= block_statement_opt statement */
+  {   78,   -1 }, /* (38) statement ::= SEMICOLON */
+  {   78,   -1 }, /* (39) statement ::= var_decl */
+  {   78,   -1 }, /* (40) statement ::= var_inst */
+  {   78,   -2 }, /* (41) statement ::= u_mnemonic operand */
+  {   78,   -4 }, /* (42) statement ::= d_mnemonic operand COMMA operand */
+  {   79,   -1 }, /* (43) u_mnemonic ::= PUSH */
+  {   81,   -1 }, /* (44) d_mnemonic ::= MOV */
+  {   81,   -1 }, /* (45) d_mnemonic ::= ADD */
+  {   75,   -2 }, /* (46) literal ::= literal_opt R_C_BRACKET */
+  {   82,   -2 }, /* (47) literal_opt ::= L_C_BRACKET INTEGER */
+  {   82,   -2 }, /* (48) literal_opt ::= L_C_BRACKET FLOAT */
+  {   82,   -2 }, /* (49) literal_opt ::= L_C_BRACKET STRING */
+  {   82,   -2 }, /* (50) literal_opt ::= L_C_BRACKET ID */
+  {   82,   -3 }, /* (51) literal_opt ::= literal_opt COMMA INTEGER */
+  {   82,   -3 }, /* (52) literal_opt ::= literal_opt COMMA FLOAT */
+  {   82,   -3 }, /* (53) literal_opt ::= literal_opt COMMA STRING */
+  {   82,   -3 }, /* (54) literal_opt ::= literal_opt COMMA ID */
+  {   80,   -1 }, /* (55) operand ::= postfix_operand */
+  {   80,   -1 }, /* (56) operand ::= STRING */
+  {   80,   -1 }, /* (57) operand ::= FLOAT */
+  {   80,   -1 }, /* (58) operand ::= scalar_operand */
+  {   80,   -3 }, /* (59) operand ::= L_S_BRACKET scalar_operand R_S_BRACKET */
+  {   85,   -1 }, /* (60) primary_operand ::= ID */
+  {   85,   -7 }, /* (61) primary_operand ::= CAST LESS_THAN type GREATER_THAN L_R_BRACKET ID R_R_BRACKET */
+  {   83,   -1 }, /* (62) postfix_operand ::= primary_operand */
+  {   83,   -4 }, /* (63) postfix_operand ::= postfix_operand L_S_BRACKET INTEGER R_S_BRACKET */
+  {   83,   -3 }, /* (64) postfix_operand ::= postfix_operand DOT ID */
+  {   83,   -3 }, /* (65) postfix_operand ::= postfix_operand ARROW ID */
+  {   86,   -1 }, /* (66) scalar_operand_int ::= INTEGER */
+  {   87,   -1 }, /* (67) multiplicative_operand ::= scalar_operand_int */
+  {   87,   -3 }, /* (68) multiplicative_operand ::= multiplicative_operand ASTERIX scalar_operand */
+  {   87,   -3 }, /* (69) multiplicative_operand ::= multiplicative_operand SLASH scalar_operand */
+  {   87,   -3 }, /* (70) multiplicative_operand ::= multiplicative_operand PERCENT scalar_operand */
+  {   88,   -1 }, /* (71) additive_operand ::= multiplicative_operand */
+  {   88,   -3 }, /* (72) additive_operand ::= additive_operand PLUS multiplicative_operand */
+  {   88,   -3 }, /* (73) additive_operand ::= additive_operand MINUS multiplicative_operand */
+  {   89,   -1 }, /* (74) shift_operand ::= additive_operand */
+  {   89,   -3 }, /* (75) shift_operand ::= shift_operand DOUBLE_LESS_THAN additive_operand */
+  {   89,   -3 }, /* (76) shift_operand ::= shift_operand DOUBLE_GREATER_THAN additive_operand */
+  {   90,   -1 }, /* (77) and_operand ::= shift_operand */
+  {   90,   -3 }, /* (78) and_operand ::= and_operand AMPERSAND shift_operand */
+  {   91,   -1 }, /* (79) exclusive_or_operand ::= and_operand */
+  {   91,   -3 }, /* (80) exclusive_or_operand ::= exclusive_or_operand CIRCUMFLEX and_operand */
+  {   92,   -1 }, /* (81) inclusive_or_operand ::= exclusive_or_operand */
+  {   92,   -3 }, /* (82) inclusive_or_operand ::= inclusive_or_operand PIPE exclusive_or_operand */
+  {   84,   -1 }, /* (83) scalar_operand ::= inclusive_or_operand */
 };
 
 static void yy_accept(yyParser*);  /* Forward Declaration */
@@ -1189,78 +1171,73 @@ static YYACTIONTYPE yy_reduce(
       /* (14) function_def_opt ::= function_def_opt COMMA var_inst */ yytestcase(yyruleno==14);
       /* (15) var_decl ::= ID COLON type */ yytestcase(yyruleno==15);
       /* (16) var_inst ::= var_decl literal */ yytestcase(yyruleno==16);
-      /* (17) function_type ::= function_param ARROW type */ yytestcase(yyruleno==17);
-      /* (18) function_type ::= function_param */ yytestcase(yyruleno==18);
-      /* (19) function_param ::= function_param_opt R_R_BRACKET */ yytestcase(yyruleno==19);
-      /* (20) function_param ::= function_param_opt COMMA TRIPLE_DOT R_R_BRACKET */ yytestcase(yyruleno==20);
-      /* (21) function_param ::= L_R_BRACKET R_R_BRACKET */ yytestcase(yyruleno==21);
-      /* (22) function_param ::= L_R_BRACKET VOID R_R_BRACKET */ yytestcase(yyruleno==22);
-      /* (23) function_param_opt ::= L_R_BRACKET var_decl */ yytestcase(yyruleno==23);
-      /* (24) function_param_opt ::= function_param_opt COMMA var_decl */ yytestcase(yyruleno==24);
-      /* (25) type ::= type ASTERIX */ yytestcase(yyruleno==25);
-      /* (26) type ::= L_S_BRACKET type COMMA INTEGER R_S_BRACKET */ yytestcase(yyruleno==26);
-      /* (27) type ::= U8 */ yytestcase(yyruleno==27);
-      /* (28) type ::= U16 */ yytestcase(yyruleno==28);
-      /* (29) type ::= U32 */ yytestcase(yyruleno==29);
-      /* (30) type ::= U64 */ yytestcase(yyruleno==30);
-      /* (31) type ::= I8 */ yytestcase(yyruleno==31);
-      /* (32) type ::= I16 */ yytestcase(yyruleno==32);
-      /* (33) type ::= I32 */ yytestcase(yyruleno==33);
-      /* (34) type ::= I64 */ yytestcase(yyruleno==34);
-      /* (35) type ::= F32 */ yytestcase(yyruleno==35);
-      /* (36) type ::= F64 */ yytestcase(yyruleno==36);
-      /* (37) type ::= VOID */ yytestcase(yyruleno==37);
-      /* (38) type ::= function_type (OPTIMIZED OUT) */ assert(yyruleno!=38);
-      /* (39) type ::= struct_def (OPTIMIZED OUT) */ assert(yyruleno!=39);
-      /* (40) block_statement ::= block_statement_opt R_C_BRACKET */ yytestcase(yyruleno==40);
-      /* (41) block_statement_opt ::= L_C_BRACKET */ yytestcase(yyruleno==41);
-      /* (42) block_statement_opt ::= block_statement_opt statement */ yytestcase(yyruleno==42);
-      /* (43) statement ::= SEMICOLON */ yytestcase(yyruleno==43);
-      /* (44) statement ::= var_decl */ yytestcase(yyruleno==44);
-      /* (45) statement ::= var_inst (OPTIMIZED OUT) */ assert(yyruleno!=45);
-      /* (46) statement ::= u_mnemonic operand */ yytestcase(yyruleno==46);
-      /* (47) statement ::= d_mnemonic operand COMMA operand */ yytestcase(yyruleno==47);
-      /* (48) u_mnemonic ::= PUSH */ yytestcase(yyruleno==48);
-      /* (49) d_mnemonic ::= MOV */ yytestcase(yyruleno==49);
-      /* (50) d_mnemonic ::= ADD */ yytestcase(yyruleno==50);
-      /* (51) literal ::= literal_opt R_C_BRACKET */ yytestcase(yyruleno==51);
-      /* (52) literal_opt ::= L_C_BRACKET INTEGER */ yytestcase(yyruleno==52);
-      /* (53) literal_opt ::= L_C_BRACKET FLOAT */ yytestcase(yyruleno==53);
-      /* (54) literal_opt ::= L_C_BRACKET STRING */ yytestcase(yyruleno==54);
-      /* (55) literal_opt ::= L_C_BRACKET ID */ yytestcase(yyruleno==55);
-      /* (56) literal_opt ::= literal_opt COMMA INTEGER */ yytestcase(yyruleno==56);
-      /* (57) literal_opt ::= literal_opt COMMA FLOAT */ yytestcase(yyruleno==57);
-      /* (58) literal_opt ::= literal_opt COMMA STRING */ yytestcase(yyruleno==58);
-      /* (59) literal_opt ::= literal_opt COMMA ID */ yytestcase(yyruleno==59);
-      /* (60) operand ::= postfix_operand */ yytestcase(yyruleno==60);
-      /* (61) operand ::= STRING */ yytestcase(yyruleno==61);
-      /* (62) operand ::= FLOAT */ yytestcase(yyruleno==62);
-      /* (63) operand ::= scalar_operand (OPTIMIZED OUT) */ assert(yyruleno!=63);
-      /* (64) operand ::= L_S_BRACKET scalar_operand R_S_BRACKET */ yytestcase(yyruleno==64);
-      /* (65) primary_operand ::= ID */ yytestcase(yyruleno==65);
-      /* (66) primary_operand ::= CAST LESS_THAN type GREATER_THAN L_R_BRACKET ID R_R_BRACKET */ yytestcase(yyruleno==66);
-      /* (67) postfix_operand ::= primary_operand (OPTIMIZED OUT) */ assert(yyruleno!=67);
-      /* (68) postfix_operand ::= postfix_operand L_S_BRACKET INTEGER R_S_BRACKET */ yytestcase(yyruleno==68);
-      /* (69) postfix_operand ::= postfix_operand DOT ID */ yytestcase(yyruleno==69);
-      /* (70) postfix_operand ::= postfix_operand ARROW ID */ yytestcase(yyruleno==70);
-      /* (71) scalar_operand_int ::= INTEGER */ yytestcase(yyruleno==71);
-      /* (72) multiplicative_operand ::= scalar_operand_int (OPTIMIZED OUT) */ assert(yyruleno!=72);
-      /* (73) multiplicative_operand ::= multiplicative_operand ASTERIX scalar_operand */ yytestcase(yyruleno==73);
-      /* (74) multiplicative_operand ::= multiplicative_operand SLASH scalar_operand */ yytestcase(yyruleno==74);
-      /* (75) multiplicative_operand ::= multiplicative_operand PERCENT scalar_operand */ yytestcase(yyruleno==75);
-      /* (76) additive_operand ::= multiplicative_operand */ yytestcase(yyruleno==76);
-      /* (77) additive_operand ::= additive_operand PLUS multiplicative_operand */ yytestcase(yyruleno==77);
-      /* (78) additive_operand ::= additive_operand MINUS multiplicative_operand */ yytestcase(yyruleno==78);
-      /* (79) shift_operand ::= additive_operand */ yytestcase(yyruleno==79);
-      /* (80) shift_operand ::= shift_operand DOUBLE_LESS_THAN additive_operand */ yytestcase(yyruleno==80);
-      /* (81) shift_operand ::= shift_operand DOUBLE_GREATER_THAN additive_operand */ yytestcase(yyruleno==81);
-      /* (82) and_operand ::= shift_operand */ yytestcase(yyruleno==82);
-      /* (83) and_operand ::= and_operand AMPERSAND shift_operand */ yytestcase(yyruleno==83);
-      /* (84) exclusive_or_operand ::= and_operand */ yytestcase(yyruleno==84);
-      /* (85) exclusive_or_operand ::= exclusive_or_operand CIRCUMFLEX and_operand */ yytestcase(yyruleno==85);
-      /* (86) inclusive_or_operand ::= exclusive_or_operand */ yytestcase(yyruleno==86);
-      /* (87) inclusive_or_operand ::= inclusive_or_operand PIPE exclusive_or_operand */ yytestcase(yyruleno==87);
-      /* (88) scalar_operand ::= inclusive_or_operand */ yytestcase(yyruleno==88);
+      /* (17) function_type ::= function_type_opt R_R_BRACKET */ yytestcase(yyruleno==17);
+      /* (18) function_type ::= L_R_BRACKET R_R_BRACKET */ yytestcase(yyruleno==18);
+      /* (19) function_type_opt ::= L_R_BRACKET var_decl */ yytestcase(yyruleno==19);
+      /* (20) function_type_opt ::= function_type_opt COMMA var_decl */ yytestcase(yyruleno==20);
+      /* (21) type ::= type ASTERIX */ yytestcase(yyruleno==21);
+      /* (22) type ::= L_S_BRACKET type COMMA INTEGER R_S_BRACKET */ yytestcase(yyruleno==22);
+      /* (23) type ::= U8 */ yytestcase(yyruleno==23);
+      /* (24) type ::= U16 */ yytestcase(yyruleno==24);
+      /* (25) type ::= U32 */ yytestcase(yyruleno==25);
+      /* (26) type ::= U64 */ yytestcase(yyruleno==26);
+      /* (27) type ::= I8 */ yytestcase(yyruleno==27);
+      /* (28) type ::= I16 */ yytestcase(yyruleno==28);
+      /* (29) type ::= I32 */ yytestcase(yyruleno==29);
+      /* (30) type ::= I64 */ yytestcase(yyruleno==30);
+      /* (31) type ::= F32 */ yytestcase(yyruleno==31);
+      /* (32) type ::= F64 */ yytestcase(yyruleno==32);
+      /* (33) type ::= function_type (OPTIMIZED OUT) */ assert(yyruleno!=33);
+      /* (34) type ::= struct_def (OPTIMIZED OUT) */ assert(yyruleno!=34);
+      /* (35) block_statement ::= block_statement_opt R_C_BRACKET */ yytestcase(yyruleno==35);
+      /* (36) block_statement_opt ::= L_C_BRACKET */ yytestcase(yyruleno==36);
+      /* (37) block_statement_opt ::= block_statement_opt statement */ yytestcase(yyruleno==37);
+      /* (38) statement ::= SEMICOLON */ yytestcase(yyruleno==38);
+      /* (39) statement ::= var_decl */ yytestcase(yyruleno==39);
+      /* (40) statement ::= var_inst (OPTIMIZED OUT) */ assert(yyruleno!=40);
+      /* (41) statement ::= u_mnemonic operand */ yytestcase(yyruleno==41);
+      /* (42) statement ::= d_mnemonic operand COMMA operand */ yytestcase(yyruleno==42);
+      /* (43) u_mnemonic ::= PUSH */ yytestcase(yyruleno==43);
+      /* (44) d_mnemonic ::= MOV */ yytestcase(yyruleno==44);
+      /* (45) d_mnemonic ::= ADD */ yytestcase(yyruleno==45);
+      /* (46) literal ::= literal_opt R_C_BRACKET */ yytestcase(yyruleno==46);
+      /* (47) literal_opt ::= L_C_BRACKET INTEGER */ yytestcase(yyruleno==47);
+      /* (48) literal_opt ::= L_C_BRACKET FLOAT */ yytestcase(yyruleno==48);
+      /* (49) literal_opt ::= L_C_BRACKET STRING */ yytestcase(yyruleno==49);
+      /* (50) literal_opt ::= L_C_BRACKET ID */ yytestcase(yyruleno==50);
+      /* (51) literal_opt ::= literal_opt COMMA INTEGER */ yytestcase(yyruleno==51);
+      /* (52) literal_opt ::= literal_opt COMMA FLOAT */ yytestcase(yyruleno==52);
+      /* (53) literal_opt ::= literal_opt COMMA STRING */ yytestcase(yyruleno==53);
+      /* (54) literal_opt ::= literal_opt COMMA ID */ yytestcase(yyruleno==54);
+      /* (55) operand ::= postfix_operand */ yytestcase(yyruleno==55);
+      /* (56) operand ::= STRING */ yytestcase(yyruleno==56);
+      /* (57) operand ::= FLOAT */ yytestcase(yyruleno==57);
+      /* (58) operand ::= scalar_operand (OPTIMIZED OUT) */ assert(yyruleno!=58);
+      /* (59) operand ::= L_S_BRACKET scalar_operand R_S_BRACKET */ yytestcase(yyruleno==59);
+      /* (60) primary_operand ::= ID */ yytestcase(yyruleno==60);
+      /* (61) primary_operand ::= CAST LESS_THAN type GREATER_THAN L_R_BRACKET ID R_R_BRACKET */ yytestcase(yyruleno==61);
+      /* (62) postfix_operand ::= primary_operand (OPTIMIZED OUT) */ assert(yyruleno!=62);
+      /* (63) postfix_operand ::= postfix_operand L_S_BRACKET INTEGER R_S_BRACKET */ yytestcase(yyruleno==63);
+      /* (64) postfix_operand ::= postfix_operand DOT ID */ yytestcase(yyruleno==64);
+      /* (65) postfix_operand ::= postfix_operand ARROW ID */ yytestcase(yyruleno==65);
+      /* (66) scalar_operand_int ::= INTEGER */ yytestcase(yyruleno==66);
+      /* (67) multiplicative_operand ::= scalar_operand_int (OPTIMIZED OUT) */ assert(yyruleno!=67);
+      /* (68) multiplicative_operand ::= multiplicative_operand ASTERIX scalar_operand */ yytestcase(yyruleno==68);
+      /* (69) multiplicative_operand ::= multiplicative_operand SLASH scalar_operand */ yytestcase(yyruleno==69);
+      /* (70) multiplicative_operand ::= multiplicative_operand PERCENT scalar_operand */ yytestcase(yyruleno==70);
+      /* (71) additive_operand ::= multiplicative_operand */ yytestcase(yyruleno==71);
+      /* (72) additive_operand ::= additive_operand PLUS multiplicative_operand */ yytestcase(yyruleno==72);
+      /* (73) additive_operand ::= additive_operand MINUS multiplicative_operand */ yytestcase(yyruleno==73);
+      /* (74) shift_operand ::= additive_operand */ yytestcase(yyruleno==74);
+      /* (75) shift_operand ::= shift_operand DOUBLE_LESS_THAN additive_operand */ yytestcase(yyruleno==75);
+      /* (76) shift_operand ::= shift_operand DOUBLE_GREATER_THAN additive_operand */ yytestcase(yyruleno==76);
+      /* (77) and_operand ::= shift_operand */ yytestcase(yyruleno==77);
+      /* (78) and_operand ::= and_operand AMPERSAND shift_operand */ yytestcase(yyruleno==78);
+      /* (79) exclusive_or_operand ::= and_operand */ yytestcase(yyruleno==79);
+      /* (80) exclusive_or_operand ::= exclusive_or_operand CIRCUMFLEX and_operand */ yytestcase(yyruleno==80);
+      /* (81) inclusive_or_operand ::= exclusive_or_operand */ yytestcase(yyruleno==81);
+      /* (82) inclusive_or_operand ::= inclusive_or_operand PIPE exclusive_or_operand */ yytestcase(yyruleno==82);
+      /* (83) scalar_operand ::= inclusive_or_operand */ yytestcase(yyruleno==83);
         break;
 /********** End reduce actions ************************************************/
   };
@@ -1323,7 +1300,7 @@ static void yy_syntax_error(
 #line 63 "./parser/grammar.y"
 
     printf("syntax error\n");
-#line 1327 "./parser/out/grammar.c"
+#line 1304 "./parser/out/grammar.c"
 /************ End %syntax_error code ******************************************/
   ImplParseARG_STORE /* Suppress warning about unused %extra_argument variable */
   ImplParseCTX_STORE
