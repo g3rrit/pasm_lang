@@ -2,8 +2,12 @@
 
 namespace tree {
 
-  package::package(char *_id)
-    : id(_id) {
+  package::package(id_token_vec* _token_vec)
+    : token_vec(_token_vec) {
+  }
+
+  package::~package() {
+    delete token_vec;
   }
 
 }

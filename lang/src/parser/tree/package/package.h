@@ -2,13 +2,16 @@
 
 #include <vector>
 
+#include "token.h"
+
 namespace tree {
 
   struct package {
+    id_token_vec *token_vec;
 
-    char *id;
+    package(id_token_vec*);
 
-    package(char*);
+    ~package();
   };
 
 }

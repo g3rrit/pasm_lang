@@ -6,6 +6,7 @@
 #include <string>
 #include <cstring>
 #include <typeinfo>
+#include <vector>
 
 struct primary_token {
   int type;
@@ -15,6 +16,12 @@ struct primary_token {
 struct id_token : primary_token {
   char *val;
   id_token(char *_val) : primary_token(ID), val(_val)  {}
+  bool operator<(const id_token&) const;
+  bool operator>(const id_token&) const;
+};
+
+struct id_token_vec : std::vector<id_token> {
+  bool operator<(const id_token_vec&) const;
 };
 
 struct float_token : primary_token {

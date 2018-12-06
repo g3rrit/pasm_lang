@@ -2,17 +2,19 @@
 
 #include <string>
 #include <map>
+#include <vector>
 
 #include "package.h"
 #include "util.h"
+#include "token.h"
 
 namespace tree {
   struct tree {
-      std::map<char*, package, util::cmp_str> package_map;
+      std::map<id_token_vec*, package*, util::cmp_id_token_vec> package_map;
 
-      void packge_add(char*);
-      package* package_get(char*);
-      bool package_exists(char*);
+      package* packge_add(id_token_vec*);
+      package* package_get(id_token_vec*);
+      bool package_exists(id_token_vec*);
 
   };
 }
