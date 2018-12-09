@@ -1,5 +1,8 @@
 #include "tree.h"
 
+#include "token.h"
+#include "package.h"
+
 namespace tree {
 
   package* tree::packge_add(id_token_vec* token_vec) {

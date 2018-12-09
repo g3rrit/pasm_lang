@@ -72,7 +72,7 @@ package ::= package_opt  END .
 
 package_opt ::= /* empty */ .
 package_opt ::= package_opt function_def .
-package_opt ::= package_opt var_inst .
+package_opt ::= package_opt var_def .
 package_opt ::= package_opt var_decl .
 package_opt ::= package_opt struct_def .
 
@@ -88,13 +88,7 @@ struct_def_opt ::= struct_def_opt var_decl .
 |                       FUNCTION                      |
 +----------------------------------------------------*/
 
-function_def ::= function_def_opt block_statement .
 function_def ::= ID function_type block_statement .
-
-function_def_opt ::= ID function_type PIPE var_decl .
-function_def_opt ::= ID function_type PIPE var_inst .
-function_def_opt ::= function_def_opt COMMA var_decl .
-function_def_opt ::= function_def_opt COMMA var_inst .
 
 /*----------------------------------------------------+
 |                       VAR                           |
@@ -104,7 +98,7 @@ function_def_opt ::= function_def_opt COMMA var_inst .
 
 var_decl ::= ID COLON type .
 
-var_inst ::= var_decl literal .
+var_def ::= var_decl literal .
 
 /*----------------------------------------------------+
 |                       TYPES                         |
@@ -146,7 +140,7 @@ block_statement_opt ::= block_statement_opt statement .
 
 statement ::= SEMICOLON .
 statement ::= var_decl .
-statement ::= var_inst .
+statement ::= var_def .
 statement ::= u_mnemonic operand .
 statement ::= d_mnemonic operand COMMA operand .
 
@@ -160,59 +154,61 @@ d_mnemonic ::= ADD .
 |                       EXPRESSION                    |
 +----------------------------------------------------*/
 
+/* -------------------- OPERAND ----------------------- */
+
+operand ::= ref_exp . [EXP]
+operand ::= FLOAT .
+operand ::= scalar_exp .
+operand ::= L_S_BRACKET scalar_exp R_S_BRACKET .
+
 /* -------------------- COMPOUND_LITERAL -------------- */
 
 literal ::= literal_opt R_C_BRACKET .
 
-literal_opt ::= L_C_BRACKET INTEGER .
-literal_opt ::= L_C_BRACKET FLOAT .
-literal_opt ::= L_C_BRACKET STRING .
-literal_opt ::= L_C_BRACKET ID .
-literal_opt ::= literal_opt COMMA INTEGER .
-literal_opt ::= literal_opt COMMA FLOAT .
-literal_opt ::= literal_opt COMMA STRING .
-literal_opt ::= literal_opt COMMA ID .
+literal_opt ::= L_C_BRACKET exp .
+literal_opt ::= literal_opt COMMA exp .
 
-/* -------------------- OPERAND ----------------------- */
+/* -------------------- EXPRESSION -------------------- */
 
-operand ::= postfix_operand . [EXP]
-operand ::= STRING .
-operand ::= FLOAT .
-operand ::= scalar_operand .
-operand ::= L_S_BRACKET scalar_operand R_S_BRACKET .
+exp ::= scalar_exp .
+exp ::= FLOAT .
+exp ::= STRING .
+exp ::= ref_exp .
 
-primary_operand ::= ID .
-primary_operand ::= CAST LESS_THAN type GREATER_THAN L_R_BRACKET ID R_R_BRACKET .
+/* -------------------- REF_EXP ----------------------- */
 
-postfix_operand ::= primary_operand . [EXP]
-postfix_operand ::= postfix_operand L_S_BRACKET INTEGER R_S_BRACKET .
-postfix_operand ::= postfix_operand DOT ID .
-postfix_operand ::= postfix_operand ARROW ID .
+ref_exp ::= ID . [EXP]
+ref_exp ::= CAST LESS_THAN type GREATER_THAN L_R_BRACKET ref_exp R_R_BRACKET .
+ref_exp ::= ref_exp L_S_BRACKET scalar_exp R_S_BRACKET .
+ref_exp ::= ref_exp DOT ID .
+ref_exp ::= ref_exp ARROW ID .
+ref_exp ::= ref_exp PLUS scalar_exp .
+ref_exp ::= ref_exp MINUS scalar_exp .
 
-/* -------------------- SCALAR_OPERAND ---------------- */
+/* -------------------- SCALAR_EXP -------------------- */
 
-scalar_operand_int ::= INTEGER .
+scalar_exp_int ::= INTEGER .
 
-multiplicative_operand ::= scalar_operand_int . [EXP]
-multiplicative_operand ::= multiplicative_operand ASTERIX scalar_operand.
-multiplicative_operand ::= multiplicative_operand SLASH scalar_operand .
-multiplicative_operand ::= multiplicative_operand PERCENT scalar_operand .
+multiplicative_exp ::= scalar_exp_int . [EXP]
+multiplicative_exp ::= multiplicative_exp ASTERIX scalar_exp.
+multiplicative_exp ::= multiplicative_exp SLASH scalar_exp .
+multiplicative_exp ::= multiplicative_exp PERCENT scalar_exp .
 
-additive_operand ::= multiplicative_operand . [EXP]
-additive_operand ::= additive_operand PLUS multiplicative_operand .
-additive_operand ::= additive_operand MINUS multiplicative_operand .
+additive_exp ::= multiplicative_exp . [EXP]
+additive_exp ::= additive_exp PLUS multiplicative_exp .
+additive_exp ::= additive_exp MINUS multiplicative_exp .
 
-shift_operand ::= additive_operand . [EXP]
-shift_operand ::= shift_operand DOUBLE_LESS_THAN additive_operand .
-shift_operand ::= shift_operand DOUBLE_GREATER_THAN additive_operand .
+shift_exp ::= additive_exp . [EXP]
+shift_exp ::= shift_exp DOUBLE_LESS_THAN additive_exp .
+shift_exp ::= shift_exp DOUBLE_GREATER_THAN additive_exp .
 
-and_operand ::= shift_operand . [EXP]
-and_operand ::= and_operand AMPERSAND shift_operand .
+and_exp ::= shift_exp . [EXP]
+and_exp ::= and_exp AMPERSAND shift_exp .
 
-exclusive_or_operand ::= and_operand . [EXP]
-exclusive_or_operand ::= exclusive_or_operand CIRCUMFLEX and_operand .
+exclusive_or_exp ::= and_exp . [EXP]
+exclusive_or_exp ::= exclusive_or_exp CIRCUMFLEX and_exp .
 
-inclusive_or_operand ::= exclusive_or_operand . [EXP]
-inclusive_or_operand ::= inclusive_or_operand PIPE exclusive_or_operand .
+inclusive_or_exp ::= exclusive_or_exp . [EXP]
+inclusive_or_exp ::= inclusive_or_exp PIPE exclusive_or_exp .
 
-scalar_operand ::= inclusive_or_operand . [EXP]
+scalar_exp ::= inclusive_or_exp . [EXP]

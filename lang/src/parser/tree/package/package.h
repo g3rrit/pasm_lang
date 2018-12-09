@@ -2,7 +2,7 @@
 
 #include <vector>
 
-#include "token.h"
+struct id_token_vec;
 
 namespace tree {
 

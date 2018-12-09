@@ -1,5 +1,7 @@
 #include "package.h"
 
+#include "token.h"
+
 namespace tree {
 
   package::package(id_token_vec* _token_vec)

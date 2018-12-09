@@ -1,0 +1,1310 @@
+State 0:
+          package ::= * package_opt END
+      (1) package_opt ::= *
+          package_opt ::= * package_opt function_def
+          package_opt ::= * package_opt var_def
+          package_opt ::= * package_opt var_decl
+          package_opt ::= * package_opt struct_def
+
+                       package accept
+                   package_opt shift        18     
+                     {default} reduce       1      package_opt ::=
+
+State 1:
+          statement ::= d_mnemonic operand COMMA * operand
+          operand ::= * ref_exp
+          operand ::= * FLOAT
+          operand ::= * scalar_exp
+          operand ::= * L_S_BRACKET scalar_exp R_S_BRACKET
+          ref_exp ::= * ID
+          ref_exp ::= * CAST LESS_THAN type GREATER_THAN L_R_BRACKET ref_exp R_R_BRACKET
+          ref_exp ::= * ref_exp L_S_BRACKET scalar_exp R_S_BRACKET
+          ref_exp ::= * ref_exp DOT ID
+          ref_exp ::= * ref_exp ARROW ID
+          ref_exp ::= * ref_exp PLUS scalar_exp
+          ref_exp ::= * ref_exp MINUS scalar_exp
+          scalar_exp_int ::= * INTEGER
+          multiplicative_exp ::= * scalar_exp_int
+          multiplicative_exp ::= * multiplicative_exp ASTERIX scalar_exp
+          multiplicative_exp ::= * multiplicative_exp SLASH scalar_exp
+          multiplicative_exp ::= * multiplicative_exp PERCENT scalar_exp
+          additive_exp ::= * multiplicative_exp
+          additive_exp ::= * additive_exp PLUS multiplicative_exp
+          additive_exp ::= * additive_exp MINUS multiplicative_exp
+          shift_exp ::= * additive_exp
+          shift_exp ::= * shift_exp DOUBLE_LESS_THAN additive_exp
+          shift_exp ::= * shift_exp DOUBLE_GREATER_THAN additive_exp
+          and_exp ::= * shift_exp
+          and_exp ::= * and_exp AMPERSAND shift_exp
+          exclusive_or_exp ::= * and_exp
+          exclusive_or_exp ::= * exclusive_or_exp CIRCUMFLEX and_exp
+          inclusive_or_exp ::= * exclusive_or_exp
+          inclusive_or_exp ::= * inclusive_or_exp PIPE exclusive_or_exp
+          scalar_exp ::= * inclusive_or_exp
+
+                       INTEGER shift-reduce 59     scalar_exp_int ::= INTEGER
+                         FLOAT shift-reduce 42     operand ::= FLOAT
+                   L_S_BRACKET shift        6      
+                            ID shift-reduce 52     ref_exp ::= ID
+                          CAST shift        57     
+                       operand shift-reduce 37     statement ::= d_mnemonic operand COMMA operand
+                       ref_exp shift        35     
+                    scalar_exp shift-reduce 37     statement ::= d_mnemonic operand COMMA operand  /* because scalar_exp==operand */
+                scalar_exp_int shift        39       /* because scalar_exp_int==multiplicative_exp */
+            multiplicative_exp shift        39     
+                  additive_exp shift        47     
+                     shift_exp shift        46     
+                       and_exp shift        64     
+              exclusive_or_exp shift        63     
+              inclusive_or_exp shift        61     
+
+State 2:
+          statement ::= d_mnemonic * operand COMMA operand
+          operand ::= * ref_exp
+          operand ::= * FLOAT
+          operand ::= * scalar_exp
+          operand ::= * L_S_BRACKET scalar_exp R_S_BRACKET
+          ref_exp ::= * ID
+          ref_exp ::= * CAST LESS_THAN type GREATER_THAN L_R_BRACKET ref_exp R_R_BRACKET
+          ref_exp ::= * ref_exp L_S_BRACKET scalar_exp R_S_BRACKET
+          ref_exp ::= * ref_exp DOT ID
+          ref_exp ::= * ref_exp ARROW ID
+          ref_exp ::= * ref_exp PLUS scalar_exp
+          ref_exp ::= * ref_exp MINUS scalar_exp
+          scalar_exp_int ::= * INTEGER
+          multiplicative_exp ::= * scalar_exp_int
+          multiplicative_exp ::= * multiplicative_exp ASTERIX scalar_exp
+          multiplicative_exp ::= * multiplicative_exp SLASH scalar_exp
+          multiplicative_exp ::= * multiplicative_exp PERCENT scalar_exp
+          additive_exp ::= * multiplicative_exp
+          additive_exp ::= * additive_exp PLUS multiplicative_exp
+          additive_exp ::= * additive_exp MINUS multiplicative_exp
+          shift_exp ::= * additive_exp
+          shift_exp ::= * shift_exp DOUBLE_LESS_THAN additive_exp
+          shift_exp ::= * shift_exp DOUBLE_GREATER_THAN additive_exp
+          and_exp ::= * shift_exp
+          and_exp ::= * and_exp AMPERSAND shift_exp
+          exclusive_or_exp ::= * and_exp
+          exclusive_or_exp ::= * exclusive_or_exp CIRCUMFLEX and_exp
+          inclusive_or_exp ::= * exclusive_or_exp
+          inclusive_or_exp ::= * inclusive_or_exp PIPE exclusive_or_exp
+          scalar_exp ::= * inclusive_or_exp
+
+                       INTEGER shift-reduce 59     scalar_exp_int ::= INTEGER
+                         FLOAT shift-reduce 42     operand ::= FLOAT
+                   L_S_BRACKET shift        6      
+                            ID shift-reduce 52     ref_exp ::= ID
+                          CAST shift        57     
+                       operand shift        49     
+                       ref_exp shift        35     
+                    scalar_exp shift        49       /* because scalar_exp==operand */
+                scalar_exp_int shift        39       /* because scalar_exp_int==multiplicative_exp */
+            multiplicative_exp shift        39     
+                  additive_exp shift        47     
+                     shift_exp shift        46     
+                       and_exp shift        64     
+              exclusive_or_exp shift        63     
+              inclusive_or_exp shift        61     
+
+State 3:
+          statement ::= u_mnemonic * operand
+          operand ::= * ref_exp
+          operand ::= * FLOAT
+          operand ::= * scalar_exp
+          operand ::= * L_S_BRACKET scalar_exp R_S_BRACKET
+          ref_exp ::= * ID
+          ref_exp ::= * CAST LESS_THAN type GREATER_THAN L_R_BRACKET ref_exp R_R_BRACKET
+          ref_exp ::= * ref_exp L_S_BRACKET scalar_exp R_S_BRACKET
+          ref_exp ::= * ref_exp DOT ID
+          ref_exp ::= * ref_exp ARROW ID
+          ref_exp ::= * ref_exp PLUS scalar_exp
+          ref_exp ::= * ref_exp MINUS scalar_exp
+          scalar_exp_int ::= * INTEGER
+          multiplicative_exp ::= * scalar_exp_int
+          multiplicative_exp ::= * multiplicative_exp ASTERIX scalar_exp
+          multiplicative_exp ::= * multiplicative_exp SLASH scalar_exp
+          multiplicative_exp ::= * multiplicative_exp PERCENT scalar_exp
+          additive_exp ::= * multiplicative_exp
+          additive_exp ::= * additive_exp PLUS multiplicative_exp
+          additive_exp ::= * additive_exp MINUS multiplicative_exp
+          shift_exp ::= * additive_exp
+          shift_exp ::= * shift_exp DOUBLE_LESS_THAN additive_exp
+          shift_exp ::= * shift_exp DOUBLE_GREATER_THAN additive_exp
+          and_exp ::= * shift_exp
+          and_exp ::= * and_exp AMPERSAND shift_exp
+          exclusive_or_exp ::= * and_exp
+          exclusive_or_exp ::= * exclusive_or_exp CIRCUMFLEX and_exp
+          inclusive_or_exp ::= * exclusive_or_exp
+          inclusive_or_exp ::= * inclusive_or_exp PIPE exclusive_or_exp
+          scalar_exp ::= * inclusive_or_exp
+
+                       INTEGER shift-reduce 59     scalar_exp_int ::= INTEGER
+                         FLOAT shift-reduce 42     operand ::= FLOAT
+                   L_S_BRACKET shift        6      
+                            ID shift-reduce 52     ref_exp ::= ID
+                          CAST shift        57     
+                       operand shift-reduce 36     statement ::= u_mnemonic operand
+                       ref_exp shift        35     
+                    scalar_exp shift-reduce 36     statement ::= u_mnemonic operand  /* because scalar_exp==operand */
+                scalar_exp_int shift        39       /* because scalar_exp_int==multiplicative_exp */
+            multiplicative_exp shift        39     
+                  additive_exp shift        47     
+                     shift_exp shift        46     
+                       and_exp shift        64     
+              exclusive_or_exp shift        63     
+              inclusive_or_exp shift        61     
+
+State 4:
+          literal_opt ::= L_C_BRACKET * exp
+          exp ::= * scalar_exp
+          exp ::= * FLOAT
+          exp ::= * STRING
+          exp ::= * ref_exp
+          ref_exp ::= * ID
+          ref_exp ::= * CAST LESS_THAN type GREATER_THAN L_R_BRACKET ref_exp R_R_BRACKET
+          ref_exp ::= * ref_exp L_S_BRACKET scalar_exp R_S_BRACKET
+          ref_exp ::= * ref_exp DOT ID
+          ref_exp ::= * ref_exp ARROW ID
+          ref_exp ::= * ref_exp PLUS scalar_exp
+          ref_exp ::= * ref_exp MINUS scalar_exp
+          scalar_exp_int ::= * INTEGER
+          multiplicative_exp ::= * scalar_exp_int
+          multiplicative_exp ::= * multiplicative_exp ASTERIX scalar_exp
+          multiplicative_exp ::= * multiplicative_exp SLASH scalar_exp
+          multiplicative_exp ::= * multiplicative_exp PERCENT scalar_exp
+          additive_exp ::= * multiplicative_exp
+          additive_exp ::= * additive_exp PLUS multiplicative_exp
+          additive_exp ::= * additive_exp MINUS multiplicative_exp
+          shift_exp ::= * additive_exp
+          shift_exp ::= * shift_exp DOUBLE_LESS_THAN additive_exp
+          shift_exp ::= * shift_exp DOUBLE_GREATER_THAN additive_exp
+          and_exp ::= * shift_exp
+          and_exp ::= * and_exp AMPERSAND shift_exp
+          exclusive_or_exp ::= * and_exp
+          exclusive_or_exp ::= * exclusive_or_exp CIRCUMFLEX and_exp
+          inclusive_or_exp ::= * exclusive_or_exp
+          inclusive_or_exp ::= * inclusive_or_exp PIPE exclusive_or_exp
+          scalar_exp ::= * inclusive_or_exp
+
+                       INTEGER shift-reduce 59     scalar_exp_int ::= INTEGER
+                         FLOAT shift-reduce 49     exp ::= FLOAT
+                        STRING shift-reduce 50     exp ::= STRING
+                            ID shift-reduce 52     ref_exp ::= ID
+                          CAST shift        57     
+                       ref_exp shift        36     
+                    scalar_exp shift-reduce 46     literal_opt ::= L_C_BRACKET exp  /* because scalar_exp==exp */
+                           exp shift-reduce 46     literal_opt ::= L_C_BRACKET exp
+                scalar_exp_int shift        39       /* because scalar_exp_int==multiplicative_exp */
+            multiplicative_exp shift        39     
+                  additive_exp shift        47     
+                     shift_exp shift        46     
+                       and_exp shift        64     
+              exclusive_or_exp shift        63     
+              inclusive_or_exp shift        61     
+
+State 5:
+          literal_opt ::= literal_opt COMMA * exp
+          exp ::= * scalar_exp
+          exp ::= * FLOAT
+          exp ::= * STRING
+          exp ::= * ref_exp
+          ref_exp ::= * ID
+          ref_exp ::= * CAST LESS_THAN type GREATER_THAN L_R_BRACKET ref_exp R_R_BRACKET
+          ref_exp ::= * ref_exp L_S_BRACKET scalar_exp R_S_BRACKET
+          ref_exp ::= * ref_exp DOT ID
+          ref_exp ::= * ref_exp ARROW ID
+          ref_exp ::= * ref_exp PLUS scalar_exp
+          ref_exp ::= * ref_exp MINUS scalar_exp
+          scalar_exp_int ::= * INTEGER
+          multiplicative_exp ::= * scalar_exp_int
+          multiplicative_exp ::= * multiplicative_exp ASTERIX scalar_exp
+          multiplicative_exp ::= * multiplicative_exp SLASH scalar_exp
+          multiplicative_exp ::= * multiplicative_exp PERCENT scalar_exp
+          additive_exp ::= * multiplicative_exp
+          additive_exp ::= * additive_exp PLUS multiplicative_exp
+          additive_exp ::= * additive_exp MINUS multiplicative_exp
+          shift_exp ::= * additive_exp
+          shift_exp ::= * shift_exp DOUBLE_LESS_THAN additive_exp
+          shift_exp ::= * shift_exp DOUBLE_GREATER_THAN additive_exp
+          and_exp ::= * shift_exp
+          and_exp ::= * and_exp AMPERSAND shift_exp
+          exclusive_or_exp ::= * and_exp
+          exclusive_or_exp ::= * exclusive_or_exp CIRCUMFLEX and_exp
+          inclusive_or_exp ::= * exclusive_or_exp
+          inclusive_or_exp ::= * inclusive_or_exp PIPE exclusive_or_exp
+          scalar_exp ::= * inclusive_or_exp
+
+                       INTEGER shift-reduce 59     scalar_exp_int ::= INTEGER
+                         FLOAT shift-reduce 49     exp ::= FLOAT
+                        STRING shift-reduce 50     exp ::= STRING
+                            ID shift-reduce 52     ref_exp ::= ID
+                          CAST shift        57     
+                       ref_exp shift        36     
+                    scalar_exp shift-reduce 47     literal_opt ::= literal_opt COMMA exp  /* because scalar_exp==exp */
+                           exp shift-reduce 47     literal_opt ::= literal_opt COMMA exp
+                scalar_exp_int shift        39       /* because scalar_exp_int==multiplicative_exp */
+            multiplicative_exp shift        39     
+                  additive_exp shift        47     
+                     shift_exp shift        46     
+                       and_exp shift        64     
+              exclusive_or_exp shift        63     
+              inclusive_or_exp shift        61     
+
+State 6:
+          operand ::= L_S_BRACKET * scalar_exp R_S_BRACKET
+          scalar_exp_int ::= * INTEGER
+          multiplicative_exp ::= * scalar_exp_int
+          multiplicative_exp ::= * multiplicative_exp ASTERIX scalar_exp
+          multiplicative_exp ::= * multiplicative_exp SLASH scalar_exp
+          multiplicative_exp ::= * multiplicative_exp PERCENT scalar_exp
+          additive_exp ::= * multiplicative_exp
+          additive_exp ::= * additive_exp PLUS multiplicative_exp
+          additive_exp ::= * additive_exp MINUS multiplicative_exp
+          shift_exp ::= * additive_exp
+          shift_exp ::= * shift_exp DOUBLE_LESS_THAN additive_exp
+          shift_exp ::= * shift_exp DOUBLE_GREATER_THAN additive_exp
+          and_exp ::= * shift_exp
+          and_exp ::= * and_exp AMPERSAND shift_exp
+          exclusive_or_exp ::= * and_exp
+          exclusive_or_exp ::= * exclusive_or_exp CIRCUMFLEX and_exp
+          inclusive_or_exp ::= * exclusive_or_exp
+          inclusive_or_exp ::= * inclusive_or_exp PIPE exclusive_or_exp
+          scalar_exp ::= * inclusive_or_exp
+
+                       INTEGER shift-reduce 59     scalar_exp_int ::= INTEGER
+                    scalar_exp shift        50     
+                scalar_exp_int shift        39       /* because scalar_exp_int==multiplicative_exp */
+            multiplicative_exp shift        39     
+                  additive_exp shift        47     
+                     shift_exp shift        46     
+                       and_exp shift        64     
+              exclusive_or_exp shift        63     
+              inclusive_or_exp shift        61     
+
+State 7:
+          ref_exp ::= ref_exp MINUS * scalar_exp
+          scalar_exp_int ::= * INTEGER
+          multiplicative_exp ::= * scalar_exp_int
+          multiplicative_exp ::= * multiplicative_exp ASTERIX scalar_exp
+          multiplicative_exp ::= * multiplicative_exp SLASH scalar_exp
+          multiplicative_exp ::= * multiplicative_exp PERCENT scalar_exp
+          additive_exp ::= * multiplicative_exp
+          additive_exp ::= * additive_exp PLUS multiplicative_exp
+          additive_exp ::= * additive_exp MINUS multiplicative_exp
+          shift_exp ::= * additive_exp
+          shift_exp ::= * shift_exp DOUBLE_LESS_THAN additive_exp
+          shift_exp ::= * shift_exp DOUBLE_GREATER_THAN additive_exp
+          and_exp ::= * shift_exp
+          and_exp ::= * and_exp AMPERSAND shift_exp
+          exclusive_or_exp ::= * and_exp
+          exclusive_or_exp ::= * exclusive_or_exp CIRCUMFLEX and_exp
+          inclusive_or_exp ::= * exclusive_or_exp
+          inclusive_or_exp ::= * inclusive_or_exp PIPE exclusive_or_exp
+          scalar_exp ::= * inclusive_or_exp
+
+                       INTEGER shift-reduce 59     scalar_exp_int ::= INTEGER
+                    scalar_exp shift-reduce 58     ref_exp ::= ref_exp MINUS scalar_exp
+                scalar_exp_int shift        39       /* because scalar_exp_int==multiplicative_exp */
+            multiplicative_exp shift        39     
+                  additive_exp shift        47     
+                     shift_exp shift        46     
+                       and_exp shift        64     
+              exclusive_or_exp shift        63     
+              inclusive_or_exp shift        61     
+
+State 8:
+          ref_exp ::= ref_exp PLUS * scalar_exp
+          scalar_exp_int ::= * INTEGER
+          multiplicative_exp ::= * scalar_exp_int
+          multiplicative_exp ::= * multiplicative_exp ASTERIX scalar_exp
+          multiplicative_exp ::= * multiplicative_exp SLASH scalar_exp
+          multiplicative_exp ::= * multiplicative_exp PERCENT scalar_exp
+          additive_exp ::= * multiplicative_exp
+          additive_exp ::= * additive_exp PLUS multiplicative_exp
+          additive_exp ::= * additive_exp MINUS multiplicative_exp
+          shift_exp ::= * additive_exp
+          shift_exp ::= * shift_exp DOUBLE_LESS_THAN additive_exp
+          shift_exp ::= * shift_exp DOUBLE_GREATER_THAN additive_exp
+          and_exp ::= * shift_exp
+          and_exp ::= * and_exp AMPERSAND shift_exp
+          exclusive_or_exp ::= * and_exp
+          exclusive_or_exp ::= * exclusive_or_exp CIRCUMFLEX and_exp
+          inclusive_or_exp ::= * exclusive_or_exp
+          inclusive_or_exp ::= * inclusive_or_exp PIPE exclusive_or_exp
+          scalar_exp ::= * inclusive_or_exp
+
+                       INTEGER shift-reduce 59     scalar_exp_int ::= INTEGER
+                    scalar_exp shift-reduce 57     ref_exp ::= ref_exp PLUS scalar_exp
+                scalar_exp_int shift        39       /* because scalar_exp_int==multiplicative_exp */
+            multiplicative_exp shift        39     
+                  additive_exp shift        47     
+                     shift_exp shift        46     
+                       and_exp shift        64     
+              exclusive_or_exp shift        63     
+              inclusive_or_exp shift        61     
+
+State 9:
+          scalar_exp_int ::= * INTEGER
+          multiplicative_exp ::= * scalar_exp_int
+          multiplicative_exp ::= * multiplicative_exp ASTERIX scalar_exp
+          multiplicative_exp ::= * multiplicative_exp SLASH scalar_exp
+          multiplicative_exp ::= * multiplicative_exp PERCENT scalar_exp
+          multiplicative_exp ::= multiplicative_exp PERCENT * scalar_exp
+          additive_exp ::= * multiplicative_exp
+          additive_exp ::= * additive_exp PLUS multiplicative_exp
+          additive_exp ::= * additive_exp MINUS multiplicative_exp
+          shift_exp ::= * additive_exp
+          shift_exp ::= * shift_exp DOUBLE_LESS_THAN additive_exp
+          shift_exp ::= * shift_exp DOUBLE_GREATER_THAN additive_exp
+          and_exp ::= * shift_exp
+          and_exp ::= * and_exp AMPERSAND shift_exp
+          exclusive_or_exp ::= * and_exp
+          exclusive_or_exp ::= * exclusive_or_exp CIRCUMFLEX and_exp
+          inclusive_or_exp ::= * exclusive_or_exp
+          inclusive_or_exp ::= * inclusive_or_exp PIPE exclusive_or_exp
+          scalar_exp ::= * inclusive_or_exp
+
+                       INTEGER shift-reduce 59     scalar_exp_int ::= INTEGER
+                    scalar_exp shift-reduce 63     multiplicative_exp ::= multiplicative_exp PERCENT scalar_exp
+                scalar_exp_int shift        39       /* because scalar_exp_int==multiplicative_exp */
+            multiplicative_exp shift        39     
+                  additive_exp shift        47     
+                     shift_exp shift        46     
+                       and_exp shift        64     
+              exclusive_or_exp shift        63     
+              inclusive_or_exp shift        61     
+
+State 10:
+          scalar_exp_int ::= * INTEGER
+          multiplicative_exp ::= * scalar_exp_int
+          multiplicative_exp ::= * multiplicative_exp ASTERIX scalar_exp
+          multiplicative_exp ::= * multiplicative_exp SLASH scalar_exp
+          multiplicative_exp ::= multiplicative_exp SLASH * scalar_exp
+          multiplicative_exp ::= * multiplicative_exp PERCENT scalar_exp
+          additive_exp ::= * multiplicative_exp
+          additive_exp ::= * additive_exp PLUS multiplicative_exp
+          additive_exp ::= * additive_exp MINUS multiplicative_exp
+          shift_exp ::= * additive_exp
+          shift_exp ::= * shift_exp DOUBLE_LESS_THAN additive_exp
+          shift_exp ::= * shift_exp DOUBLE_GREATER_THAN additive_exp
+          and_exp ::= * shift_exp
+          and_exp ::= * and_exp AMPERSAND shift_exp
+          exclusive_or_exp ::= * and_exp
+          exclusive_or_exp ::= * exclusive_or_exp CIRCUMFLEX and_exp
+          inclusive_or_exp ::= * exclusive_or_exp
+          inclusive_or_exp ::= * inclusive_or_exp PIPE exclusive_or_exp
+          scalar_exp ::= * inclusive_or_exp
+
+                       INTEGER shift-reduce 59     scalar_exp_int ::= INTEGER
+                    scalar_exp shift-reduce 62     multiplicative_exp ::= multiplicative_exp SLASH scalar_exp
+                scalar_exp_int shift        39       /* because scalar_exp_int==multiplicative_exp */
+            multiplicative_exp shift        39     
+                  additive_exp shift        47     
+                     shift_exp shift        46     
+                       and_exp shift        64     
+              exclusive_or_exp shift        63     
+              inclusive_or_exp shift        61     
+
+State 11:
+          scalar_exp_int ::= * INTEGER
+          multiplicative_exp ::= * scalar_exp_int
+          multiplicative_exp ::= * multiplicative_exp ASTERIX scalar_exp
+          multiplicative_exp ::= multiplicative_exp ASTERIX * scalar_exp
+          multiplicative_exp ::= * multiplicative_exp SLASH scalar_exp
+          multiplicative_exp ::= * multiplicative_exp PERCENT scalar_exp
+          additive_exp ::= * multiplicative_exp
+          additive_exp ::= * additive_exp PLUS multiplicative_exp
+          additive_exp ::= * additive_exp MINUS multiplicative_exp
+          shift_exp ::= * additive_exp
+          shift_exp ::= * shift_exp DOUBLE_LESS_THAN additive_exp
+          shift_exp ::= * shift_exp DOUBLE_GREATER_THAN additive_exp
+          and_exp ::= * shift_exp
+          and_exp ::= * and_exp AMPERSAND shift_exp
+          exclusive_or_exp ::= * and_exp
+          exclusive_or_exp ::= * exclusive_or_exp CIRCUMFLEX and_exp
+          inclusive_or_exp ::= * exclusive_or_exp
+          inclusive_or_exp ::= * inclusive_or_exp PIPE exclusive_or_exp
+          scalar_exp ::= * inclusive_or_exp
+
+                       INTEGER shift-reduce 59     scalar_exp_int ::= INTEGER
+                    scalar_exp shift-reduce 61     multiplicative_exp ::= multiplicative_exp ASTERIX scalar_exp
+                scalar_exp_int shift        39       /* because scalar_exp_int==multiplicative_exp */
+            multiplicative_exp shift        39     
+                  additive_exp shift        47     
+                     shift_exp shift        46     
+                       and_exp shift        64     
+              exclusive_or_exp shift        63     
+              inclusive_or_exp shift        61     
+
+State 12:
+          ref_exp ::= ref_exp L_S_BRACKET * scalar_exp R_S_BRACKET
+          scalar_exp_int ::= * INTEGER
+          multiplicative_exp ::= * scalar_exp_int
+          multiplicative_exp ::= * multiplicative_exp ASTERIX scalar_exp
+          multiplicative_exp ::= * multiplicative_exp SLASH scalar_exp
+          multiplicative_exp ::= * multiplicative_exp PERCENT scalar_exp
+          additive_exp ::= * multiplicative_exp
+          additive_exp ::= * additive_exp PLUS multiplicative_exp
+          additive_exp ::= * additive_exp MINUS multiplicative_exp
+          shift_exp ::= * additive_exp
+          shift_exp ::= * shift_exp DOUBLE_LESS_THAN additive_exp
+          shift_exp ::= * shift_exp DOUBLE_GREATER_THAN additive_exp
+          and_exp ::= * shift_exp
+          and_exp ::= * and_exp AMPERSAND shift_exp
+          exclusive_or_exp ::= * and_exp
+          exclusive_or_exp ::= * exclusive_or_exp CIRCUMFLEX and_exp
+          inclusive_or_exp ::= * exclusive_or_exp
+          inclusive_or_exp ::= * inclusive_or_exp PIPE exclusive_or_exp
+          scalar_exp ::= * inclusive_or_exp
+
+                       INTEGER shift-reduce 59     scalar_exp_int ::= INTEGER
+                    scalar_exp shift        65     
+                scalar_exp_int shift        39       /* because scalar_exp_int==multiplicative_exp */
+            multiplicative_exp shift        39     
+                  additive_exp shift        47     
+                     shift_exp shift        46     
+                       and_exp shift        64     
+              exclusive_or_exp shift        63     
+              inclusive_or_exp shift        61     
+
+State 13:
+          scalar_exp_int ::= * INTEGER
+          multiplicative_exp ::= * scalar_exp_int
+          multiplicative_exp ::= * multiplicative_exp ASTERIX scalar_exp
+          multiplicative_exp ::= * multiplicative_exp SLASH scalar_exp
+          multiplicative_exp ::= * multiplicative_exp PERCENT scalar_exp
+          additive_exp ::= * multiplicative_exp
+          additive_exp ::= * additive_exp PLUS multiplicative_exp
+          additive_exp ::= * additive_exp MINUS multiplicative_exp
+          shift_exp ::= * additive_exp
+          shift_exp ::= * shift_exp DOUBLE_LESS_THAN additive_exp
+          shift_exp ::= * shift_exp DOUBLE_GREATER_THAN additive_exp
+          and_exp ::= * shift_exp
+          and_exp ::= * and_exp AMPERSAND shift_exp
+          exclusive_or_exp ::= * and_exp
+          exclusive_or_exp ::= * exclusive_or_exp CIRCUMFLEX and_exp
+          inclusive_or_exp ::= inclusive_or_exp PIPE * exclusive_or_exp
+
+                       INTEGER shift-reduce 59     scalar_exp_int ::= INTEGER
+                scalar_exp_int shift        39       /* because scalar_exp_int==multiplicative_exp */
+            multiplicative_exp shift        39     
+                  additive_exp shift        47     
+                     shift_exp shift        46     
+                       and_exp shift        64     
+              exclusive_or_exp shift        60     
+
+State 14:
+          struct_def ::= * struct_def_opt R_C_BRACKET
+          struct_def_opt ::= * ID L_C_BRACKET var_decl
+          struct_def_opt ::= * struct_def_opt var_decl
+          function_type ::= * function_type_opt R_R_BRACKET
+          function_type ::= * L_R_BRACKET R_R_BRACKET
+          function_type_opt ::= * L_R_BRACKET var_decl
+          function_type_opt ::= * function_type_opt COMMA var_decl
+          type ::= * type ASTERIX
+          type ::= * L_S_BRACKET type COMMA INTEGER R_S_BRACKET
+          type ::= L_S_BRACKET * type COMMA INTEGER R_S_BRACKET
+          type ::= * U8
+          type ::= * U16
+          type ::= * U32
+          type ::= * U64
+          type ::= * I8
+          type ::= * I16
+          type ::= * I32
+          type ::= * I64
+          type ::= * F32
+          type ::= * F64
+          type ::= * function_type
+          type ::= * struct_def
+
+                            U8 shift-reduce 18     type ::= U8
+                           U16 shift-reduce 19     type ::= U16
+                           U32 shift-reduce 20     type ::= U32
+                           U64 shift-reduce 21     type ::= U64
+                            I8 shift-reduce 22     type ::= I8
+                           I16 shift-reduce 23     type ::= I16
+                           I32 shift-reduce 24     type ::= I32
+                           I64 shift-reduce 25     type ::= I64
+                           F32 shift-reduce 26     type ::= F32
+                           F64 shift-reduce 27     type ::= F64
+                   L_S_BRACKET shift        14     
+                   L_R_BRACKET shift        30     
+                            ID shift        55     
+                    struct_def shift        41       /* because struct_def==type */
+                struct_def_opt shift        31     
+                 function_type shift        41       /* because function_type==type */
+                          type shift        41     
+             function_type_opt shift        42     
+
+State 15:
+          struct_def ::= * struct_def_opt R_C_BRACKET
+          struct_def_opt ::= * ID L_C_BRACKET var_decl
+          struct_def_opt ::= * struct_def_opt var_decl
+          var_decl ::= ID COLON * type
+          function_type ::= * function_type_opt R_R_BRACKET
+          function_type ::= * L_R_BRACKET R_R_BRACKET
+          function_type_opt ::= * L_R_BRACKET var_decl
+          function_type_opt ::= * function_type_opt COMMA var_decl
+          type ::= * type ASTERIX
+          type ::= * L_S_BRACKET type COMMA INTEGER R_S_BRACKET
+          type ::= * U8
+          type ::= * U16
+          type ::= * U32
+          type ::= * U64
+          type ::= * I8
+          type ::= * I16
+          type ::= * I32
+          type ::= * I64
+          type ::= * F32
+          type ::= * F64
+          type ::= * function_type
+          type ::= * struct_def
+
+                            U8 shift-reduce 18     type ::= U8
+                           U16 shift-reduce 19     type ::= U16
+                           U32 shift-reduce 20     type ::= U32
+                           U64 shift-reduce 21     type ::= U64
+                            I8 shift-reduce 22     type ::= I8
+                           I16 shift-reduce 23     type ::= I16
+                           I32 shift-reduce 24     type ::= I32
+                           I64 shift-reduce 25     type ::= I64
+                           F32 shift-reduce 26     type ::= F32
+                           F64 shift-reduce 27     type ::= F64
+                   L_S_BRACKET shift        14     
+                   L_R_BRACKET shift        30     
+                            ID shift        55     
+                    struct_def shift        54       /* because struct_def==type */
+                struct_def_opt shift        31     
+                 function_type shift        54       /* because function_type==type */
+                          type shift        54     
+             function_type_opt shift        42     
+
+State 16:
+          struct_def ::= * struct_def_opt R_C_BRACKET
+          struct_def_opt ::= * ID L_C_BRACKET var_decl
+          struct_def_opt ::= * struct_def_opt var_decl
+          function_type ::= * function_type_opt R_R_BRACKET
+          function_type ::= * L_R_BRACKET R_R_BRACKET
+          function_type_opt ::= * L_R_BRACKET var_decl
+          function_type_opt ::= * function_type_opt COMMA var_decl
+          type ::= * type ASTERIX
+          type ::= * L_S_BRACKET type COMMA INTEGER R_S_BRACKET
+          type ::= * U8
+          type ::= * U16
+          type ::= * U32
+          type ::= * U64
+          type ::= * I8
+          type ::= * I16
+          type ::= * I32
+          type ::= * I64
+          type ::= * F32
+          type ::= * F64
+          type ::= * function_type
+          type ::= * struct_def
+          ref_exp ::= CAST LESS_THAN * type GREATER_THAN L_R_BRACKET ref_exp R_R_BRACKET
+
+                            U8 shift-reduce 18     type ::= U8
+                           U16 shift-reduce 19     type ::= U16
+                           U32 shift-reduce 20     type ::= U32
+                           U64 shift-reduce 21     type ::= U64
+                            I8 shift-reduce 22     type ::= I8
+                           I16 shift-reduce 23     type ::= I16
+                           I32 shift-reduce 24     type ::= I32
+                           I64 shift-reduce 25     type ::= I64
+                           F32 shift-reduce 26     type ::= F32
+                           F64 shift-reduce 27     type ::= F64
+                   L_S_BRACKET shift        14     
+                   L_R_BRACKET shift        30     
+                            ID shift        55     
+                    struct_def shift        40       /* because struct_def==type */
+                struct_def_opt shift        31     
+                 function_type shift        40       /* because function_type==type */
+                          type shift        40     
+             function_type_opt shift        42     
+
+State 17:
+          var_decl ::= * ID COLON type
+          var_def ::= * var_decl literal
+          block_statement ::= block_statement_opt * R_C_BRACKET
+          block_statement_opt ::= block_statement_opt * statement
+          statement ::= * SEMICOLON
+          statement ::= * var_decl
+          statement ::= * var_def
+          statement ::= * u_mnemonic operand
+          statement ::= * d_mnemonic operand COMMA operand
+          u_mnemonic ::= * PUSH
+          d_mnemonic ::= * MOV
+          d_mnemonic ::= * ADD
+
+                     SEMICOLON shift-reduce 33     statement ::= SEMICOLON
+                   R_C_BRACKET shift-reduce 30     block_statement ::= block_statement_opt R_C_BRACKET
+                            ID shift        56     
+                          PUSH shift-reduce 38     u_mnemonic ::= PUSH
+                           MOV shift-reduce 39     d_mnemonic ::= MOV
+                           ADD shift-reduce 40     d_mnemonic ::= ADD
+                       var_def shift-reduce 32     block_statement_opt ::= block_statement_opt statement  /* because var_def==statement */
+                      var_decl shift        24     
+                     statement shift-reduce 32     block_statement_opt ::= block_statement_opt statement
+                    u_mnemonic shift        3      
+                    d_mnemonic shift        2      
+
+State 18:
+          package ::= package_opt * END
+          package_opt ::= package_opt * function_def
+          package_opt ::= package_opt * var_def
+          package_opt ::= package_opt * var_decl
+          package_opt ::= package_opt * struct_def
+          struct_def ::= * struct_def_opt R_C_BRACKET
+          struct_def_opt ::= * ID L_C_BRACKET var_decl
+          struct_def_opt ::= * struct_def_opt var_decl
+          function_def ::= * ID function_type block_statement
+          var_decl ::= * ID COLON type
+          var_def ::= * var_decl literal
+
+                           END shift        66     
+                            ID shift        23     
+                  function_def shift-reduce 2      package_opt ::= package_opt function_def
+                       var_def shift-reduce 3      package_opt ::= package_opt var_def
+                      var_decl shift        28     
+                    struct_def shift-reduce 5      package_opt ::= package_opt struct_def
+                struct_def_opt shift        31     
+
+State 19:
+          scalar_exp_int ::= * INTEGER
+          multiplicative_exp ::= * scalar_exp_int
+          multiplicative_exp ::= * multiplicative_exp ASTERIX scalar_exp
+          multiplicative_exp ::= * multiplicative_exp SLASH scalar_exp
+          multiplicative_exp ::= * multiplicative_exp PERCENT scalar_exp
+          additive_exp ::= * multiplicative_exp
+          additive_exp ::= * additive_exp PLUS multiplicative_exp
+          additive_exp ::= * additive_exp MINUS multiplicative_exp
+          shift_exp ::= * additive_exp
+          shift_exp ::= * shift_exp DOUBLE_LESS_THAN additive_exp
+          shift_exp ::= * shift_exp DOUBLE_GREATER_THAN additive_exp
+          and_exp ::= * shift_exp
+          and_exp ::= * and_exp AMPERSAND shift_exp
+          exclusive_or_exp ::= exclusive_or_exp CIRCUMFLEX * and_exp
+
+                       INTEGER shift-reduce 59     scalar_exp_int ::= INTEGER
+                scalar_exp_int shift        39       /* because scalar_exp_int==multiplicative_exp */
+            multiplicative_exp shift        39     
+                  additive_exp shift        47     
+                     shift_exp shift        46     
+                       and_exp shift        62     
+
+State 20:
+          scalar_exp_int ::= * INTEGER
+          multiplicative_exp ::= * scalar_exp_int
+          multiplicative_exp ::= * multiplicative_exp ASTERIX scalar_exp
+          multiplicative_exp ::= * multiplicative_exp SLASH scalar_exp
+          multiplicative_exp ::= * multiplicative_exp PERCENT scalar_exp
+          additive_exp ::= * multiplicative_exp
+          additive_exp ::= * additive_exp PLUS multiplicative_exp
+          additive_exp ::= * additive_exp MINUS multiplicative_exp
+          shift_exp ::= * additive_exp
+          shift_exp ::= * shift_exp DOUBLE_LESS_THAN additive_exp
+          shift_exp ::= * shift_exp DOUBLE_GREATER_THAN additive_exp
+          and_exp ::= and_exp AMPERSAND * shift_exp
+
+                       INTEGER shift-reduce 59     scalar_exp_int ::= INTEGER
+                scalar_exp_int shift        39       /* because scalar_exp_int==multiplicative_exp */
+            multiplicative_exp shift        39     
+                  additive_exp shift        47     
+                     shift_exp shift        44     
+
+State 21:
+          scalar_exp_int ::= * INTEGER
+          multiplicative_exp ::= * scalar_exp_int
+          multiplicative_exp ::= * multiplicative_exp ASTERIX scalar_exp
+          multiplicative_exp ::= * multiplicative_exp SLASH scalar_exp
+          multiplicative_exp ::= * multiplicative_exp PERCENT scalar_exp
+          additive_exp ::= * multiplicative_exp
+          additive_exp ::= * additive_exp PLUS multiplicative_exp
+          additive_exp ::= * additive_exp MINUS multiplicative_exp
+          shift_exp ::= shift_exp DOUBLE_GREATER_THAN * additive_exp
+
+                       INTEGER shift-reduce 59     scalar_exp_int ::= INTEGER
+                scalar_exp_int shift        39       /* because scalar_exp_int==multiplicative_exp */
+            multiplicative_exp shift        39     
+                  additive_exp shift        43     
+
+State 22:
+          scalar_exp_int ::= * INTEGER
+          multiplicative_exp ::= * scalar_exp_int
+          multiplicative_exp ::= * multiplicative_exp ASTERIX scalar_exp
+          multiplicative_exp ::= * multiplicative_exp SLASH scalar_exp
+          multiplicative_exp ::= * multiplicative_exp PERCENT scalar_exp
+          additive_exp ::= * multiplicative_exp
+          additive_exp ::= * additive_exp PLUS multiplicative_exp
+          additive_exp ::= * additive_exp MINUS multiplicative_exp
+          shift_exp ::= shift_exp DOUBLE_LESS_THAN * additive_exp
+
+                       INTEGER shift-reduce 59     scalar_exp_int ::= INTEGER
+                scalar_exp_int shift        39       /* because scalar_exp_int==multiplicative_exp */
+            multiplicative_exp shift        39     
+                  additive_exp shift        45     
+
+State 23:
+          struct_def_opt ::= ID * L_C_BRACKET var_decl
+          function_def ::= ID * function_type block_statement
+          var_decl ::= ID * COLON type
+          function_type ::= * function_type_opt R_R_BRACKET
+          function_type ::= * L_R_BRACKET R_R_BRACKET
+          function_type_opt ::= * L_R_BRACKET var_decl
+          function_type_opt ::= * function_type_opt COMMA var_decl
+
+                         COLON shift        15     
+                   L_C_BRACKET shift        33     
+                   L_R_BRACKET shift        30     
+                 function_type shift        25     
+             function_type_opt shift        42     
+
+State 24:
+          var_def ::= var_decl * literal
+     (34) statement ::= var_decl *
+          literal ::= * literal_opt R_C_BRACKET
+          literal_opt ::= * L_C_BRACKET exp
+          literal_opt ::= * literal_opt COMMA exp
+
+                   L_C_BRACKET shift        4      
+                       literal shift-reduce 11     var_def ::= var_decl literal
+                   literal_opt shift        48     
+                     {default} reduce       34     statement ::= var_decl
+
+State 25:
+          function_def ::= ID function_type * block_statement
+          block_statement ::= * block_statement_opt R_C_BRACKET
+          block_statement_opt ::= * L_C_BRACKET
+          block_statement_opt ::= * block_statement_opt statement
+
+                   L_C_BRACKET shift-reduce 31     block_statement_opt ::= L_C_BRACKET
+               block_statement shift-reduce 9      function_def ::= ID function_type block_statement
+           block_statement_opt shift        17     
+
+State 26:
+          scalar_exp_int ::= * INTEGER
+          multiplicative_exp ::= * scalar_exp_int
+          multiplicative_exp ::= * multiplicative_exp ASTERIX scalar_exp
+          multiplicative_exp ::= * multiplicative_exp SLASH scalar_exp
+          multiplicative_exp ::= * multiplicative_exp PERCENT scalar_exp
+          additive_exp ::= additive_exp MINUS * multiplicative_exp
+
+                       INTEGER shift-reduce 59     scalar_exp_int ::= INTEGER
+                scalar_exp_int shift        37       /* because scalar_exp_int==multiplicative_exp */
+            multiplicative_exp shift        37     
+
+State 27:
+          scalar_exp_int ::= * INTEGER
+          multiplicative_exp ::= * scalar_exp_int
+          multiplicative_exp ::= * multiplicative_exp ASTERIX scalar_exp
+          multiplicative_exp ::= * multiplicative_exp SLASH scalar_exp
+          multiplicative_exp ::= * multiplicative_exp PERCENT scalar_exp
+          additive_exp ::= additive_exp PLUS * multiplicative_exp
+
+                       INTEGER shift-reduce 59     scalar_exp_int ::= INTEGER
+                scalar_exp_int shift        38       /* because scalar_exp_int==multiplicative_exp */
+            multiplicative_exp shift        38     
+
+State 28:
+      (4) package_opt ::= package_opt var_decl *
+          var_def ::= var_decl * literal
+          literal ::= * literal_opt R_C_BRACKET
+          literal_opt ::= * L_C_BRACKET exp
+          literal_opt ::= * literal_opt COMMA exp
+
+                   L_C_BRACKET shift        4      
+                       literal shift-reduce 11     var_def ::= var_decl literal
+                   literal_opt shift        48     
+                     {default} reduce       4      package_opt ::= package_opt var_decl
+
+State 29:
+          ref_exp ::= * ID
+          ref_exp ::= * CAST LESS_THAN type GREATER_THAN L_R_BRACKET ref_exp R_R_BRACKET
+          ref_exp ::= CAST LESS_THAN type GREATER_THAN L_R_BRACKET * ref_exp R_R_BRACKET
+          ref_exp ::= * ref_exp L_S_BRACKET scalar_exp R_S_BRACKET
+          ref_exp ::= * ref_exp DOT ID
+          ref_exp ::= * ref_exp ARROW ID
+          ref_exp ::= * ref_exp PLUS scalar_exp
+          ref_exp ::= * ref_exp MINUS scalar_exp
+
+                            ID shift-reduce 52     ref_exp ::= ID
+                          CAST shift        57     
+                       ref_exp shift        34     
+
+State 30:
+          var_decl ::= * ID COLON type
+          function_type ::= L_R_BRACKET * R_R_BRACKET
+          function_type_opt ::= L_R_BRACKET * var_decl
+
+                   R_R_BRACKET shift-reduce 13     function_type ::= L_R_BRACKET R_R_BRACKET
+                            ID shift        56     
+                      var_decl shift-reduce 14     function_type_opt ::= L_R_BRACKET var_decl
+
+State 31:
+          struct_def ::= struct_def_opt * R_C_BRACKET
+          struct_def_opt ::= struct_def_opt * var_decl
+          var_decl ::= * ID COLON type
+
+                   R_C_BRACKET shift-reduce 6      struct_def ::= struct_def_opt R_C_BRACKET
+                            ID shift        56     
+                      var_decl shift-reduce 8      struct_def_opt ::= struct_def_opt var_decl
+
+State 32:
+          var_decl ::= * ID COLON type
+          function_type_opt ::= function_type_opt COMMA * var_decl
+
+                            ID shift        56     
+                      var_decl shift-reduce 15     function_type_opt ::= function_type_opt COMMA var_decl
+
+State 33:
+          struct_def_opt ::= ID L_C_BRACKET * var_decl
+          var_decl ::= * ID COLON type
+
+                            ID shift        56     
+                      var_decl shift-reduce 7      struct_def_opt ::= ID L_C_BRACKET var_decl
+
+State 34:
+          ref_exp ::= CAST LESS_THAN type GREATER_THAN L_R_BRACKET ref_exp * R_R_BRACKET
+          ref_exp ::= ref_exp * L_S_BRACKET scalar_exp R_S_BRACKET
+          ref_exp ::= ref_exp * DOT ID
+          ref_exp ::= ref_exp * ARROW ID
+          ref_exp ::= ref_exp * PLUS scalar_exp
+          ref_exp ::= ref_exp * MINUS scalar_exp
+
+                         MINUS shift        7      
+                          PLUS shift        8      
+                   L_S_BRACKET shift        12     
+                   R_R_BRACKET shift-reduce 53     ref_exp ::= CAST LESS_THAN type GREATER_THAN L_R_BRACKET ref_exp R_R_BRACKET
+                           DOT shift        59     
+                         ARROW shift        58     
+
+State 35:
+     (41) operand ::= ref_exp *
+          ref_exp ::= ref_exp * L_S_BRACKET scalar_exp R_S_BRACKET
+          ref_exp ::= ref_exp * DOT ID
+          ref_exp ::= ref_exp * ARROW ID
+          ref_exp ::= ref_exp * PLUS scalar_exp
+          ref_exp ::= ref_exp * MINUS scalar_exp
+
+                         MINUS shift        7      
+                          PLUS shift        8      
+                   L_S_BRACKET shift        12     
+                           DOT shift        59     
+                         ARROW shift        58     
+                     {default} reduce       41     operand ::= ref_exp
+
+State 36:
+     (51) exp ::= ref_exp *
+          ref_exp ::= ref_exp * L_S_BRACKET scalar_exp R_S_BRACKET
+          ref_exp ::= ref_exp * DOT ID
+          ref_exp ::= ref_exp * ARROW ID
+          ref_exp ::= ref_exp * PLUS scalar_exp
+          ref_exp ::= ref_exp * MINUS scalar_exp
+
+                         MINUS shift        7      
+                          PLUS shift        8      
+                   L_S_BRACKET shift        12     
+                           DOT shift        59     
+                         ARROW shift        58     
+                     {default} reduce       51     exp ::= ref_exp
+
+State 37:
+          multiplicative_exp ::= multiplicative_exp * ASTERIX scalar_exp
+          multiplicative_exp ::= multiplicative_exp * SLASH scalar_exp
+          multiplicative_exp ::= multiplicative_exp * PERCENT scalar_exp
+     (66) additive_exp ::= additive_exp MINUS multiplicative_exp *
+
+                         SLASH shift        10     
+                       PERCENT shift        9      
+                       ASTERIX shift        11     
+                     {default} reduce       66     additive_exp ::= additive_exp MINUS multiplicative_exp
+
+State 38:
+          multiplicative_exp ::= multiplicative_exp * ASTERIX scalar_exp
+          multiplicative_exp ::= multiplicative_exp * SLASH scalar_exp
+          multiplicative_exp ::= multiplicative_exp * PERCENT scalar_exp
+     (65) additive_exp ::= additive_exp PLUS multiplicative_exp *
+
+                         SLASH shift        10     
+                       PERCENT shift        9      
+                       ASTERIX shift        11     
+                     {default} reduce       65     additive_exp ::= additive_exp PLUS multiplicative_exp
+
+State 39:
+          multiplicative_exp ::= multiplicative_exp * ASTERIX scalar_exp
+          multiplicative_exp ::= multiplicative_exp * SLASH scalar_exp
+          multiplicative_exp ::= multiplicative_exp * PERCENT scalar_exp
+     (64) additive_exp ::= multiplicative_exp *
+
+                         SLASH shift        10     
+                       PERCENT shift        9      
+                       ASTERIX shift        11     
+                     {default} reduce       64     additive_exp ::= multiplicative_exp
+
+State 40:
+          type ::= type * ASTERIX
+          ref_exp ::= CAST LESS_THAN type * GREATER_THAN L_R_BRACKET ref_exp R_R_BRACKET
+
+                       ASTERIX shift-reduce 16     type ::= type ASTERIX
+                  GREATER_THAN shift        51     
+
+State 41:
+          type ::= type * ASTERIX
+          type ::= L_S_BRACKET type * COMMA INTEGER R_S_BRACKET
+
+                         COMMA shift        53     
+                       ASTERIX shift-reduce 16     type ::= type ASTERIX
+
+State 42:
+          function_type ::= function_type_opt * R_R_BRACKET
+          function_type_opt ::= function_type_opt * COMMA var_decl
+
+                         COMMA shift        32     
+                   R_R_BRACKET shift-reduce 12     function_type ::= function_type_opt R_R_BRACKET
+
+State 43:
+          additive_exp ::= additive_exp * PLUS multiplicative_exp
+          additive_exp ::= additive_exp * MINUS multiplicative_exp
+     (69) shift_exp ::= shift_exp DOUBLE_GREATER_THAN additive_exp *
+
+                         MINUS shift        26     
+                          PLUS shift        27     
+                     {default} reduce       69     shift_exp ::= shift_exp DOUBLE_GREATER_THAN additive_exp
+
+State 44:
+          shift_exp ::= shift_exp * DOUBLE_LESS_THAN additive_exp
+          shift_exp ::= shift_exp * DOUBLE_GREATER_THAN additive_exp
+     (71) and_exp ::= and_exp AMPERSAND shift_exp *
+
+              DOUBLE_LESS_THAN shift        22     
+           DOUBLE_GREATER_THAN shift        21     
+                     {default} reduce       71     and_exp ::= and_exp AMPERSAND shift_exp
+
+State 45:
+          additive_exp ::= additive_exp * PLUS multiplicative_exp
+          additive_exp ::= additive_exp * MINUS multiplicative_exp
+     (68) shift_exp ::= shift_exp DOUBLE_LESS_THAN additive_exp *
+
+                         MINUS shift        26     
+                          PLUS shift        27     
+                     {default} reduce       68     shift_exp ::= shift_exp DOUBLE_LESS_THAN additive_exp
+
+State 46:
+          shift_exp ::= shift_exp * DOUBLE_LESS_THAN additive_exp
+          shift_exp ::= shift_exp * DOUBLE_GREATER_THAN additive_exp
+     (70) and_exp ::= shift_exp *
+
+              DOUBLE_LESS_THAN shift        22     
+           DOUBLE_GREATER_THAN shift        21     
+                     {default} reduce       70     and_exp ::= shift_exp
+
+State 47:
+          additive_exp ::= additive_exp * PLUS multiplicative_exp
+          additive_exp ::= additive_exp * MINUS multiplicative_exp
+     (67) shift_exp ::= additive_exp *
+
+                         MINUS shift        26     
+                          PLUS shift        27     
+                     {default} reduce       67     shift_exp ::= additive_exp
+
+State 48:
+          literal ::= literal_opt * R_C_BRACKET
+          literal_opt ::= literal_opt * COMMA exp
+
+                         COMMA shift        5      
+                   R_C_BRACKET shift-reduce 45     literal ::= literal_opt R_C_BRACKET
+
+State 49:
+          statement ::= d_mnemonic operand * COMMA operand
+
+                         COMMA shift        1      
+
+State 50:
+          operand ::= L_S_BRACKET scalar_exp * R_S_BRACKET
+
+                   R_S_BRACKET shift-reduce 44     operand ::= L_S_BRACKET scalar_exp R_S_BRACKET
+
+State 51:
+          ref_exp ::= CAST LESS_THAN type GREATER_THAN * L_R_BRACKET ref_exp R_R_BRACKET
+
+                   L_R_BRACKET shift        29     
+
+State 52:
+          type ::= L_S_BRACKET type COMMA INTEGER * R_S_BRACKET
+
+                   R_S_BRACKET shift-reduce 17     type ::= L_S_BRACKET type COMMA INTEGER R_S_BRACKET
+
+State 53:
+          type ::= L_S_BRACKET type COMMA * INTEGER R_S_BRACKET
+
+                       INTEGER shift        52     
+
+State 54:
+     (10) var_decl ::= ID COLON type *
+          type ::= type * ASTERIX
+
+                       ASTERIX shift-reduce 16     type ::= type ASTERIX
+                     {default} reduce       10     var_decl ::= ID COLON type
+
+State 55:
+          struct_def_opt ::= ID * L_C_BRACKET var_decl
+
+                   L_C_BRACKET shift        33     
+
+State 56:
+          var_decl ::= ID * COLON type
+
+                         COLON shift        15     
+
+State 57:
+          ref_exp ::= CAST * LESS_THAN type GREATER_THAN L_R_BRACKET ref_exp R_R_BRACKET
+
+                     LESS_THAN shift        16     
+
+State 58:
+          ref_exp ::= ref_exp ARROW * ID
+
+                            ID shift-reduce 56     ref_exp ::= ref_exp ARROW ID
+
+State 59:
+          ref_exp ::= ref_exp DOT * ID
+
+                            ID shift-reduce 55     ref_exp ::= ref_exp DOT ID
+
+State 60:
+          exclusive_or_exp ::= exclusive_or_exp * CIRCUMFLEX and_exp
+     (75) inclusive_or_exp ::= inclusive_or_exp PIPE exclusive_or_exp *
+
+                    CIRCUMFLEX shift        19     
+                     {default} reduce       75     inclusive_or_exp ::= inclusive_or_exp PIPE exclusive_or_exp
+
+State 61:
+          inclusive_or_exp ::= inclusive_or_exp * PIPE exclusive_or_exp
+     (76) scalar_exp ::= inclusive_or_exp *
+
+                          PIPE shift        13     
+                     {default} reduce       76     scalar_exp ::= inclusive_or_exp
+
+State 62:
+          and_exp ::= and_exp * AMPERSAND shift_exp
+     (73) exclusive_or_exp ::= exclusive_or_exp CIRCUMFLEX and_exp *
+
+                     AMPERSAND shift        20     
+                     {default} reduce       73     exclusive_or_exp ::= exclusive_or_exp CIRCUMFLEX and_exp
+
+State 63:
+          exclusive_or_exp ::= exclusive_or_exp * CIRCUMFLEX and_exp
+     (74) inclusive_or_exp ::= exclusive_or_exp *
+
+                    CIRCUMFLEX shift        19     
+                     {default} reduce       74     inclusive_or_exp ::= exclusive_or_exp
+
+State 64:
+          and_exp ::= and_exp * AMPERSAND shift_exp
+     (72) exclusive_or_exp ::= and_exp *
+
+                     AMPERSAND shift        20     
+                     {default} reduce       72     exclusive_or_exp ::= and_exp
+
+State 65:
+          ref_exp ::= ref_exp L_S_BRACKET scalar_exp * R_S_BRACKET
+
+                   R_S_BRACKET shift-reduce 54     ref_exp ::= ref_exp L_S_BRACKET scalar_exp R_S_BRACKET
+
+State 66:
+      (0) package ::= package_opt END *
+
+                             $ reduce       0      package ::= package_opt END
+
+----------------------------------------------------
+Symbols:
+The first-set of non-terminals is shown after the name.
+
+    0: $:
+    1: WHITESPACE (precedence=1)
+    2: END (precedence=1)
+    3: OTHER (precedence=1)
+    4: TAB (precedence=1)
+    5: NEW_LINE (precedence=1)
+    6: CARRIAGE_RETURN (precedence=1)
+    7: CHAR (precedence=1)
+    8: MULTICHAR (precedence=1)
+    9: LINE_COMMENT (precedence=1)
+   10: MULTILINE_COMMENT (precedence=1)
+   11: INTEGER (precedence=1)
+   12: FLOAT (precedence=1)
+   13: STRING (precedence=1)
+   14: USE (precedence=1)
+   15: AS (precedence=1)
+   16: RET (precedence=1)
+   17: U8 (precedence=1)
+   18: U16 (precedence=1)
+   19: U32 (precedence=1)
+   20: U64 (precedence=1)
+   21: I8 (precedence=1)
+   22: I16 (precedence=1)
+   23: I32 (precedence=1)
+   24: I64 (precedence=1)
+   25: F32 (precedence=1)
+   26: F64 (precedence=1)
+   27: EXCALAMATIONMARK_EQUALS (precedence=1)
+   28: COLON (precedence=1)
+   29: SEMICOLON (precedence=1)
+   30: EXCLAMATIONMARK (precedence=1)
+   31: QUESTIONMARK (precedence=1)
+   32: EXP (precedence=2)
+   33: COMMA (precedence=3)
+   34: PIPE (precedence=3)
+   35: CIRCUMFLEX (precedence=3)
+   36: DOUBLE_LESS_THAN (precedence=3)
+   37: DOUBLE_GREATER_THAN (precedence=3)
+   38: SLASH (precedence=3)
+   39: PERCENT (precedence=3)
+   40: MINUS (precedence=3)
+   41: PLUS (precedence=3)
+   42: EXCLAMATION_MARK (precedence=3)
+   43: TILDE (precedence=3)
+   44: ASTERIX (precedence=3)
+   45: AMPERSAND (precedence=3)
+   46: L_C_BRACKET (precedence=3)
+   47: R_C_BRACKET (precedence=3)
+   48: L_S_BRACKET (precedence=3)
+   49: R_S_BRACKET (precedence=3)
+   50: L_R_BRACKET (precedence=3)
+   51: R_R_BRACKET (precedence=3)
+   52: DOT (precedence=3)
+   53: ARROW (precedence=3)
+   54: DOUBLE_COLON (precedence=3)
+   55: POINTER_TYPE (precedence=4)
+   56: VOID (precedence=5)
+   57: ID (precedence=6)
+   58: PUSH
+   59: MOV
+   60: ADD
+   61: CAST
+   62: LESS_THAN
+   63: GREATER_THAN
+   64: package: END ID
+   65: package_opt: <lambda> ID
+   66: function_def: ID
+   67: var_def: ID
+   68: var_decl: ID
+   69: struct_def: ID
+   70: struct_def_opt: ID
+   71: function_type: L_R_BRACKET
+   72: block_statement: L_C_BRACKET
+   73: type: U8 U16 U32 U64 I8 I16 I32 I64 F32 F64 L_S_BRACKET L_R_BRACKET ID
+   74: literal: L_C_BRACKET
+   75: function_type_opt: L_R_BRACKET
+   76: block_statement_opt: L_C_BRACKET
+   77: statement: SEMICOLON ID PUSH MOV ADD
+   78: u_mnemonic: PUSH
+   79: operand: INTEGER FLOAT L_S_BRACKET ID CAST
+   80: d_mnemonic: MOV ADD
+   81: ref_exp: ID CAST
+   82: scalar_exp: INTEGER
+   83: literal_opt: L_C_BRACKET
+   84: exp: INTEGER FLOAT STRING ID CAST
+   85: scalar_exp_int: INTEGER
+   86: multiplicative_exp: INTEGER
+   87: additive_exp: INTEGER
+   88: shift_exp: INTEGER
+   89: and_exp: INTEGER
+   90: exclusive_or_exp: INTEGER
+   91: inclusive_or_exp: INTEGER
+----------------------------------------------------
+Syntax-only Symbols:
+The following symbols never carry semantic content.
+
+$ WHITESPACE END OTHER TAB NEW_LINE CARRIAGE_RETURN CHAR MULTICHAR
+LINE_COMMENT MULTILINE_COMMENT INTEGER FLOAT STRING USE AS RET U8 U16 U32
+U64 I8 I16 I32 I64 F32 F64 EXCALAMATIONMARK_EQUALS COLON SEMICOLON
+EXCLAMATIONMARK QUESTIONMARK EXP COMMA PIPE CIRCUMFLEX DOUBLE_LESS_THAN
+DOUBLE_GREATER_THAN SLASH PERCENT MINUS PLUS EXCLAMATION_MARK TILDE ASTERIX
+AMPERSAND L_C_BRACKET R_C_BRACKET L_S_BRACKET R_S_BRACKET L_R_BRACKET
+R_R_BRACKET DOT ARROW DOUBLE_COLON POINTER_TYPE VOID ID PUSH MOV ADD CAST
+LESS_THAN GREATER_THAN package package_opt function_def var_def var_decl
+struct_def struct_def_opt function_type block_statement type literal
+function_type_opt block_statement_opt statement u_mnemonic operand
+d_mnemonic ref_exp scalar_exp literal_opt exp scalar_exp_int
+multiplicative_exp additive_exp shift_exp and_exp exclusive_or_exp
+inclusive_or_exp
+----------------------------------------------------
+Rules:
+   0: package ::= package_opt END. [END precedence=1]
+   1: package_opt ::=.
+   2: package_opt ::= package_opt function_def.
+   3: package_opt ::= package_opt var_def.
+   4: package_opt ::= package_opt var_decl.
+   5: package_opt ::= package_opt struct_def.
+   6: struct_def ::= struct_def_opt R_C_BRACKET. [R_C_BRACKET precedence=3]
+   7: struct_def_opt ::= ID L_C_BRACKET var_decl. [ID precedence=6]
+   8: struct_def_opt ::= struct_def_opt var_decl.
+   9: function_def ::= ID function_type block_statement. [ID precedence=6]
+  10: var_decl ::= ID COLON type. [ID precedence=6]
+  11: var_def ::= var_decl literal.
+  12: function_type ::= function_type_opt R_R_BRACKET. [R_R_BRACKET precedence=3]
+  13: function_type ::= L_R_BRACKET R_R_BRACKET. [L_R_BRACKET precedence=3]
+  14: function_type_opt ::= L_R_BRACKET var_decl. [L_R_BRACKET precedence=3]
+  15: function_type_opt ::= function_type_opt COMMA var_decl. [COMMA precedence=3]
+  16: type ::= type ASTERIX. [POINTER_TYPE precedence=4]
+  17: type ::= L_S_BRACKET type COMMA INTEGER R_S_BRACKET. [L_S_BRACKET precedence=3]
+  18: type ::= U8. [U8 precedence=1]
+  19: type ::= U16. [U16 precedence=1]
+  20: type ::= U32. [U32 precedence=1]
+  21: type ::= U64. [U64 precedence=1]
+  22: type ::= I8. [I8 precedence=1]
+  23: type ::= I16. [I16 precedence=1]
+  24: type ::= I32. [I32 precedence=1]
+  25: type ::= I64. [I64 precedence=1]
+  26: type ::= F32. [F32 precedence=1]
+  27: type ::= F64. [F64 precedence=1]
+  28: type ::= function_type.
+  29: type ::= struct_def.
+  30: block_statement ::= block_statement_opt R_C_BRACKET. [R_C_BRACKET precedence=3]
+  31: block_statement_opt ::= L_C_BRACKET. [L_C_BRACKET precedence=3]
+  32: block_statement_opt ::= block_statement_opt statement.
+  33: statement ::= SEMICOLON. [SEMICOLON precedence=1]
+  34: statement ::= var_decl.
+  35: statement ::= var_def.
+  36: statement ::= u_mnemonic operand.
+  37: statement ::= d_mnemonic operand COMMA operand. [COMMA precedence=3]
+  38: u_mnemonic ::= PUSH.
+  39: d_mnemonic ::= MOV.
+  40: d_mnemonic ::= ADD.
+  41: operand ::= ref_exp. [EXP precedence=2]
+  42: operand ::= FLOAT. [FLOAT precedence=1]
+  43: operand ::= scalar_exp.
+  44: operand ::= L_S_BRACKET scalar_exp R_S_BRACKET. [L_S_BRACKET precedence=3]
+  45: literal ::= literal_opt R_C_BRACKET. [R_C_BRACKET precedence=3]
+  46: literal_opt ::= L_C_BRACKET exp. [L_C_BRACKET precedence=3]
+  47: literal_opt ::= literal_opt COMMA exp. [COMMA precedence=3]
+  48: exp ::= scalar_exp.
+  49: exp ::= FLOAT. [FLOAT precedence=1]
+  50: exp ::= STRING. [STRING precedence=1]
+  51: exp ::= ref_exp.
+  52: ref_exp ::= ID. [EXP precedence=2]
+  53: ref_exp ::= CAST LESS_THAN type GREATER_THAN L_R_BRACKET ref_exp R_R_BRACKET. [L_R_BRACKET precedence=3]
+  54: ref_exp ::= ref_exp L_S_BRACKET scalar_exp R_S_BRACKET. [L_S_BRACKET precedence=3]
+  55: ref_exp ::= ref_exp DOT ID. [DOT precedence=3]
+  56: ref_exp ::= ref_exp ARROW ID. [ARROW precedence=3]
+  57: ref_exp ::= ref_exp PLUS scalar_exp. [PLUS precedence=3]
+  58: ref_exp ::= ref_exp MINUS scalar_exp. [MINUS precedence=3]
+  59: scalar_exp_int ::= INTEGER. [INTEGER precedence=1]
+  60: multiplicative_exp ::= scalar_exp_int. [EXP precedence=2]
+  61: multiplicative_exp ::= multiplicative_exp ASTERIX scalar_exp. [ASTERIX precedence=3]
+  62: multiplicative_exp ::= multiplicative_exp SLASH scalar_exp. [SLASH precedence=3]
+  63: multiplicative_exp ::= multiplicative_exp PERCENT scalar_exp. [PERCENT precedence=3]
+  64: additive_exp ::= multiplicative_exp. [EXP precedence=2]
+  65: additive_exp ::= additive_exp PLUS multiplicative_exp. [PLUS precedence=3]
+  66: additive_exp ::= additive_exp MINUS multiplicative_exp. [MINUS precedence=3]
+  67: shift_exp ::= additive_exp. [EXP precedence=2]
+  68: shift_exp ::= shift_exp DOUBLE_LESS_THAN additive_exp. [DOUBLE_LESS_THAN precedence=3]
+  69: shift_exp ::= shift_exp DOUBLE_GREATER_THAN additive_exp. [DOUBLE_GREATER_THAN precedence=3]
+  70: and_exp ::= shift_exp. [EXP precedence=2]
+  71: and_exp ::= and_exp AMPERSAND shift_exp. [AMPERSAND precedence=3]
+  72: exclusive_or_exp ::= and_exp. [EXP precedence=2]
+  73: exclusive_or_exp ::= exclusive_or_exp CIRCUMFLEX and_exp. [CIRCUMFLEX precedence=3]
+  74: inclusive_or_exp ::= exclusive_or_exp. [EXP precedence=2]
+  75: inclusive_or_exp ::= inclusive_or_exp PIPE exclusive_or_exp. [PIPE precedence=3]
+  76: scalar_exp ::= inclusive_or_exp. [EXP precedence=2]

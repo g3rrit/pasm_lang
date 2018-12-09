@@ -4,11 +4,14 @@
 #include <map>
 #include <vector>
 
-#include "package.h"
 #include "util.h"
-#include "token.h"
+
+struct id_token_vec;
 
 namespace tree {
+
+  struct package;
+
   struct tree {
       std::map<id_token_vec*, package*, util::cmp_id_token_vec> package_map;
 
