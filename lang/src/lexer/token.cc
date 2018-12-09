@@ -35,3 +35,54 @@ bool id_token_vec::operator<(const id_token_vec& rhs) const {
   }
   return false;
 }
+
+
+primary_token::primary_token(int _type) : type(_type) {}
+
+id_token::id_token(char *_val) : primary_token(ID), val(_val)  {}
+
+id_token::~id_token() {
+  delete val;
+}
+
+float_token::float_token(float _val) : primary_token(FLOAT), val(_val) {}
+
+string_token::string_token(char *_val) : primary_token(STRING), val(_val) {}
+
+string_token::~string_token() {
+  delete val;
+}
+
+int_token::int_token(int _val) : primary_token(INTEGER), val(_val) {}
+
+token::token() : type(OTHER) {}
+
+token::token(int _type) : type(_type), vt(val_type::NONE_VAL) {}
+
+token::operator id_token() {
+  if(type != ID) {
+    throw std::bad_cast();
+  }
+  return id_token(str_val);
+}
+
+token::operator float_token() {
+  if(type != FLOAT) {
+    throw std::bad_cast();
+  }
+  return float_token(float_val);
+}
+
+token::operator int_token() {
+  if(type != INTEGER) {
+    throw std::bad_cast();
+  }
+  return int_token(int_val);
+}
+
+token::operator string_token() {
+  if(type != STRING) {
+    throw std::bad_cast();
+  }
+  return string_token(str_val);
+}
