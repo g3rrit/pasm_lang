@@ -59,30 +59,34 @@ token::token() : type(OTHER) {}
 
 token::token(int _type) : type(_type), vt(val_type::NONE_VAL) {}
 
-token::operator id_token() {
+token::operator id_token*() {
   if(type != ID) {
     throw std::bad_cast();
   }
-  return id_token(str_val);
+  id_token *res = new id_token(str_val);
+  str_val = 0;
+  return res;
 }
 
-token::operator float_token() {
+token::operator float_token*() {
   if(type != FLOAT) {
     throw std::bad_cast();
   }
-  return float_token(float_val);
+  return new float_token(float_val);
 }
 
-token::operator int_token() {
+token::operator int_token*() {
   if(type != INTEGER) {
     throw std::bad_cast();
   }
-  return int_token(int_val);
+  return new int_token(int_val);
 }
 
-token::operator string_token() {
+token::operator string_token*() {
   if(type != STRING) {
     throw std::bad_cast();
   }
-  return string_token(str_val);
+  string_token *res = new string_token(str_val);
+  str_val = 0;
+  return res;
 }

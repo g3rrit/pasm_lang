@@ -91,10 +91,10 @@ struct token {
 
     /* OVERLOADED CASTS */
 
-    operator id_token();
-    operator float_token();
-    operator int_token();
-    operator string_token();
+    operator id_token*();
+    operator float_token*();
+    operator int_token*();
+    operator string_token*();
 
     /* STRING CONVERSION */
 

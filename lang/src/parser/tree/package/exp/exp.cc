@@ -6,10 +6,26 @@
 
 namespace tree {
 
-  int_exp::int_exp(int _val)
+  int_exp::int_exp(int_token *_val)
     : val(_val) {}
 
-  int_exp::~int_exp() {}
+  int_exp::~int_exp() {
+    delete val;
+  }
+
+  float_exp::float_exp(float_token *_val)
+    : val(_val) {}
+
+  float_exp::~float_exp() {
+    delete val;
+  }
+
+  string_exp::string_exp(string_token *_val)
+    : val(_val) {}
+
+  string_exp::~string_exp() {
+    delete val;
+  }
 
   infix_scalar_exp::infix_scalar_exp(scalar_exp *_left, scalar_exp *_right, INFIX_OP _op)
     : left(_left), right(_right), op(_op) {}
@@ -26,10 +42,18 @@ namespace tree {
     delete id;
   }
 
-  infix_ref_exp::infix_ref_exp(ref_exp *_left, ref_exp *_right, REF_OP _op)
+  ref_acc_exp::ref_acc_exp(ref_exp *_left, id_token *_right, REF_OP _op)
     : left(_left), right(_right), op(_op) {}
 
-  infix_ref_exp::~infix_ref_exp() {
+  ref_acc_exp::~ref_acc_exp() {
+    delete left;
+    delete right;
+  }
+
+  ref_off_exp::ref_off_exp(ref_exp *_left, scalar_exp *_right, REF_OP _op)
+   : left(_left), right(_right), op(_op) {}
+
+  ref_off_exp::~ref_off_exp() {
     delete left;
     delete right;
   }

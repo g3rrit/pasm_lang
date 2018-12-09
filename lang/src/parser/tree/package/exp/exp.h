@@ -1,6 +1,9 @@
 #pragma once
 
 struct id_token;
+struct int_token;
+struct float_token;
+struct string_token;
 
 namespace tree {
 
@@ -14,10 +17,22 @@ namespace tree {
     virtual ~scalar_exp() {}
   };
 
-  struct int_exp : exp {
-    int val;
-    int_exp(int);
+  struct int_exp : scalar_exp {
+    int_token *val;
+    int_exp(int_token*);
     ~int_exp();
+  };
+
+  struct float_exp : exp {
+    float_token *val;
+    float_exp(float_token*);
+    ~float_exp();
+  };
+
+  struct string_exp : exp {
+    string_token *val;
+    string_exp(string_token*);
+    ~string_exp();
   };
 
   struct infix_scalar_exp : scalar_exp {
@@ -50,20 +65,30 @@ namespace tree {
     ~id_exp();
   };
 
-  struct infix_ref_exp : ref_exp {
+  struct ref_acc_exp : ref_exp {
     ref_exp *left;
-    ref_exp *right;
+    id_token *right;
 
     enum REF_OP {
-      ID,
       DOT,
       ARROW,
+    } op;
+
+    ref_acc_exp(ref_exp*, id_token*, REF_OP);
+    ~ref_acc_exp();
+  };
+
+  struct ref_off_exp : ref_exp {
+    ref_exp *left;
+    scalar_exp *right;
+
+    enum REF_OP {
       PLUS,
       MINUS
     } op;
 
-    infix_ref_exp(ref_exp*, ref_exp*, REF_OP);
-    ~infix_ref_exp();
+    ref_off_exp(ref_exp*, scalar_exp*, REF_OP);
+    ~ref_off_exp();
   };
 
   struct acc_exp : ref_exp {

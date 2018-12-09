@@ -1,6 +1,21 @@
 #pragma once
 
 #include "token.h"
+#include "iostream"
+
+#ifdef DEBUG
+
+#define log_debug(msg) \
+  std::cout << "log: " << msg << std::endl;
+
+#else
+
+#define log_debug(msg) \
+  ;
+
+#endif
+
+
 
 namespace util {
   struct cmp_str {

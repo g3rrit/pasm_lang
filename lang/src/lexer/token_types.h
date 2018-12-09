@@ -58,6 +58,5 @@
 #define PUSH                            58
 #define MOV                             59
 #define ADD                             60
-#define CAST                            61
-#define LESS_THAN                       62
-#define GREATER_THAN                    63
+#define LESS_THAN                       61
+#define GREATER_THAN                    62
