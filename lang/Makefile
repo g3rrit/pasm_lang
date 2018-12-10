@@ -48,5 +48,7 @@ debug:
 MKDIR_P ?= mkdir -p
 
 clean:
-	rm $(BUILD)/*
 	rm parser/out/*
+	rm src/lexer/lexer.cc
+	rm src/parser/parser.cc
+	rm $(BUILD)/*
