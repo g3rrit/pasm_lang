@@ -4,6 +4,11 @@
 #include "cassert"
 #include "lexer.h"
 #include "util.h"
+#include "literal.h"
+#include "operand.h"
+#include "statement.h"
+#include "var_def.h"
+#include "var_decl.h"
 
 using namespace tree;
 }
@@ -67,6 +72,22 @@ using namespace tree;
 %type integer                       {int_token*}
 %type float                         {float_token*}
 %type string                        {string_token*}
+
+%type var_decl                      {var_decl*}
+%type var_def                       {var_def*}
+
+
+%type type                          {type*}
+
+%type block_statement               {block_statement*}
+%type block_statement_opt           {block_statement*}
+%type statement                     {statement*}
+%type u_mnemonic                    {mnemonic}
+%type d_mnemonic                    {mnemonic}
+
+%type operand                       {operand*}
+%type literal                       {literal*}
+%type literal_opt                   {literal*}
 
 %type exp                           {exp*}
 %type ref_exp                       {ref_exp*}
@@ -213,42 +234,56 @@ type ::= struct_def . {
 |                       STATEMENT                     |
 +----------------------------------------------------*/
 
-block_statement ::= block_statement_opt T_R_C_BRACKET . {
+block_statement(A) ::= block_statement_opt(B) T_R_C_BRACKET . {
     log_debug("block_statement ::= block_statement_opt R_C_BRACKET");
+    A = B;
 }
 
-block_statement_opt ::= T_L_C_BRACKET . {
+block_statement_opt(A) ::= T_L_C_BRACKET . {
     log_debug("block_statement_opt ::= L_C_BRACKET");
+    A = new block_statement();
 }
-block_statement_opt ::= block_statement_opt statement . {
+block_statement_opt(A) ::= block_statement_opt(B) statement(C) . {
     log_debug("block_statement_opt ::= block_statement_opt statement");
+    if(C != nullptr) {
+      B->push_back(C);
+    }
+    A = B;
 }
 
-statement ::= T_SEMICOLON . {
+statement(A) ::= T_SEMICOLON . {
     log_debug("statement ::= SEMICOLON");
+    A = nullptr;
 }
-statement ::= var_decl . {
+statement(A) ::= var_decl(B) . {
     log_debug("statement ::= var_decl");
+    A = new var_def_statement(new var_def(B, 0));
 }
-statement ::= var_def . {
+statement(A) ::= var_def(B) . {
     log_debug("statement ::= var_def");
+    A = new var_def_statement(B);
 }
-statement ::= u_mnemonic operand . {
+statement(A) ::= u_mnemonic(B) operand(C) . {
     log_debug("statement ::= u_mnemonic operand");
+    A = new u_mnemonic_statement(B, C);
 }
-statement ::= d_mnemonic operand T_COMMA operand . {
+statement(A) ::= d_mnemonic(B) operand(C) T_COMMA operand(D) . {
     log_debug("statement ::= d_mnemonic operand COMMA operand");
+    A = new d_mnemonic_statement(B, C, D);
 }
 
-u_mnemonic ::= T_PUSH . {
+u_mnemonic(A) ::= T_PUSH . {
     log_debug("u_mnemonic ::= PUSH");
+    A = mnemonic::PUSH;
 }
 
-d_mnemonic ::= T_MOV . {
+d_mnemonic(A) ::= T_MOV . {
     log_debug("d_mnemonic ::= MOV");
+    A = mnemonic::MOV;
 }
-d_mnemonic ::= T_ADD . {
+d_mnemonic(A) ::= T_ADD . {
     log_debug("d_mnemonic ::= ADD");
+    A = mnemonic::ADD;
 }
 
 
@@ -277,30 +312,39 @@ integer(A) ::= T_INTEGER(B) . {
 
 /* -------------------- OPERAND ----------------------- */
 
-operand ::= ref_exp . [EXP] {
+operand(A) ::= ref_exp(B) . [EXP] {
     log_debug("operand ::= ref_exp");
+    A = new ref_operand(B);
 }
-operand ::= float . {
+operand(A) ::= float(B) . {
     log_debug("operand ::= float");
+    A = new float_operand(B);
 }
-operand ::= scalar_exp . {
+operand(A) ::= scalar_exp(B) . {
     log_debug("operand ::= scalar_exp");
+    A = new scalar_operand(B);
 }
-operand ::= T_L_S_BRACKET scalar_exp T_R_S_BRACKET . {
+operand(A) ::= T_L_S_BRACKET scalar_exp(B) T_R_S_BRACKET . {
     log_debug("operand ::= L_S_BRACKET scalar_exp R_S_BRACKET");
+    A = new acc_operand(B);
 }
 
 /* -------------------- COMPOUND_LITERAL -------------- */
 
-literal ::= literal_opt T_R_C_BRACKET . {
+literal(A) ::= literal_opt(B) T_R_C_BRACKET . {
     log_debug("literal ::= literal_opt R_C_BRACKET");
+    A = B;
 }
 
-literal_opt ::= T_L_C_BRACKET exp . {
+literal_opt(A) ::= T_L_C_BRACKET exp(B) . {
     log_debug("literal_opt ::= L_C_BRACKET exp");
+    A = new literal();
+    A->push_back(B);
 }
-literal_opt ::= literal_opt T_COMMA exp . {
+literal_opt(A) ::= literal_opt(B) T_COMMA exp(C) . {
     log_debug("literal_opt ::= literal_opt COMMA exp");
+    B->push_back(C);
+    A = B;
 }
 
 /* -------------------- EXPRESSION -------------------- */
@@ -360,10 +404,19 @@ scalar_exp_int(A) ::= integer(B) . {
     A = new int_exp(B);
 }
 
-multiplicative_exp(A) ::= scalar_exp_int(B) . [T_EXP] {
-    log_debug("multiplicative_exp ::= scalar_exp_int");
-    A = B;
+multiplicative_exp(A) ::= scalar_exp_int(B) T_ASTERIX scalar_exp(C) . {
+    log_debug("multiplicative_exp ::= scalar_exp_int ASTERIX scalar_ex");
+    A = new infix_scalar_exp(B, C, infix_scalar_exp::INFIX_OP::TIMES);
 }
+multiplicative_exp(A) ::= scalar_exp_int(B) T_SLASH scalar_exp(C) . {
+    log_debug("multiplicative_exp ::= scalar_exp_int SLASH scalar_exp");
+    A =new infix_scalar_exp(B, C, infix_scalar_exp::INFIX_OP::DIV);
+}
+multiplicative_exp(A) ::= scalar_exp_int(B) T_PERCENT scalar_exp(C) . {
+    log_debug("multiplicative_exp ::= scalar_exp_int PERCENT scalar_exp");
+    A = new infix_scalar_exp(B, C, infix_scalar_exp::INFIX_OP::MOD);
+}
+
 multiplicative_exp(A) ::= multiplicative_exp(B) T_ASTERIX scalar_exp(C) . {
     log_debug("multiplicative_exp ::= multiplicative_exp ASTERIX scalar_ex");
     A = new infix_scalar_exp(B, C, infix_scalar_exp::INFIX_OP::TIMES);

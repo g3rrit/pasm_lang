@@ -99,7 +99,7 @@ namespace tree {
     ~acc_exp();
   };
 
-  struct cast_exp : exp {
+  struct cast_exp : ref_exp {
     ref_exp *ref;
     type *t;
 

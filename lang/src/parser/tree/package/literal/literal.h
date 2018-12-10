@@ -1,7 +1,12 @@
 #pragma once
 
-namespace tree {
-    struct literal {
+#include <vector>
 
-    };
+namespace tree {
+
+  struct exp;
+
+  struct literal : std::vector<exp*> {
+    ~literal();
+  };
 }
