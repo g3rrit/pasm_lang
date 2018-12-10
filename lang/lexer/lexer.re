@@ -28,8 +28,8 @@ token& lex(std::ifstream &in, bool keep)
     static char buffer[BUFFER_SIZE];
     bzero(buffer, BUFFER_SIZE);
 #   define YYCTYPE     char
-#   define YYPEEK()    in.peek(); {if(in.eof()) {*current_token = token(END); return *current_token;}}
-#   define YYSKIP()    do { in.get(buffer[pos]); pos++; if (in.eof()) { *current_token = token(END); return *current_token; }} while(0)
+#   define YYPEEK()    in.peek(); {if(in.eof()) {*current_token = token(T_END); return *current_token;}}
+#   define YYSKIP()    do { in.get(buffer[pos]); pos++; if (in.eof()) { *current_token = token(T_END); return *current_token; }} while(0)
 #   define YYBACKUP()  mar = in.tellg()
 #   define YYRESTORE() in.seekg(mar)
 
@@ -37,209 +37,209 @@ token& lex(std::ifstream &in, bool keep)
         re2c:yyfill:enable = 0;
 
         [ \t\r]                             {
-                                                *current_token = token(OTHER);
+                                                *current_token = token(T_OTHER);
                                                 return *current_token;
                                             }
         [\n]                                {
                                                 line_num++;
-                                                *current_token = token(OTHER);
+                                                *current_token = token(T_OTHER);
                                                 return *current_token;
                                             }
 
         "use"                               {
-                                                *current_token = token(USE);
+                                                *current_token = token(T_USE);
                                                 return *current_token;
                                             }
 
         "as"                                {
-                                                *current_token = token(AS);
+                                                *current_token = token(T_AS);
                                                 return *current_token;
                                             }
 
         "ret"                               {
-                                                *current_token = token(RET);
+                                                *current_token = token(T_RET);
                                                 return *current_token;
                                             }
 
         "u8"                                {
-                                                *current_token = token(U8);
+                                                *current_token = token(T_U8);
                                                 return *current_token;
                                             }
 
         "u16"                               {
-                                                *current_token = token(U16);
+                                                *current_token = token(T_U16);
                                                 return *current_token;
                                             }
 
         "u32"                               {
-                                                *current_token = token(U32);
+                                                *current_token = token(T_U32);
                                                 return *current_token;
                                             }
 
         "u64"                               {
-                                                *current_token = token(U64);
+                                                *current_token = token(T_U64);
                                                 return *current_token;
                                             }
 
         "i8"                                {
-                                                *current_token = token(I8);
+                                                *current_token = token(T_I8);
                                                 return *current_token;
                                             }
 
         "i16"                               {
-                                                *current_token = token(I16);
+                                                *current_token = token(T_I16);
                                                 return *current_token;
                                             }
 
         "i32"                               {
-                                                *current_token = token(I32);
+                                                *current_token = token(T_I32);
                                                 return *current_token;
                                             }
 
         "i64"                               {
-                                                *current_token = token(I64);
+                                                *current_token = token(T_I64);
                                                 return *current_token;
                                             }
 
         "f32"                               {
-                                                *current_token = token(F32);
+                                                *current_token = token(T_F32);
                                                 return *current_token;
                                             }
 
         "f64"                               {
-                                                *current_token = token(F64);
+                                                *current_token = token(T_F64);
                                                 return *current_token;
                                             }
 
         [&]                                 {
-                                                *current_token = token(AMPERSAND);
+                                                *current_token = token(T_AMPERSAND);
                                                 return *current_token;
                                             }
 
         [\x5e]                              {
-                                                *current_token = token(CIRCUMFLEX);
+                                                *current_token = token(T_CIRCUMFLEX);
                                                 return *current_token;
                                             }
 
         [:]                                 {
-                                                *current_token = token(COLON);
+                                                *current_token = token(T_COLON);
                                                 return *current_token;
                                             }
 
         [;]                                 {
-                                                *current_token = token(SEMICOLON);
+                                                *current_token = token(T_SEMICOLON);
                                                 return *current_token;
                                             }
 
         [,]                                 {
-                                                *current_token = token(COMMA);
+                                                *current_token = token(T_COMMA);
                                                 return *current_token;
                                             }
 
         [\x7b]                              {
-                                                *current_token = token(L_C_BRACKET);
+                                                *current_token = token(T_L_C_BRACKET);
                                                 return *current_token;
                                             }
 
         [\x7d]                              {
-                                                *current_token = token(R_C_BRACKET);
+                                                *current_token = token(T_R_C_BRACKET);
                                                 return *current_token;
                                             }
 
         [\x28]                              {
-                                                *current_token = token(L_R_BRACKET);
+                                                *current_token = token(T_L_R_BRACKET);
                                                 return *current_token;
                                             }
 
         [\x29]                              {
-                                                *current_token = token(R_R_BRACKET);
+                                                *current_token = token(T_R_R_BRACKET);
                                                 return *current_token;
                                             }
 
         [\x5b]                              {
-                                                *current_token = token(L_S_BRACKET);
+                                                *current_token = token(T_L_S_BRACKET);
                                                 return *current_token;
                                             }
 
         [\x5d]                              {
-                                                *current_token = token(R_S_BRACKET);
+                                                *current_token = token(T_R_S_BRACKET);
                                                 return *current_token;
                                             }
 
         [\x2a]                              {
-                                                *current_token = token(ASTERIX);
+                                                *current_token = token(T_ASTERIX);
                                                 return *current_token;
                                             }
 
         [\x2b]                              {
-                                                *current_token = token(PLUS);
+                                                *current_token = token(T_PLUS);
                                                 return *current_token;
                                             }
 
         [\x2d]                              {
-                                                *current_token = token(MINUS);
+                                                *current_token = token(T_MINUS);
                                                 return *current_token;
                                             }
 
         [\x2f]                              {
-                                                *current_token = token(SLASH);
+                                                *current_token = token(T_SLASH);
                                                 return *current_token;
                                             }
 
         [\x2e]                              {
-                                                *current_token = token(DOT);
+                                                *current_token = token(T_DOT);
                                                 return *current_token;
                                             }
 
         [%]                                 {
-                                                *current_token = token(PERCENT);
+                                                *current_token = token(T_PERCENT);
                                                 return *current_token;
                                             }
 
         [!]                                 {
-                                                *current_token = token(EXCLAMATIONMARK);
+                                                *current_token = token(T_EXCLAMATIONMARK);
                                                 return *current_token;
                                             }
 
         [?]                                 {
-                                                *current_token = token(QUESTIONMARK);
+                                                *current_token = token(T_QUESTIONMARK);
                                                 return *current_token;
                                             }
 
         [<]                                 {
-                                                *current_token = token(LESS_THAN);
+                                                *current_token = token(T_LESS_THAN);
                                                 return *current_token;
                                             }
 
         [>]                                 {
-                                                *current_token = token(GREATER_THAN);
+                                                *current_token = token(T_GREATER_THAN);
                                                 return *current_token;
                                             }
 
         [\x7c]                              {
-                                                *current_token = token(PIPE);
+                                                *current_token = token(T_PIPE);
                                                 return *current_token;
                                             }
 
         [\x7e]                              {
-                                                *current_token = token(TILDE);
+                                                *current_token = token(T_TILDE);
                                                 return *current_token;
                                             }
 
         [0-9]+		                        {
-                                                *current_token = token(INTEGER);
+                                                *current_token = token(T_INTEGER);
                                                 current_token->set_int_val(atoi(buffer));
                                                 return *current_token;
                                             }
 
         [0-9]+[\x2e][0-9]+                  {
-                                                *current_token = token(FLOAT);
+                                                *current_token = token(T_FLOAT);
                                                 current_token->set_float_val(atof(buffer));
                                                 return *current_token;
                                             }
 
         [a-zA-Z_][a-zA-Z0-9_]*              {
-                                                *current_token = token(ID);
+                                                *current_token = token(T_ID);
                                                 current_token->set_str_val(buffer);
                                                 return *current_token;
                                             }

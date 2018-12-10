@@ -39,28 +39,28 @@ bool id_token_vec::operator<(const id_token_vec& rhs) const {
 
 primary_token::primary_token(int _type) : type(_type) {}
 
-id_token::id_token(char *_val) : primary_token(ID), val(_val)  {}
+id_token::id_token(char *_val) : primary_token(T_ID), val(_val)  {}
 
 id_token::~id_token() {
   delete val;
 }
 
-float_token::float_token(float _val) : primary_token(FLOAT), val(_val) {}
+float_token::float_token(float _val) : primary_token(T_FLOAT), val(_val) {}
 
-string_token::string_token(char *_val) : primary_token(STRING), val(_val) {}
+string_token::string_token(char *_val) : primary_token(T_STRING), val(_val) {}
 
 string_token::~string_token() {
   delete val;
 }
 
-int_token::int_token(int _val) : primary_token(INTEGER), val(_val) {}
+int_token::int_token(int _val) : primary_token(T_INTEGER), val(_val) {}
 
-token::token() : type(OTHER) {}
+token::token() : type(T_OTHER) {}
 
 token::token(int _type) : type(_type), vt(val_type::NONE_VAL) {}
 
 token::operator id_token*() {
-  if(type != ID) {
+  if(type != T_ID) {
     throw std::bad_cast();
   }
   id_token *res = new id_token(str_val);
@@ -69,21 +69,21 @@ token::operator id_token*() {
 }
 
 token::operator float_token*() {
-  if(type != FLOAT) {
+  if(type != T_FLOAT) {
     throw std::bad_cast();
   }
   return new float_token(float_val);
 }
 
 token::operator int_token*() {
-  if(type != INTEGER) {
+  if(type != T_INTEGER) {
     throw std::bad_cast();
   }
   return new int_token(int_val);
 }
 
 token::operator string_token*() {
-  if(type != STRING) {
+  if(type != T_STRING) {
     throw std::bad_cast();
   }
   string_token *res = new string_token(str_val);

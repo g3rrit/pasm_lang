@@ -20,43 +20,43 @@ using namespace tree;
 +----------------------------------------------------*/
 
 
-%right              WHITESPACE END OTHER TAB NEW_LINE CARRIAGE_RETURN CHAR MULTICHAR LINE_COMMENT
-                    MULTILINE_COMMENT INTEGER FLOAT STRING USE AS RET
-                    U8 U16 U32 U64 I8 I16 I32 I64 F32 F64
-                    EXCALAMATIONMARK_EQUALS
-                    COLON SEMICOLON
-                    EXCLAMATIONMARK QUESTIONMARK .
+%right              T_WHITESPACE T_END T_OTHER T_TAB T_NEW_LINE T_CARRIAGE_RETURN T_CHAR T_MULTICHAR T_LINE_COMMENT
+                    T_MULTILINE_COMMENT T_INTEGER T_FLOAT T_STRING T_USE T_AS T_RET
+                    T_U8 T_U16 T_U32 T_U64 T_I8 T_I16 T_I32 T_I64 T_F32 T_F64
+                    T_EXCALAMATIONMARK_EQUALS
+                    T_COLON T_SEMICOLON
+                    T_EXCLAMATIONMARK T_QUESTIONMARK .
 
-%left               EXP .
+%left               T_EXP .
 
-%right              COMMA
-                    PIPE
-                    CIRCUMFLEX
-                    DOUBLE_LESS_THAN
-                    DOUBLE_GREATER_THAN
-                    SLASH
-                    PERCENT
-                    MINUS
-                    PLUS
-                    EXCLAMATION_MARK
-                    TILDE
-                    ASTERIX
-                    AMPERSAND
-                    L_C_BRACKET
-                    R_C_BRACKET
-                    L_S_BRACKET
-                    R_S_BRACKET
-                    L_R_BRACKET
-                    R_R_BRACKET
-                    DOT
-                    ARROW
-                    DOUBLE_COLON .
+%right              T_COMMA
+                    T_PIPE
+                    T_CIRCUMFLEX
+                    T_DOUBLE_LESS_THAN
+                    T_DOUBLE_GREATER_THAN
+                    T_SLASH
+                    T_PERCENT
+                    T_MINUS
+                    T_PLUS
+                    T_EXCLAMATION_MARK
+                    T_TILDE
+                    T_ASTERIX
+                    T_AMPERSAND
+                    T_L_C_BRACKET
+                    T_R_C_BRACKET
+                    T_L_S_BRACKET
+                    T_R_S_BRACKET
+                    T_L_R_BRACKET
+                    T_R_R_BRACKET
+                    T_DOT
+                    T_ARROW
+                    T_DOUBLE_COLON .
 
-%left               POINTER_TYPE .
+%left               T_POINTER_TYPE .
 
-%right              VOID .
+%right              T_VOID .
 
-%right              ID .
+%right              T_ID .
 
 
 /*----------------------------------------------------+
@@ -88,7 +88,7 @@ using namespace tree;
 |                      GRAMMAR                        |
 +----------------------------------------------------*/
 
-package ::= package_opt  END . {
+package ::= package_opt T_END . {
     log_debug("package ::= package_opt  END");
 }
 
@@ -112,10 +112,10 @@ package_opt ::= package_opt struct_def . {
 |                       STRUCT                        |
 +----------------------------------------------------*/
 
-struct_def ::= struct_def_opt R_C_BRACKET . {
+struct_def ::= struct_def_opt T_R_C_BRACKET . {
     log_debug("struct_def ::= struct_def_opt R_C_BRACKET");
 }
-struct_def_opt ::= id L_C_BRACKET var_decl . {
+struct_def_opt ::= id T_L_C_BRACKET var_decl . {
     log_debug("struct_def_opt ::= id L_C_BRACKET var_decl");
 }
 struct_def_opt ::= struct_def_opt var_decl . {
@@ -136,7 +136,7 @@ function_def ::= id function_type block_statement . {
 
 /* -------------------- VAR --------------------------- */
 
-var_decl ::= id COLON type . {
+var_decl ::= id T_COLON type . {
     log_debug("var_decl ::= id COLON type");
 }
 
@@ -150,56 +150,56 @@ var_def ::= var_decl literal . {
 
 /* -------------------- FUNCTION_TYPE ----------------- */
 
-function_type ::= function_type_opt R_R_BRACKET . {
+function_type ::= function_type_opt T_R_R_BRACKET . {
     log_debug("function_type ::= function_type_opt R_R_BRACKET");
 }
-function_type ::= L_R_BRACKET R_R_BRACKET . {
+function_type ::= T_L_R_BRACKET T_R_R_BRACKET . {
     log_debug("function_type ::= L_R_BRACKET R_R_BRACKET");
 }
 
-function_type_opt ::= L_R_BRACKET var_decl . {
+function_type_opt ::= T_L_R_BRACKET var_decl . {
     log_debug("function_type_opt ::= L_R_BRACKET var_decl");
 }
-function_type_opt ::= function_type_opt COMMA var_decl . {
+function_type_opt ::= function_type_opt T_COMMA var_decl . {
     log_debug("function_type_opt ::= function_type_opt COMMA var_decl");
 }
 
 /* -------------------- TYPE -------------------------- */
 
-type ::= type ASTERIX . [POINTER_TYPE] {
+type ::= type T_ASTERIX . [T_POINTER_TYPE] {
     log_debug("type ::= type ASTERIX . [POINTER_TYP");
 }
-type ::= L_S_BRACKET type COMMA integer R_S_BRACKET . {
+type ::= T_L_S_BRACKET type T_COMMA integer T_R_S_BRACKET . {
     log_debug("type ::= L_S_BRACKET type COMMA integer R_S_BRACKET");
 }
-type ::= U8 . {
+type ::= T_U8 . {
     log_debug("type ::= U8");
 }
-type ::= U16 . {
+type ::= T_U16 . {
     log_debug("type ::= U16");
 }
-type ::= U32 . {
+type ::= T_U32 . {
     log_debug("type ::= U32");
 }
-type ::= U64 . {
+type ::= T_U64 . {
     log_debug("type ::= U64");
 }
-type ::= I8 . {
+type ::= T_I8 . {
     log_debug("type ::= I8");
 }
-type ::= I16 . {
+type ::= T_I16 . {
     log_debug("type ::= I16");
 }
-type ::= I32 . {
+type ::= T_I32 . {
     log_debug("type ::= I32");
 }
-type ::= I64 . {
+type ::= T_I64 . {
     log_debug("type ::= I64");
 }
-type ::= F32 . {
+type ::= T_F32 . {
     log_debug("type ::= F32");
 }
-type ::= F64 . {
+type ::= T_F64 . {
     log_debug("type ::= F64");
 }
 type ::= function_type . {
@@ -213,18 +213,18 @@ type ::= struct_def . {
 |                       STATEMENT                     |
 +----------------------------------------------------*/
 
-block_statement ::= block_statement_opt R_C_BRACKET . {
+block_statement ::= block_statement_opt T_R_C_BRACKET . {
     log_debug("block_statement ::= block_statement_opt R_C_BRACKET");
 }
 
-block_statement_opt ::= L_C_BRACKET . {
+block_statement_opt ::= T_L_C_BRACKET . {
     log_debug("block_statement_opt ::= L_C_BRACKET");
 }
 block_statement_opt ::= block_statement_opt statement . {
     log_debug("block_statement_opt ::= block_statement_opt statement");
 }
 
-statement ::= SEMICOLON . {
+statement ::= T_SEMICOLON . {
     log_debug("statement ::= SEMICOLON");
 }
 statement ::= var_decl . {
@@ -236,18 +236,18 @@ statement ::= var_def . {
 statement ::= u_mnemonic operand . {
     log_debug("statement ::= u_mnemonic operand");
 }
-statement ::= d_mnemonic operand COMMA operand . {
+statement ::= d_mnemonic operand T_COMMA operand . {
     log_debug("statement ::= d_mnemonic operand COMMA operand");
 }
 
-u_mnemonic ::= PUSH . {
+u_mnemonic ::= T_PUSH . {
     log_debug("u_mnemonic ::= PUSH");
 }
 
-d_mnemonic ::= MOV . {
+d_mnemonic ::= T_MOV . {
     log_debug("d_mnemonic ::= MOV");
 }
-d_mnemonic ::= ADD . {
+d_mnemonic ::= T_ADD . {
     log_debug("d_mnemonic ::= ADD");
 }
 
@@ -258,19 +258,19 @@ d_mnemonic ::= ADD . {
 
 /* -------------------- PRIMATIVES -------------------- */
 
-id(A) ::= ID(B) . {
+id(A) ::= T_ID(B) . {
     log_debug("id ::= ID");
     A = static_cast<id_token*>(*B);
 }
-string(A) ::= STRING(B) . {
+string(A) ::= T_STRING(B) . {
     log_debug("string ::= STRING");
     A = static_cast<string_token*>(*B);
 }
-float(A) ::= FLOAT(B) . {
+float(A) ::= T_FLOAT(B) . {
     log_debug("float ::= FLOAT");
     A = static_cast<float_token*>(*B);
 }
-integer(A) ::= INTEGER(B) . {
+integer(A) ::= T_INTEGER(B) . {
     log_debug("integer ::= INTEGER");
     A = static_cast<int_token*>(*B);
 }
@@ -286,20 +286,20 @@ operand ::= float . {
 operand ::= scalar_exp . {
     log_debug("operand ::= scalar_exp");
 }
-operand ::= L_S_BRACKET scalar_exp R_S_BRACKET . {
+operand ::= T_L_S_BRACKET scalar_exp T_R_S_BRACKET . {
     log_debug("operand ::= L_S_BRACKET scalar_exp R_S_BRACKET");
 }
 
 /* -------------------- COMPOUND_LITERAL -------------- */
 
-literal ::= literal_opt R_C_BRACKET . {
+literal ::= literal_opt T_R_C_BRACKET . {
     log_debug("literal ::= literal_opt R_C_BRACKET");
 }
 
-literal_opt ::= L_C_BRACKET exp . {
+literal_opt ::= T_L_C_BRACKET exp . {
     log_debug("literal_opt ::= L_C_BRACKET exp");
 }
-literal_opt ::= literal_opt COMMA exp . {
+literal_opt ::= literal_opt T_COMMA exp . {
     log_debug("literal_opt ::= literal_opt COMMA exp");
 }
 
@@ -324,31 +324,31 @@ exp(A) ::= ref_exp(B) . {
 
 /* -------------------- REF_EXP ----------------------- */
 
-ref_exp(A) ::= id(B) . [EXP] {
+ref_exp(A) ::= id(B) . [T_EXP] {
     log_debug("ref_exp ::= id");
     A = new id_exp(B);
 }
-ref_exp(A) ::= LESS_THAN type(B) GREATER_THAN L_R_BRACKET ref_exp(C) R_R_BRACKET . {
+ref_exp(A) ::= T_LESS_THAN type(B) T_GREATER_THAN T_L_R_BRACKET ref_exp(C) T_R_R_BRACKET . {
     log_debug("ref_exp ::= CAST LESS_THAN type GREATER_THAN L_R_BRACKET ref_exp R_R_BRACKET");
     A = new cast_exp(C, B);
 }
-ref_exp(A) ::= ref_exp(B) L_S_BRACKET scalar_exp(C) R_S_BRACKET . {
+ref_exp(A) ::= ref_exp(B) T_L_S_BRACKET scalar_exp(C) T_R_S_BRACKET . {
     log_debug("ref_exp ::= ref_exp L_S_BRACKET scalar_exp R_S_BRACKET");
     A = new acc_exp(B, C);
 }
-ref_exp(A) ::= ref_exp(B) DOT id(C) . {
+ref_exp(A) ::= ref_exp(B) T_DOT id(C) . {
     log_debug("ref_exp ::= ref_exp DOT id");
     A = new ref_acc_exp(B, C, ref_acc_exp::REF_OP::DOT);
 }
-ref_exp(A) ::= ref_exp(B) ARROW id(C) . {
+ref_exp(A) ::= ref_exp(B) T_ARROW id(C) . {
     log_debug("ref_exp ::= ref_exp ARROW id");
     A = new ref_acc_exp(B, C, ref_acc_exp::REF_OP::ARROW);
 }
-ref_exp(A) ::= ref_exp(B) PLUS scalar_exp(C) . {
+ref_exp(A) ::= ref_exp(B) T_PLUS scalar_exp(C) . {
     log_debug("ref_exp ::= ref_exp PLUS scalar_exp");
     A = new ref_off_exp(B, C, ref_off_exp::REF_OP::PLUS);
 }
-ref_exp(A) ::= ref_exp(B) MINUS scalar_exp(C) . {
+ref_exp(A) ::= ref_exp(B) T_MINUS scalar_exp(C) . {
     log_debug("ref_exp ::= ref_exp MINUS scalar_exp");
     A = new ref_off_exp(B, C, ref_off_exp::REF_OP::MINUS);
 }
@@ -360,77 +360,77 @@ scalar_exp_int(A) ::= integer(B) . {
     A = new int_exp(B);
 }
 
-multiplicative_exp(A) ::= scalar_exp_int(B) . [EXP] {
+multiplicative_exp(A) ::= scalar_exp_int(B) . [T_EXP] {
     log_debug("multiplicative_exp ::= scalar_exp_int");
     A = B;
 }
-multiplicative_exp(A) ::= multiplicative_exp(B) ASTERIX scalar_exp(C) . {
+multiplicative_exp(A) ::= multiplicative_exp(B) T_ASTERIX scalar_exp(C) . {
     log_debug("multiplicative_exp ::= multiplicative_exp ASTERIX scalar_ex");
     A = new infix_scalar_exp(B, C, infix_scalar_exp::INFIX_OP::TIMES);
 }
-multiplicative_exp(A) ::= multiplicative_exp(B) SLASH scalar_exp(C) . {
+multiplicative_exp(A) ::= multiplicative_exp(B) T_SLASH scalar_exp(C) . {
     log_debug("multiplicative_exp ::= multiplicative_exp SLASH scalar_exp");
     A =new infix_scalar_exp(B, C, infix_scalar_exp::INFIX_OP::DIV);
 }
-multiplicative_exp(A) ::= multiplicative_exp(B) PERCENT scalar_exp(C) . {
+multiplicative_exp(A) ::= multiplicative_exp(B) T_PERCENT scalar_exp(C) . {
     log_debug("multiplicative_exp ::= multiplicative_exp PERCENT scalar_exp");
     A = new infix_scalar_exp(B, C, infix_scalar_exp::INFIX_OP::MOD);
 }
 
-additive_exp(A) ::= multiplicative_exp(B) . [EXP] {
+additive_exp(A) ::= multiplicative_exp(B) . [T_EXP] {
     log_debug("additive_exp ::= multiplicative_exp");
     A = B;
 }
-additive_exp(A) ::= additive_exp(B) PLUS multiplicative_exp(C) . {
+additive_exp(A) ::= additive_exp(B) T_PLUS multiplicative_exp(C) . {
     log_debug("additive_exp ::= additive_exp PLUS multiplicative_exp");
     A = new infix_scalar_exp(B, C, infix_scalar_exp::INFIX_OP::PLUS);
 }
-additive_exp(A) ::= additive_exp(B) MINUS multiplicative_exp(C) . {
+additive_exp(A) ::= additive_exp(B) T_MINUS multiplicative_exp(C) . {
     log_debug("additive_exp ::= additive_exp MINUS multiplicative_exp");
     A = new infix_scalar_exp(B, C, infix_scalar_exp::INFIX_OP::MINUS);
 }
 
-shift_exp(A) ::= additive_exp(B) . [EXP] {
+shift_exp(A) ::= additive_exp(B) . [T_EXP] {
     log_debug("shift_exp ::= additive_exp");
     A = B;
 }
-shift_exp(A) ::= shift_exp(B) DOUBLE_LESS_THAN additive_exp(C) . {
+shift_exp(A) ::= shift_exp(B) T_DOUBLE_LESS_THAN additive_exp(C) . {
     log_debug("shift_exp ::= shift_exp DOUBLE_LESS_THAN additive_exp");
     A = new infix_scalar_exp(B, C, infix_scalar_exp::INFIX_OP::SHIFT_LEFT);
 }
-shift_exp(A) ::= shift_exp(B) DOUBLE_GREATER_THAN additive_exp(C) . {
+shift_exp(A) ::= shift_exp(B) T_DOUBLE_GREATER_THAN additive_exp(C) . {
     log_debug("shift_exp ::= shift_exp DOUBLE_GREATER_THAN additive_exp");
     A = new infix_scalar_exp(B, C, infix_scalar_exp::INFIX_OP::SHIFT_RIGHT);
 }
 
-and_exp(A) ::= shift_exp(B) . [EXP] {
+and_exp(A) ::= shift_exp(B) . [T_EXP] {
     log_debug("and_exp ::= shift_exp");
     A = B;
 }
-and_exp(A) ::= and_exp(B) AMPERSAND shift_exp(C) . {
-    log_debug("and_exp ::= and_exp AMPERSAND shift_exp");
+and_exp(A) ::= and_exp(B) T_AMPERSAND shift_exp(C) . {
+    log_debug("and_exp ::= and_exp T_AMPERSAND shift_exp");
     A = new infix_scalar_exp(B, C, infix_scalar_exp::INFIX_OP::AND);
 }
 
-exclusive_or_exp(A) ::= and_exp(B) . [EXP] {
+exclusive_or_exp(A) ::= and_exp(B) . [T_EXP] {
     log_debug("exclusive_or_exp ::= and_exp");
     A = B;
 }
-exclusive_or_exp(A) ::= exclusive_or_exp(B) CIRCUMFLEX and_exp(C) . {
+exclusive_or_exp(A) ::= exclusive_or_exp(B) T_CIRCUMFLEX and_exp(C) . {
     log_debug("exclusive_or_exp ::= exclusive_or_exp CIRCUMFLEX and_exp");
     A = new infix_scalar_exp(B, C, infix_scalar_exp::INFIX_OP::NOR);
 }
 
-inclusive_or_exp(A) ::= exclusive_or_exp(B) . [EXP] {
+inclusive_or_exp(A) ::= exclusive_or_exp(B) . [T_EXP] {
     log_debug("inclusive_or_exp ::= exclusive_or_exp");
     A = B;
 }
-inclusive_or_exp(A) ::= inclusive_or_exp(B) PIPE exclusive_or_exp(C) . {
+inclusive_or_exp(A) ::= inclusive_or_exp(B) T_PIPE exclusive_or_exp(C) . {
     log_debug("inclusive_or_exp ::= inclusive_or_exp PIPE exclusive_or_exp");
     A = new infix_scalar_exp(B, C, infix_scalar_exp::INFIX_OP::OR);
 }
 
-scalar_exp(A) ::= inclusive_or_exp(B) . [EXP] {
+scalar_exp(A) ::= inclusive_or_exp(B) . [T_EXP] {
     log_debug("scalar_exp ::= inclusive_or_exp");
     A = B;
 }

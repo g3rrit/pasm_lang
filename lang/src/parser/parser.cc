@@ -23,6 +23,7 @@
 ** input grammar file:
 */
 #include <stdio.h>
+#include <assert.h>
 /************ Begin %include sections from the grammar ************************/
 #line 1 "./parser/grammar.y"
 
@@ -33,7 +34,7 @@
 #include "util.h"
 
 using namespace tree;
-#line 37 "./parser/out/grammar.c"
+#line 38 "./parser/out/grammar.c"
 /**************** End of %include directives **********************************/
 /* These constants specify the various numeric values for terminal symbols
 ** in a format understandable to "makeheaders".  This section is blank unless
@@ -97,20 +98,20 @@ using namespace tree;
 #endif
 /************* Begin control #defines *****************************************/
 #define YYCODETYPE unsigned char
-#define YYNOCODE 95
+#define YYNOCODE 96
 #define YYACTIONTYPE unsigned short int
 #define ImplParseTOKENTYPE token*
 typedef union {
   int yyinit;
   ImplParseTOKENTYPE yy0;
-  string_token* yy22;
-  infix_scalar_exp* yy54;
-  int_token* yy74;
-  exp* yy86;
-  float_token* yy97;
-  id_token* yy104;
-  ref_exp* yy128;
-  scalar_exp* yy149;
+  float_token* yy17;
+  infix_scalar_exp* yy42;
+  exp* yy52;
+  int_token* yy70;
+  string_token* yy150;
+  id_token* yy180;
+  ref_exp* yy184;
+  scalar_exp* yy189;
 } YYMINORTYPE;
 #ifndef YYSTACKDEPTH
 #define YYSTACKDEPTH 100
@@ -127,7 +128,7 @@ typedef union {
 #define ImplParseCTX_STORE
 #define YYNSTATE             66
 #define YYNRULE              81
-#define YYNTOKEN             63
+#define YYNTOKEN             64
 #define YY_MAX_SHIFT         65
 #define YY_MIN_SHIFTREDUCE   127
 #define YY_MAX_SHIFTREDUCE   207
@@ -202,7 +203,7 @@ typedef union {
 **  yy_default[]       Default action for each state.
 **
 *********** Begin parsing tables **********************************************/
-#define YY_ACTTAB_COUNT (323)
+#define YY_ACTTAB_COUNT (311)
 static const YYACTIONTYPE yy_action[] = {
  /*     0 */   267,  274,  264,  265,  261,   39,  275,   42,   50,   49,
  /*    10 */    63,   62,   60,  263,  267,  274,  264,  265,  262,   39,
@@ -212,89 +213,89 @@ static const YYACTIONTYPE yy_action[] = {
  /*    50 */    50,   49,   63,   62,   60,  258,  274,  248,   22,   21,
  /*    60 */   133,  275,   42,   50,   49,   63,   59,  267,  274,  257,
  /*    70 */   168,   52,   38,  275,   42,   50,   49,   63,   62,   60,
- /*    80 */   258,  160,   65,    2,  171,  145,  146,  147,  148,  149,
- /*    90 */   150,  151,  152,  153,  154,  274,  247,  176,  168,  157,
+ /*    80 */   258,  160,  171,   65,    2,  145,  146,  147,  148,  149,
+ /*    90 */   150,  151,  152,  153,  154,  274,  247,  168,  176,  157,
  /*   100 */   275,   42,   50,   49,   63,   62,   60,   53,  274,  168,
- /*   110 */   165,  166,  167,  275,   42,   46,   14,   15,   27,   30,
- /*   120 */    10,    9,  274,   45,    1,  168,   11,  275,   42,   50,
- /*   130 */    49,   63,   62,   60,  273,   32,  274,  168,   55,   27,
- /*   140 */   158,  275,   42,   50,   49,   63,   62,   60,  272,  168,
- /*   150 */   274,   58,    3,   16,  271,  275,   42,   50,   49,   63,
- /*   160 */    62,   60,  278,  267,  143,  274,  270,  175,   37,  225,
- /*   170 */   275,   42,   50,   49,   63,   62,   60,  277,  274,   58,
- /*   180 */   144,  274,   54,  275,   42,   48,  275,   42,   50,   49,
- /*   190 */    63,   62,   60,  276,  274,   57,   26,  219,   34,  275,
- /*   200 */    42,   50,   49,   63,   62,   60,   64,   57,  220,  143,
- /*   210 */    32,  140,   17,  143,  240,   28,  239,  168,   44,   57,
- /*   220 */    45,   15,   19,   31,  222,   20,  240,   28,  239,   58,
- /*   230 */    56,   51,   45,   13,   25,  185,  211,  210,  240,   28,
- /*   240 */   239,  139,   43,  274,   45,  210,  246,   29,  275,   40,
- /*   250 */   213,  214,   33,  216,   28,  274,  243,    5,   58,    4,
- /*   260 */   275,   42,   50,   49,   61,  210,  210,    7,    8,  171,
- /*   270 */   170,  169,  171,  170,  210,   12,  226,  210,  184,   36,
- /*   280 */    35,  274,   58,    7,    8,  210,  275,   42,   50,   47,
- /*   290 */   210,   12,  274,  210,  210,   36,   35,  275,   41,  210,
- /*   300 */   218,  210,  210,  210,  210,  210,  210,  210,  210,    6,
- /*   310 */   210,  210,  210,  210,  210,  168,  210,  210,  168,   16,
- /*   320 */   210,  210,   16,
+ /*   110 */   165,  166,  167,  275,   42,   46,   14,  267,   27,   30,
+ /*   120 */     1,  274,   37,   45,   34,  168,  275,   42,   50,   49,
+ /*   130 */    63,   62,   60,  273,  274,  143,  158,   58,  168,  275,
+ /*   140 */    42,   50,   49,   63,   62,   60,  272,  274,   55,  271,
+ /*   150 */   143,  274,  275,   40,  246,   29,  275,   42,   50,   49,
+ /*   160 */    63,   62,   60,  278,  243,    5,  274,    4,   58,   54,
+ /*   170 */     3,  275,   42,   50,   49,   63,   62,   60,  277,  171,
+ /*   180 */   170,  169,  274,  270,  175,  144,  225,  275,   42,   50,
+ /*   190 */    49,   63,   62,   60,  276,  274,   57,   26,  143,   15,
+ /*   200 */   275,   42,   50,   49,   63,   62,   60,   64,   57,  168,
+ /*   210 */    32,   19,   13,  211,   16,  240,   28,  239,  274,   44,
+ /*   220 */    25,   45,   57,  275,   41,  168,  140,  240,   28,  239,
+ /*   230 */    16,   56,  168,   45,  171,  170,  213,  214,   33,  216,
+ /*   240 */    28,  240,   28,  239,  274,   43,   20,   45,   15,  275,
+ /*   250 */    42,   50,   49,   61,  274,   58,    7,    8,   58,  275,
+ /*   260 */    42,   50,   47,  210,   12,  210,   32,  184,   36,   35,
+ /*   270 */    27,    6,  274,  219,    7,    8,  226,  275,   42,   48,
+ /*   280 */   168,  222,   12,   10,    9,   16,   36,   35,   51,   11,
+ /*   290 */   220,   58,   31,  185,   17,  210,  210,  210,  210,  210,
+ /*   300 */   210,  210,  210,  210,  210,  210,  210,  210,  210,  218,
+ /*   310 */   139,
 };
 static const YYCODETYPE yy_lookahead[] = {
- /*     0 */    63,   64,   65,   66,   67,   68,   69,   70,   71,   72,
- /*    10 */    73,   74,   75,   76,   63,   64,   65,   66,   67,   68,
- /*    20 */    69,   70,   71,   72,   73,   74,   75,   76,   63,   64,
- /*    30 */    65,   77,   78,   68,   69,   70,   71,   72,   73,   74,
- /*    40 */    75,   76,   63,   64,   65,   40,   41,   68,   69,   70,
- /*    50 */    71,   72,   73,   74,   75,   76,   64,   92,   36,   37,
- /*    60 */    47,   69,   70,   71,   72,   73,   74,   63,   64,   65,
- /*    70 */    57,   92,   68,   69,   70,   71,   72,   73,   74,   75,
- /*    80 */    76,   29,    2,   33,   11,   17,   18,   19,   20,   21,
- /*    90 */    22,   23,   24,   25,   26,   64,   92,   47,   57,   47,
- /*   100 */    69,   70,   71,   72,   73,   74,   75,   76,   64,   57,
- /*   110 */    58,   59,   60,   69,   70,   71,   48,   28,   50,   84,
- /*   120 */    38,   39,   64,   88,   46,   57,   44,   69,   70,   71,
- /*   130 */    72,   73,   74,   75,   76,   46,   64,   57,   64,   50,
- /*   140 */    46,   69,   70,   71,   72,   73,   74,   75,   76,   57,
- /*   150 */    64,   63,   33,   61,   63,   69,   70,   71,   72,   73,
- /*   160 */    74,   75,   76,   63,   44,   64,   63,   49,   68,   81,
- /*   170 */    69,   70,   71,   72,   73,   74,   75,   76,   64,   63,
- /*   180 */    49,   64,   62,   69,   70,   71,   69,   70,   71,   72,
- /*   190 */    73,   74,   75,   76,   64,   63,   50,   81,   33,   69,
- /*   200 */    70,   71,   72,   73,   74,   75,   76,   63,   85,   44,
- /*   210 */    46,   51,   89,   44,   82,   83,   84,   57,   86,   63,
- /*   220 */    88,   28,   35,   33,   87,   45,   82,   83,   84,   63,
- /*   230 */    86,   94,   88,   34,   63,   49,    0,   95,   82,   83,
- /*   240 */    84,   51,   86,   64,   88,   95,   80,   81,   69,   70,
- /*   250 */    79,   80,   81,   82,   83,   64,   90,   91,   63,   93,
- /*   260 */    69,   70,   71,   72,   73,   95,   95,   40,   41,   11,
- /*   270 */    12,   13,   11,   12,   95,   48,   81,   95,   51,   52,
- /*   280 */    53,   64,   63,   40,   41,   95,   69,   70,   71,   72,
- /*   290 */    95,   48,   64,   95,   95,   52,   53,   69,   70,   95,
- /*   300 */    81,   95,   95,   95,   95,   95,   95,   95,   95,   48,
- /*   310 */    95,   95,   95,   95,   95,   57,   95,   95,   57,   61,
- /*   320 */    95,   95,   61,   95,   95,   95,   95,   95,   95,   95,
- /*   330 */    95,   95,   95,   95,   95,   95,   95,   95,   95,   95,
- /*   340 */    95,   95,   95,   95,   95,   95,   95,
+ /*     0 */    64,   65,   66,   67,   68,   69,   70,   71,   72,   73,
+ /*    10 */    74,   75,   76,   77,   64,   65,   66,   67,   68,   69,
+ /*    20 */    70,   71,   72,   73,   74,   75,   76,   77,   64,   65,
+ /*    30 */    66,   78,   79,   69,   70,   71,   72,   73,   74,   75,
+ /*    40 */    76,   77,   64,   65,   66,   40,   41,   69,   70,   71,
+ /*    50 */    72,   73,   74,   75,   76,   77,   65,   93,   36,   37,
+ /*    60 */    47,   70,   71,   72,   73,   74,   75,   64,   65,   66,
+ /*    70 */    57,   93,   69,   70,   71,   72,   73,   74,   75,   76,
+ /*    80 */    77,   29,   11,    2,   33,   17,   18,   19,   20,   21,
+ /*    90 */    22,   23,   24,   25,   26,   65,   93,   57,   47,   47,
+ /*   100 */    70,   71,   72,   73,   74,   75,   76,   77,   65,   57,
+ /*   110 */    58,   59,   60,   70,   71,   72,   48,   64,   50,   85,
+ /*   120 */    46,   65,   69,   89,   33,   57,   70,   71,   72,   73,
+ /*   130 */    74,   75,   76,   77,   65,   44,   46,   64,   57,   70,
+ /*   140 */    71,   72,   73,   74,   75,   76,   77,   65,   65,   64,
+ /*   150 */    44,   65,   70,   71,   81,   82,   70,   71,   72,   73,
+ /*   160 */    74,   75,   76,   77,   91,   92,   65,   94,   64,   63,
+ /*   170 */    33,   70,   71,   72,   73,   74,   75,   76,   77,   11,
+ /*   180 */    12,   13,   65,   64,   49,   49,   82,   70,   71,   72,
+ /*   190 */    73,   74,   75,   76,   77,   65,   64,   50,   44,   28,
+ /*   200 */    70,   71,   72,   73,   74,   75,   76,   77,   64,   57,
+ /*   210 */    46,   35,   34,    0,   62,   83,   84,   85,   65,   87,
+ /*   220 */    64,   89,   64,   70,   71,   57,   51,   83,   84,   85,
+ /*   230 */    62,   87,   57,   89,   11,   12,   80,   81,   82,   83,
+ /*   240 */    84,   83,   84,   85,   65,   87,   45,   89,   28,   70,
+ /*   250 */    71,   72,   73,   74,   65,   64,   40,   41,   64,   70,
+ /*   260 */    71,   72,   73,   96,   48,   96,   46,   51,   52,   53,
+ /*   270 */    50,   48,   65,   82,   40,   41,   82,   70,   71,   72,
+ /*   280 */    57,   88,   48,   38,   39,   62,   52,   53,   95,   44,
+ /*   290 */    86,   64,   33,   49,   90,   96,   96,   96,   96,   96,
+ /*   300 */    96,   96,   96,   96,   96,   96,   96,   96,   96,   82,
+ /*   310 */    51,   96,   96,   96,   96,   96,   96,   96,   96,   96,
+ /*   320 */    96,   96,   96,   96,   96,   96,   96,   96,   96,   96,
+ /*   330 */    96,   96,   96,   96,   96,   96,   96,   96,   96,   96,
+ /*   340 */    96,   96,   96,   96,   96,   96,   96,   96,   96,   96,
+ /*   350 */    96,   96,   96,   96,   96,   96,   96,   96,
 };
 #define YY_SHIFT_COUNT    (65)
 #define YY_SHIFT_MIN      (0)
-#define YY_SHIFT_MAX      (261)
+#define YY_SHIFT_MAX      (259)
 static const unsigned short int yy_shift_ofst[] = {
- /*     0 */   323,  258,  258,  261,  261,  261,   73,   73,   73,   73,
- /*    10 */    73,   73,   73,   73,   68,   68,   68,   52,   80,   73,
- /*    20 */    73,   73,   73,   73,   73,   89,   92,  160,   13,   78,
- /*    30 */    94,   41,   41,   78,   73,   41,   41,  227,  243,  243,
- /*    40 */    82,   82,   82,  120,  165,  190,    5,   22,    5,   22,
- /*    50 */     5,   50,  119,  118,  146,  131,  169,  164,  193,  187,
- /*    60 */   199,  180,  187,  180,  186,  236,
+ /*     0 */   311,  168,  168,  223,  223,  223,   71,   71,   71,   71,
+ /*    10 */    71,   71,   71,   71,   68,   68,   68,   52,   81,   71,
+ /*    20 */    71,   71,   71,   71,   71,  220,  152,  175,   13,   74,
+ /*    30 */    90,   40,   40,   74,   71,   40,   40,  216,  234,  234,
+ /*    40 */   245,  245,  245,  106,   91,  259,    5,   22,    5,   22,
+ /*    50 */     5,   51,  137,  135,  147,  136,  154,  164,  171,  176,
+ /*    60 */   178,  201,  176,  201,  244,  213,
 };
 #define YY_REDUCE_COUNT (36)
-#define YY_REDUCE_MIN   (-63)
-#define YY_REDUCE_MAX   (228)
+#define YY_REDUCE_MIN   (-64)
+#define YY_REDUCE_MAX   (227)
 static const short yy_reduce_ofst[] = {
- /*     0 */   -46,  -63,  -49,  -35,  -21,    4,   31,   58,   72,   86,
- /*    10 */   101,  117,  130,   -8,  132,  144,  156,  166,  171,  191,
- /*    20 */   217,   44,  114,  179,  228,   35,  100,   88,  116,  137,
- /*    30 */   123,  195,  219,  137,   74,   91,  103,
+ /*     0 */   -47,  -64,  -50,  -36,  -22,    3,   30,   56,   69,   86,
+ /*    10 */   101,  117,  130,   -9,  132,  144,  158,   73,  156,  179,
+ /*    20 */   189,   43,  207,   82,  153,   34,   53,  104,  191,  193,
+ /*    30 */   204,  194,  227,  193,   83,   85,  119,
 };
 static const YYACTIONTYPE yy_default[] = {
  /*     0 */   212,  208,  208,  208,  208,  208,  208,  208,  208,  208,
@@ -411,100 +412,101 @@ void ImplParseTrace(FILE *TraceFILE, char *zTracePrompt){
 ** are required.  The following table supplies these names */
 static const char *const yyTokenName[] = { 
   /*    0 */ "$",
-  /*    1 */ "WHITESPACE",
-  /*    2 */ "END",
-  /*    3 */ "OTHER",
-  /*    4 */ "TAB",
-  /*    5 */ "NEW_LINE",
-  /*    6 */ "CARRIAGE_RETURN",
-  /*    7 */ "CHAR",
-  /*    8 */ "MULTICHAR",
-  /*    9 */ "LINE_COMMENT",
-  /*   10 */ "MULTILINE_COMMENT",
-  /*   11 */ "INTEGER",
-  /*   12 */ "FLOAT",
-  /*   13 */ "STRING",
-  /*   14 */ "USE",
-  /*   15 */ "AS",
-  /*   16 */ "RET",
-  /*   17 */ "U8",
-  /*   18 */ "U16",
-  /*   19 */ "U32",
-  /*   20 */ "U64",
-  /*   21 */ "I8",
-  /*   22 */ "I16",
-  /*   23 */ "I32",
-  /*   24 */ "I64",
-  /*   25 */ "F32",
-  /*   26 */ "F64",
-  /*   27 */ "EXCALAMATIONMARK_EQUALS",
-  /*   28 */ "COLON",
-  /*   29 */ "SEMICOLON",
-  /*   30 */ "EXCLAMATIONMARK",
-  /*   31 */ "QUESTIONMARK",
-  /*   32 */ "EXP",
-  /*   33 */ "COMMA",
-  /*   34 */ "PIPE",
-  /*   35 */ "CIRCUMFLEX",
-  /*   36 */ "DOUBLE_LESS_THAN",
-  /*   37 */ "DOUBLE_GREATER_THAN",
-  /*   38 */ "SLASH",
-  /*   39 */ "PERCENT",
-  /*   40 */ "MINUS",
-  /*   41 */ "PLUS",
-  /*   42 */ "EXCLAMATION_MARK",
-  /*   43 */ "TILDE",
-  /*   44 */ "ASTERIX",
-  /*   45 */ "AMPERSAND",
-  /*   46 */ "L_C_BRACKET",
-  /*   47 */ "R_C_BRACKET",
-  /*   48 */ "L_S_BRACKET",
-  /*   49 */ "R_S_BRACKET",
-  /*   50 */ "L_R_BRACKET",
-  /*   51 */ "R_R_BRACKET",
-  /*   52 */ "DOT",
-  /*   53 */ "ARROW",
-  /*   54 */ "DOUBLE_COLON",
-  /*   55 */ "POINTER_TYPE",
-  /*   56 */ "VOID",
-  /*   57 */ "ID",
-  /*   58 */ "PUSH",
-  /*   59 */ "MOV",
-  /*   60 */ "ADD",
-  /*   61 */ "LESS_THAN",
-  /*   62 */ "GREATER_THAN",
-  /*   63 */ "id",
-  /*   64 */ "integer",
-  /*   65 */ "float",
-  /*   66 */ "string",
-  /*   67 */ "exp",
-  /*   68 */ "ref_exp",
-  /*   69 */ "scalar_exp_int",
-  /*   70 */ "multiplicative_exp",
-  /*   71 */ "additive_exp",
-  /*   72 */ "shift_exp",
-  /*   73 */ "and_exp",
-  /*   74 */ "exclusive_or_exp",
-  /*   75 */ "inclusive_or_exp",
-  /*   76 */ "scalar_exp",
-  /*   77 */ "package",
-  /*   78 */ "package_opt",
-  /*   79 */ "function_def",
-  /*   80 */ "var_def",
-  /*   81 */ "var_decl",
-  /*   82 */ "struct_def",
-  /*   83 */ "struct_def_opt",
-  /*   84 */ "function_type",
-  /*   85 */ "block_statement",
-  /*   86 */ "type",
-  /*   87 */ "literal",
-  /*   88 */ "function_type_opt",
-  /*   89 */ "block_statement_opt",
-  /*   90 */ "statement",
-  /*   91 */ "u_mnemonic",
-  /*   92 */ "operand",
-  /*   93 */ "d_mnemonic",
-  /*   94 */ "literal_opt",
+  /*    1 */ "T_WHITESPACE",
+  /*    2 */ "T_END",
+  /*    3 */ "T_OTHER",
+  /*    4 */ "T_TAB",
+  /*    5 */ "T_NEW_LINE",
+  /*    6 */ "T_CARRIAGE_RETURN",
+  /*    7 */ "T_CHAR",
+  /*    8 */ "T_MULTICHAR",
+  /*    9 */ "T_LINE_COMMENT",
+  /*   10 */ "T_MULTILINE_COMMENT",
+  /*   11 */ "T_INTEGER",
+  /*   12 */ "T_FLOAT",
+  /*   13 */ "T_STRING",
+  /*   14 */ "T_USE",
+  /*   15 */ "T_AS",
+  /*   16 */ "T_RET",
+  /*   17 */ "T_U8",
+  /*   18 */ "T_U16",
+  /*   19 */ "T_U32",
+  /*   20 */ "T_U64",
+  /*   21 */ "T_I8",
+  /*   22 */ "T_I16",
+  /*   23 */ "T_I32",
+  /*   24 */ "T_I64",
+  /*   25 */ "T_F32",
+  /*   26 */ "T_F64",
+  /*   27 */ "T_EXCALAMATIONMARK_EQUALS",
+  /*   28 */ "T_COLON",
+  /*   29 */ "T_SEMICOLON",
+  /*   30 */ "T_EXCLAMATIONMARK",
+  /*   31 */ "T_QUESTIONMARK",
+  /*   32 */ "T_EXP",
+  /*   33 */ "T_COMMA",
+  /*   34 */ "T_PIPE",
+  /*   35 */ "T_CIRCUMFLEX",
+  /*   36 */ "T_DOUBLE_LESS_THAN",
+  /*   37 */ "T_DOUBLE_GREATER_THAN",
+  /*   38 */ "T_SLASH",
+  /*   39 */ "T_PERCENT",
+  /*   40 */ "T_MINUS",
+  /*   41 */ "T_PLUS",
+  /*   42 */ "T_EXCLAMATION_MARK",
+  /*   43 */ "T_TILDE",
+  /*   44 */ "T_ASTERIX",
+  /*   45 */ "T_AMPERSAND",
+  /*   46 */ "T_L_C_BRACKET",
+  /*   47 */ "T_R_C_BRACKET",
+  /*   48 */ "T_L_S_BRACKET",
+  /*   49 */ "T_R_S_BRACKET",
+  /*   50 */ "T_L_R_BRACKET",
+  /*   51 */ "T_R_R_BRACKET",
+  /*   52 */ "T_DOT",
+  /*   53 */ "T_ARROW",
+  /*   54 */ "T_DOUBLE_COLON",
+  /*   55 */ "T_POINTER_TYPE",
+  /*   56 */ "T_VOID",
+  /*   57 */ "T_ID",
+  /*   58 */ "T_PUSH",
+  /*   59 */ "T_MOV",
+  /*   60 */ "T_ADD",
+  /*   61 */ "EXP",
+  /*   62 */ "T_LESS_THAN",
+  /*   63 */ "T_GREATER_THAN",
+  /*   64 */ "id",
+  /*   65 */ "integer",
+  /*   66 */ "float",
+  /*   67 */ "string",
+  /*   68 */ "exp",
+  /*   69 */ "ref_exp",
+  /*   70 */ "scalar_exp_int",
+  /*   71 */ "multiplicative_exp",
+  /*   72 */ "additive_exp",
+  /*   73 */ "shift_exp",
+  /*   74 */ "and_exp",
+  /*   75 */ "exclusive_or_exp",
+  /*   76 */ "inclusive_or_exp",
+  /*   77 */ "scalar_exp",
+  /*   78 */ "package",
+  /*   79 */ "package_opt",
+  /*   80 */ "function_def",
+  /*   81 */ "var_def",
+  /*   82 */ "var_decl",
+  /*   83 */ "struct_def",
+  /*   84 */ "struct_def_opt",
+  /*   85 */ "function_type",
+  /*   86 */ "block_statement",
+  /*   87 */ "type",
+  /*   88 */ "literal",
+  /*   89 */ "function_type_opt",
+  /*   90 */ "block_statement_opt",
+  /*   91 */ "statement",
+  /*   92 */ "u_mnemonic",
+  /*   93 */ "operand",
+  /*   94 */ "d_mnemonic",
+  /*   95 */ "literal_opt",
 };
 #endif /* defined(YYCOVERAGE) || !defined(NDEBUG) */
 
@@ -512,86 +514,86 @@ static const char *const yyTokenName[] = {
 /* For tracing reduce actions, the names of all rules are required.
 */
 static const char *const yyRuleName[] = {
- /*   0 */ "package ::= package_opt END",
+ /*   0 */ "package ::= package_opt T_END",
  /*   1 */ "package_opt ::=",
  /*   2 */ "package_opt ::= package_opt function_def",
  /*   3 */ "package_opt ::= package_opt var_def",
  /*   4 */ "package_opt ::= package_opt var_decl",
  /*   5 */ "package_opt ::= package_opt struct_def",
- /*   6 */ "struct_def ::= struct_def_opt R_C_BRACKET",
- /*   7 */ "struct_def_opt ::= id L_C_BRACKET var_decl",
+ /*   6 */ "struct_def ::= struct_def_opt T_R_C_BRACKET",
+ /*   7 */ "struct_def_opt ::= id T_L_C_BRACKET var_decl",
  /*   8 */ "struct_def_opt ::= struct_def_opt var_decl",
  /*   9 */ "function_def ::= id function_type block_statement",
- /*  10 */ "var_decl ::= id COLON type",
+ /*  10 */ "var_decl ::= id T_COLON type",
  /*  11 */ "var_def ::= var_decl literal",
- /*  12 */ "function_type ::= function_type_opt R_R_BRACKET",
- /*  13 */ "function_type ::= L_R_BRACKET R_R_BRACKET",
- /*  14 */ "function_type_opt ::= L_R_BRACKET var_decl",
- /*  15 */ "function_type_opt ::= function_type_opt COMMA var_decl",
- /*  16 */ "type ::= type ASTERIX",
- /*  17 */ "type ::= L_S_BRACKET type COMMA integer R_S_BRACKET",
- /*  18 */ "type ::= U8",
- /*  19 */ "type ::= U16",
- /*  20 */ "type ::= U32",
- /*  21 */ "type ::= U64",
- /*  22 */ "type ::= I8",
- /*  23 */ "type ::= I16",
- /*  24 */ "type ::= I32",
- /*  25 */ "type ::= I64",
- /*  26 */ "type ::= F32",
- /*  27 */ "type ::= F64",
+ /*  12 */ "function_type ::= function_type_opt T_R_R_BRACKET",
+ /*  13 */ "function_type ::= T_L_R_BRACKET T_R_R_BRACKET",
+ /*  14 */ "function_type_opt ::= T_L_R_BRACKET var_decl",
+ /*  15 */ "function_type_opt ::= function_type_opt T_COMMA var_decl",
+ /*  16 */ "type ::= type T_ASTERIX",
+ /*  17 */ "type ::= T_L_S_BRACKET type T_COMMA integer T_R_S_BRACKET",
+ /*  18 */ "type ::= T_U8",
+ /*  19 */ "type ::= T_U16",
+ /*  20 */ "type ::= T_U32",
+ /*  21 */ "type ::= T_U64",
+ /*  22 */ "type ::= T_I8",
+ /*  23 */ "type ::= T_I16",
+ /*  24 */ "type ::= T_I32",
+ /*  25 */ "type ::= T_I64",
+ /*  26 */ "type ::= T_F32",
+ /*  27 */ "type ::= T_F64",
  /*  28 */ "type ::= function_type",
  /*  29 */ "type ::= struct_def",
- /*  30 */ "block_statement ::= block_statement_opt R_C_BRACKET",
- /*  31 */ "block_statement_opt ::= L_C_BRACKET",
+ /*  30 */ "block_statement ::= block_statement_opt T_R_C_BRACKET",
+ /*  31 */ "block_statement_opt ::= T_L_C_BRACKET",
  /*  32 */ "block_statement_opt ::= block_statement_opt statement",
- /*  33 */ "statement ::= SEMICOLON",
+ /*  33 */ "statement ::= T_SEMICOLON",
  /*  34 */ "statement ::= var_decl",
  /*  35 */ "statement ::= var_def",
  /*  36 */ "statement ::= u_mnemonic operand",
- /*  37 */ "statement ::= d_mnemonic operand COMMA operand",
- /*  38 */ "u_mnemonic ::= PUSH",
- /*  39 */ "d_mnemonic ::= MOV",
- /*  40 */ "d_mnemonic ::= ADD",
- /*  41 */ "id ::= ID",
- /*  42 */ "string ::= STRING",
- /*  43 */ "float ::= FLOAT",
- /*  44 */ "integer ::= INTEGER",
+ /*  37 */ "statement ::= d_mnemonic operand T_COMMA operand",
+ /*  38 */ "u_mnemonic ::= T_PUSH",
+ /*  39 */ "d_mnemonic ::= T_MOV",
+ /*  40 */ "d_mnemonic ::= T_ADD",
+ /*  41 */ "id ::= T_ID",
+ /*  42 */ "string ::= T_STRING",
+ /*  43 */ "float ::= T_FLOAT",
+ /*  44 */ "integer ::= T_INTEGER",
  /*  45 */ "operand ::= ref_exp",
  /*  46 */ "operand ::= float",
  /*  47 */ "operand ::= scalar_exp",
- /*  48 */ "operand ::= L_S_BRACKET scalar_exp R_S_BRACKET",
- /*  49 */ "literal ::= literal_opt R_C_BRACKET",
- /*  50 */ "literal_opt ::= L_C_BRACKET exp",
- /*  51 */ "literal_opt ::= literal_opt COMMA exp",
+ /*  48 */ "operand ::= T_L_S_BRACKET scalar_exp T_R_S_BRACKET",
+ /*  49 */ "literal ::= literal_opt T_R_C_BRACKET",
+ /*  50 */ "literal_opt ::= T_L_C_BRACKET exp",
+ /*  51 */ "literal_opt ::= literal_opt T_COMMA exp",
  /*  52 */ "exp ::= scalar_exp",
  /*  53 */ "exp ::= float",
  /*  54 */ "exp ::= string",
  /*  55 */ "exp ::= ref_exp",
  /*  56 */ "ref_exp ::= id",
- /*  57 */ "ref_exp ::= LESS_THAN type GREATER_THAN L_R_BRACKET ref_exp R_R_BRACKET",
- /*  58 */ "ref_exp ::= ref_exp L_S_BRACKET scalar_exp R_S_BRACKET",
- /*  59 */ "ref_exp ::= ref_exp DOT id",
- /*  60 */ "ref_exp ::= ref_exp ARROW id",
- /*  61 */ "ref_exp ::= ref_exp PLUS scalar_exp",
- /*  62 */ "ref_exp ::= ref_exp MINUS scalar_exp",
+ /*  57 */ "ref_exp ::= T_LESS_THAN type T_GREATER_THAN T_L_R_BRACKET ref_exp T_R_R_BRACKET",
+ /*  58 */ "ref_exp ::= ref_exp T_L_S_BRACKET scalar_exp T_R_S_BRACKET",
+ /*  59 */ "ref_exp ::= ref_exp T_DOT id",
+ /*  60 */ "ref_exp ::= ref_exp T_ARROW id",
+ /*  61 */ "ref_exp ::= ref_exp T_PLUS scalar_exp",
+ /*  62 */ "ref_exp ::= ref_exp T_MINUS scalar_exp",
  /*  63 */ "scalar_exp_int ::= integer",
  /*  64 */ "multiplicative_exp ::= scalar_exp_int",
- /*  65 */ "multiplicative_exp ::= multiplicative_exp ASTERIX scalar_exp",
- /*  66 */ "multiplicative_exp ::= multiplicative_exp SLASH scalar_exp",
- /*  67 */ "multiplicative_exp ::= multiplicative_exp PERCENT scalar_exp",
+ /*  65 */ "multiplicative_exp ::= multiplicative_exp T_ASTERIX scalar_exp",
+ /*  66 */ "multiplicative_exp ::= multiplicative_exp T_SLASH scalar_exp",
+ /*  67 */ "multiplicative_exp ::= multiplicative_exp T_PERCENT scalar_exp",
  /*  68 */ "additive_exp ::= multiplicative_exp",
- /*  69 */ "additive_exp ::= additive_exp PLUS multiplicative_exp",
- /*  70 */ "additive_exp ::= additive_exp MINUS multiplicative_exp",
+ /*  69 */ "additive_exp ::= additive_exp T_PLUS multiplicative_exp",
+ /*  70 */ "additive_exp ::= additive_exp T_MINUS multiplicative_exp",
  /*  71 */ "shift_exp ::= additive_exp",
- /*  72 */ "shift_exp ::= shift_exp DOUBLE_LESS_THAN additive_exp",
- /*  73 */ "shift_exp ::= shift_exp DOUBLE_GREATER_THAN additive_exp",
+ /*  72 */ "shift_exp ::= shift_exp T_DOUBLE_LESS_THAN additive_exp",
+ /*  73 */ "shift_exp ::= shift_exp T_DOUBLE_GREATER_THAN additive_exp",
  /*  74 */ "and_exp ::= shift_exp",
- /*  75 */ "and_exp ::= and_exp AMPERSAND shift_exp",
+ /*  75 */ "and_exp ::= and_exp T_AMPERSAND shift_exp",
  /*  76 */ "exclusive_or_exp ::= and_exp",
- /*  77 */ "exclusive_or_exp ::= exclusive_or_exp CIRCUMFLEX and_exp",
+ /*  77 */ "exclusive_or_exp ::= exclusive_or_exp T_CIRCUMFLEX and_exp",
  /*  78 */ "inclusive_or_exp ::= exclusive_or_exp",
- /*  79 */ "inclusive_or_exp ::= inclusive_or_exp PIPE exclusive_or_exp",
+ /*  79 */ "inclusive_or_exp ::= inclusive_or_exp T_PIPE exclusive_or_exp",
  /*  80 */ "scalar_exp ::= inclusive_or_exp",
 };
 #endif /* NDEBUG */
@@ -1005,94 +1007,730 @@ static void yy_shift(
   yyTraceShift(yypParser, yyNewState, "Shift");
 }
 
-/* The following table contains information about every rule that
-** is used during the reduce.
-*/
-static const struct {
-  YYCODETYPE lhs;       /* Symbol on the left-hand side of the rule */
-  signed char nrhs;     /* Negative of the number of RHS symbols in the rule */
-} yyRuleInfo[] = {
-  {   77,   -2 }, /* (0) package ::= package_opt END */
-  {   78,    0 }, /* (1) package_opt ::= */
-  {   78,   -2 }, /* (2) package_opt ::= package_opt function_def */
-  {   78,   -2 }, /* (3) package_opt ::= package_opt var_def */
-  {   78,   -2 }, /* (4) package_opt ::= package_opt var_decl */
-  {   78,   -2 }, /* (5) package_opt ::= package_opt struct_def */
-  {   82,   -2 }, /* (6) struct_def ::= struct_def_opt R_C_BRACKET */
-  {   83,   -3 }, /* (7) struct_def_opt ::= id L_C_BRACKET var_decl */
-  {   83,   -2 }, /* (8) struct_def_opt ::= struct_def_opt var_decl */
-  {   79,   -3 }, /* (9) function_def ::= id function_type block_statement */
-  {   81,   -3 }, /* (10) var_decl ::= id COLON type */
-  {   80,   -2 }, /* (11) var_def ::= var_decl literal */
-  {   84,   -2 }, /* (12) function_type ::= function_type_opt R_R_BRACKET */
-  {   84,   -2 }, /* (13) function_type ::= L_R_BRACKET R_R_BRACKET */
-  {   88,   -2 }, /* (14) function_type_opt ::= L_R_BRACKET var_decl */
-  {   88,   -3 }, /* (15) function_type_opt ::= function_type_opt COMMA var_decl */
-  {   86,   -2 }, /* (16) type ::= type ASTERIX */
-  {   86,   -5 }, /* (17) type ::= L_S_BRACKET type COMMA integer R_S_BRACKET */
-  {   86,   -1 }, /* (18) type ::= U8 */
-  {   86,   -1 }, /* (19) type ::= U16 */
-  {   86,   -1 }, /* (20) type ::= U32 */
-  {   86,   -1 }, /* (21) type ::= U64 */
-  {   86,   -1 }, /* (22) type ::= I8 */
-  {   86,   -1 }, /* (23) type ::= I16 */
-  {   86,   -1 }, /* (24) type ::= I32 */
-  {   86,   -1 }, /* (25) type ::= I64 */
-  {   86,   -1 }, /* (26) type ::= F32 */
-  {   86,   -1 }, /* (27) type ::= F64 */
-  {   86,   -1 }, /* (28) type ::= function_type */
-  {   86,   -1 }, /* (29) type ::= struct_def */
-  {   85,   -2 }, /* (30) block_statement ::= block_statement_opt R_C_BRACKET */
-  {   89,   -1 }, /* (31) block_statement_opt ::= L_C_BRACKET */
-  {   89,   -2 }, /* (32) block_statement_opt ::= block_statement_opt statement */
-  {   90,   -1 }, /* (33) statement ::= SEMICOLON */
-  {   90,   -1 }, /* (34) statement ::= var_decl */
-  {   90,   -1 }, /* (35) statement ::= var_def */
-  {   90,   -2 }, /* (36) statement ::= u_mnemonic operand */
-  {   90,   -4 }, /* (37) statement ::= d_mnemonic operand COMMA operand */
-  {   91,   -1 }, /* (38) u_mnemonic ::= PUSH */
-  {   93,   -1 }, /* (39) d_mnemonic ::= MOV */
-  {   93,   -1 }, /* (40) d_mnemonic ::= ADD */
-  {   63,   -1 }, /* (41) id ::= ID */
-  {   66,   -1 }, /* (42) string ::= STRING */
-  {   65,   -1 }, /* (43) float ::= FLOAT */
-  {   64,   -1 }, /* (44) integer ::= INTEGER */
-  {   92,   -1 }, /* (45) operand ::= ref_exp */
-  {   92,   -1 }, /* (46) operand ::= float */
-  {   92,   -1 }, /* (47) operand ::= scalar_exp */
-  {   92,   -3 }, /* (48) operand ::= L_S_BRACKET scalar_exp R_S_BRACKET */
-  {   87,   -2 }, /* (49) literal ::= literal_opt R_C_BRACKET */
-  {   94,   -2 }, /* (50) literal_opt ::= L_C_BRACKET exp */
-  {   94,   -3 }, /* (51) literal_opt ::= literal_opt COMMA exp */
-  {   67,   -1 }, /* (52) exp ::= scalar_exp */
-  {   67,   -1 }, /* (53) exp ::= float */
-  {   67,   -1 }, /* (54) exp ::= string */
-  {   67,   -1 }, /* (55) exp ::= ref_exp */
-  {   68,   -1 }, /* (56) ref_exp ::= id */
-  {   68,   -6 }, /* (57) ref_exp ::= LESS_THAN type GREATER_THAN L_R_BRACKET ref_exp R_R_BRACKET */
-  {   68,   -4 }, /* (58) ref_exp ::= ref_exp L_S_BRACKET scalar_exp R_S_BRACKET */
-  {   68,   -3 }, /* (59) ref_exp ::= ref_exp DOT id */
-  {   68,   -3 }, /* (60) ref_exp ::= ref_exp ARROW id */
-  {   68,   -3 }, /* (61) ref_exp ::= ref_exp PLUS scalar_exp */
-  {   68,   -3 }, /* (62) ref_exp ::= ref_exp MINUS scalar_exp */
-  {   69,   -1 }, /* (63) scalar_exp_int ::= integer */
-  {   70,   -1 }, /* (64) multiplicative_exp ::= scalar_exp_int */
-  {   70,   -3 }, /* (65) multiplicative_exp ::= multiplicative_exp ASTERIX scalar_exp */
-  {   70,   -3 }, /* (66) multiplicative_exp ::= multiplicative_exp SLASH scalar_exp */
-  {   70,   -3 }, /* (67) multiplicative_exp ::= multiplicative_exp PERCENT scalar_exp */
-  {   71,   -1 }, /* (68) additive_exp ::= multiplicative_exp */
-  {   71,   -3 }, /* (69) additive_exp ::= additive_exp PLUS multiplicative_exp */
-  {   71,   -3 }, /* (70) additive_exp ::= additive_exp MINUS multiplicative_exp */
-  {   72,   -1 }, /* (71) shift_exp ::= additive_exp */
-  {   72,   -3 }, /* (72) shift_exp ::= shift_exp DOUBLE_LESS_THAN additive_exp */
-  {   72,   -3 }, /* (73) shift_exp ::= shift_exp DOUBLE_GREATER_THAN additive_exp */
-  {   73,   -1 }, /* (74) and_exp ::= shift_exp */
-  {   73,   -3 }, /* (75) and_exp ::= and_exp AMPERSAND shift_exp */
-  {   74,   -1 }, /* (76) exclusive_or_exp ::= and_exp */
-  {   74,   -3 }, /* (77) exclusive_or_exp ::= exclusive_or_exp CIRCUMFLEX and_exp */
-  {   75,   -1 }, /* (78) inclusive_or_exp ::= exclusive_or_exp */
-  {   75,   -3 }, /* (79) inclusive_or_exp ::= inclusive_or_exp PIPE exclusive_or_exp */
-  {   76,   -1 }, /* (80) scalar_exp ::= inclusive_or_exp */
+/* For rule J, yyRuleInfoLhs[J] contains the symbol on the left-hand side
+** of that rule */
+static const YYCODETYPE yyRuleInfoLhs[] = {
+  {   78,   -2 }, /* (0) package ::= package_opt T_END */
+  {   79,    0 }, /* (1) package_opt ::= */
+  {   79,   -2 }, /* (2) package_opt ::= package_opt function_def */
+  {   79,   -2 }, /* (3) package_opt ::= package_opt var_def */
+  {   79,   -2 }, /* (4) package_opt ::= package_opt var_decl */
+  {   79,   -2 }, /* (5) package_opt ::= package_opt struct_def */
+  {   83,   -2 }, /* (6) struct_def ::= struct_def_opt T_R_C_BRACKET */
+  {   84,   -3 }, /* (7) struct_def_opt ::= id T_L_C_BRACKET var_decl */
+  {   84,   -2 }, /* (8) struct_def_opt ::= struct_def_opt var_decl */
+  {   80,   -3 }, /* (9) function_def ::= id function_type block_statement */
+  {   82,   -3 }, /* (10) var_decl ::= id T_COLON type */
+  {   81,   -2 }, /* (11) var_def ::= var_decl literal */
+  {   85,   -2 }, /* (12) function_type ::= function_type_opt T_R_R_BRACKET */
+  {   85,   -2 }, /* (13) function_type ::= T_L_R_BRACKET T_R_R_BRACKET */
+  {   89,   -2 }, /* (14) function_type_opt ::= T_L_R_BRACKET var_decl */
+  {   89,   -3 }, /* (15) function_type_opt ::= function_type_opt T_COMMA var_decl */
+  {   87,   -2 }, /* (16) type ::= type T_ASTERIX */
+  {   87,   -5 }, /* (17) type ::= T_L_S_BRACKET type T_COMMA integer T_R_S_BRACKET */
+  {   87,   -1 }, /* (18) type ::= T_U8 */
+  {   87,   -1 }, /* (19) type ::= T_U16 */
+  {   87,   -1 }, /* (20) type ::= T_U32 */
+  {   87,   -1 }, /* (21) type ::= T_U64 */
+  {   87,   -1 }, /* (22) type ::= T_I8 */
+  {   87,   -1 }, /* (23) type ::= T_I16 */
+  {   87,   -1 }, /* (24) type ::= T_I32 */
+  {   87,   -1 }, /* (25) type ::= T_I64 */
+  {   87,   -1 }, /* (26) type ::= T_F32 */
+  {   87,   -1 }, /* (27) type ::= T_F64 */
+  {   87,   -1 }, /* (28) type ::= function_type */
+  {   87,   -1 }, /* (29) type ::= struct_def */
+  {   86,   -2 }, /* (30) block_statement ::= block_statement_opt T_R_C_BRACKET */
+  {   90,   -1 }, /* (31) block_statement_opt ::= T_L_C_BRACKET */
+  {   90,   -2 }, /* (32) block_statement_opt ::= block_statement_opt statement */
+  {   91,   -1 }, /* (33) statement ::= T_SEMICOLON */
+  {   91,   -1 }, /* (34) statement ::= var_decl */
+  {   91,   -1 }, /* (35) statement ::= var_def */
+  {   91,   -2 }, /* (36) statement ::= u_mnemonic operand */
+  {   91,   -4 }, /* (37) statement ::= d_mnemonic operand T_COMMA operand */
+  {   92,   -1 }, /* (38) u_mnemonic ::= T_PUSH */
+  {   94,   -1 }, /* (39) d_mnemonic ::= T_MOV */
+  {   94,   -1 }, /* (40) d_mnemonic ::= T_ADD */
+  {   64,   -1 }, /* (41) id ::= T_ID */
+  {   67,   -1 }, /* (42) string ::= T_STRING */
+  {   66,   -1 }, /* (43) float ::= T_FLOAT */
+  {   65,   -1 }, /* (44) integer ::= T_INTEGER */
+  {   93,   -1 }, /* (45) operand ::= ref_exp */
+  {   93,   -1 }, /* (46) operand ::= float */
+  {   93,   -1 }, /* (47) operand ::= scalar_exp */
+  {   93,   -3 }, /* (48) operand ::= T_L_S_BRACKET scalar_exp T_R_S_BRACKET */
+  {   88,   -2 }, /* (49) literal ::= literal_opt T_R_C_BRACKET */
+  {   95,   -2 }, /* (50) literal_opt ::= T_L_C_BRACKET exp */
+  {   95,   -3 }, /* (51) literal_opt ::= literal_opt T_COMMA exp */
+  {   68,   -1 }, /* (52) exp ::= scalar_exp */
+  {   68,   -1 }, /* (53) exp ::= float */
+  {   68,   -1 }, /* (54) exp ::= string */
+  {   68,   -1 }, /* (55) exp ::= ref_exp */
+  {   69,   -1 }, /* (56) ref_exp ::= id */
+  {   69,   -6 }, /* (57) ref_exp ::= T_LESS_THAN type T_GREATER_THAN T_L_R_BRACKET ref_exp T_R_R_BRACKET */
+  {   69,   -4 }, /* (58) ref_exp ::= ref_exp T_L_S_BRACKET scalar_exp T_R_S_BRACKET */
+  {   69,   -3 }, /* (59) ref_exp ::= ref_exp T_DOT id */
+  {   69,   -3 }, /* (60) ref_exp ::= ref_exp T_ARROW id */
+  {   69,   -3 }, /* (61) ref_exp ::= ref_exp T_PLUS scalar_exp */
+  {   69,   -3 }, /* (62) ref_exp ::= ref_exp T_MINUS scalar_exp */
+  {   70,   -1 }, /* (63) scalar_exp_int ::= integer */
+  {   71,   -1 }, /* (64) multiplicative_exp ::= scalar_exp_int */
+  {   71,   -3 }, /* (65) multiplicative_exp ::= multiplicative_exp T_ASTERIX scalar_exp */
+  {   71,   -3 }, /* (66) multiplicative_exp ::= multiplicative_exp T_SLASH scalar_exp */
+  {   71,   -3 }, /* (67) multiplicative_exp ::= multiplicative_exp T_PERCENT scalar_exp */
+  {   72,   -1 }, /* (68) additive_exp ::= multiplicative_exp */
+  {   72,   -3 }, /* (69) additive_exp ::= additive_exp T_PLUS multiplicative_exp */
+  {   72,   -3 }, /* (70) additive_exp ::= additive_exp T_MINUS multiplicative_exp */
+  {   73,   -1 }, /* (71) shift_exp ::= additive_exp */
+  {   73,   -3 }, /* (72) shift_exp ::= shift_exp T_DOUBLE_LESS_THAN additive_exp */
+  {   73,   -3 }, /* (73) shift_exp ::= shift_exp T_DOUBLE_GREATER_THAN additive_exp */
+  {   74,   -1 }, /* (74) and_exp ::= shift_exp */
+  {   74,   -3 }, /* (75) and_exp ::= and_exp T_AMPERSAND shift_exp */
+  {   75,   -1 }, /* (76) exclusive_or_exp ::= and_exp */
+  {   75,   -3 }, /* (77) exclusive_or_exp ::= exclusive_or_exp T_CIRCUMFLEX and_exp */
+  {   76,   -1 }, /* (78) inclusive_or_exp ::= exclusive_or_exp */
+  {   76,   -3 }, /* (79) inclusive_or_exp ::= inclusive_or_exp T_PIPE exclusive_or_exp */
+  {   77,   -1 }, /* (80) scalar_exp ::= inclusive_or_exp */
+};
+
+/* For rule J, yyRuleInfoNRhs[J] contains the negative of the number
+** of symbols on the right-hand side of that rule. */
+static const signed char yyRuleInfoNRhs[] = {
+        YYMINORTYPE yylhsminor;
+      case 0: /* package ::= package_opt T_END */
+#line 91 "./parser/grammar.y"
+{
+    log_debug("package ::= package_opt  END");
+}
+#line 1106 "./parser/out/grammar.c"
+        break;
+      case 1: /* package_opt ::= */
+#line 95 "./parser/grammar.y"
+{
+    log_debug("package_opt ::= /* empty */");
+}
+#line 1113 "./parser/out/grammar.c"
+        break;
+      case 2: /* package_opt ::= package_opt function_def */
+#line 98 "./parser/grammar.y"
+{
+    log_debug("package_opt ::= package_opt function_def");
+}
+#line 1120 "./parser/out/grammar.c"
+        break;
+      case 3: /* package_opt ::= package_opt var_def */
+#line 101 "./parser/grammar.y"
+{
+    log_debug("package_opt ::= package_opt var_def");
+}
+#line 1127 "./parser/out/grammar.c"
+        break;
+      case 4: /* package_opt ::= package_opt var_decl */
+#line 104 "./parser/grammar.y"
+{
+    log_debug("package_opt ::= package_opt var_decl");
+}
+#line 1134 "./parser/out/grammar.c"
+        break;
+      case 5: /* package_opt ::= package_opt struct_def */
+#line 107 "./parser/grammar.y"
+{
+    log_debug("package_opt ::= package_opt struct_def");
+}
+#line 1141 "./parser/out/grammar.c"
+        break;
+      case 6: /* struct_def ::= struct_def_opt T_R_C_BRACKET */
+#line 115 "./parser/grammar.y"
+{
+    log_debug("struct_def ::= struct_def_opt R_C_BRACKET");
+}
+#line 1148 "./parser/out/grammar.c"
+        break;
+      case 7: /* struct_def_opt ::= id T_L_C_BRACKET var_decl */
+#line 118 "./parser/grammar.y"
+{
+    log_debug("struct_def_opt ::= id L_C_BRACKET var_decl");
+}
+#line 1155 "./parser/out/grammar.c"
+        break;
+      case 8: /* struct_def_opt ::= struct_def_opt var_decl */
+#line 121 "./parser/grammar.y"
+{
+    log_debug("struct_def_opt ::= struct_def_opt var_decl");
+}
+#line 1162 "./parser/out/grammar.c"
+        break;
+      case 9: /* function_def ::= id function_type block_statement */
+#line 129 "./parser/grammar.y"
+{
+    log_debug("function_def ::= id function_type block_statement");
+}
+#line 1169 "./parser/out/grammar.c"
+        break;
+      case 10: /* var_decl ::= id T_COLON type */
+#line 139 "./parser/grammar.y"
+{
+    log_debug("var_decl ::= id COLON type");
+}
+#line 1176 "./parser/out/grammar.c"
+        break;
+      case 11: /* var_def ::= var_decl literal */
+#line 143 "./parser/grammar.y"
+{
+    log_debug("var_def ::= var_decl literal");
+}
+#line 1183 "./parser/out/grammar.c"
+        break;
+      case 12: /* function_type ::= function_type_opt T_R_R_BRACKET */
+#line 153 "./parser/grammar.y"
+{
+    log_debug("function_type ::= function_type_opt R_R_BRACKET");
+}
+#line 1190 "./parser/out/grammar.c"
+        break;
+      case 13: /* function_type ::= T_L_R_BRACKET T_R_R_BRACKET */
+#line 156 "./parser/grammar.y"
+{
+    log_debug("function_type ::= L_R_BRACKET R_R_BRACKET");
+}
+#line 1197 "./parser/out/grammar.c"
+        break;
+      case 14: /* function_type_opt ::= T_L_R_BRACKET var_decl */
+#line 160 "./parser/grammar.y"
+{
+    log_debug("function_type_opt ::= L_R_BRACKET var_decl");
+}
+#line 1204 "./parser/out/grammar.c"
+        break;
+      case 15: /* function_type_opt ::= function_type_opt T_COMMA var_decl */
+#line 163 "./parser/grammar.y"
+{
+    log_debug("function_type_opt ::= function_type_opt COMMA var_decl");
+}
+#line 1211 "./parser/out/grammar.c"
+        break;
+      case 16: /* type ::= type T_ASTERIX */
+#line 169 "./parser/grammar.y"
+{
+    log_debug("type ::= type ASTERIX . [POINTER_TYP");
+}
+#line 1218 "./parser/out/grammar.c"
+        break;
+      case 17: /* type ::= T_L_S_BRACKET type T_COMMA integer T_R_S_BRACKET */
+#line 172 "./parser/grammar.y"
+{
+    log_debug("type ::= L_S_BRACKET type COMMA integer R_S_BRACKET");
+}
+#line 1225 "./parser/out/grammar.c"
+        break;
+      case 18: /* type ::= T_U8 */
+#line 175 "./parser/grammar.y"
+{
+    log_debug("type ::= U8");
+}
+#line 1232 "./parser/out/grammar.c"
+        break;
+      case 19: /* type ::= T_U16 */
+#line 178 "./parser/grammar.y"
+{
+    log_debug("type ::= U16");
+}
+#line 1239 "./parser/out/grammar.c"
+        break;
+      case 20: /* type ::= T_U32 */
+#line 181 "./parser/grammar.y"
+{
+    log_debug("type ::= U32");
+}
+#line 1246 "./parser/out/grammar.c"
+        break;
+      case 21: /* type ::= T_U64 */
+#line 184 "./parser/grammar.y"
+{
+    log_debug("type ::= U64");
+}
+#line 1253 "./parser/out/grammar.c"
+        break;
+      case 22: /* type ::= T_I8 */
+#line 187 "./parser/grammar.y"
+{
+    log_debug("type ::= I8");
+}
+#line 1260 "./parser/out/grammar.c"
+        break;
+      case 23: /* type ::= T_I16 */
+#line 190 "./parser/grammar.y"
+{
+    log_debug("type ::= I16");
+}
+#line 1267 "./parser/out/grammar.c"
+        break;
+      case 24: /* type ::= T_I32 */
+#line 193 "./parser/grammar.y"
+{
+    log_debug("type ::= I32");
+}
+#line 1274 "./parser/out/grammar.c"
+        break;
+      case 25: /* type ::= T_I64 */
+#line 196 "./parser/grammar.y"
+{
+    log_debug("type ::= I64");
+}
+#line 1281 "./parser/out/grammar.c"
+        break;
+      case 26: /* type ::= T_F32 */
+#line 199 "./parser/grammar.y"
+{
+    log_debug("type ::= F32");
+}
+#line 1288 "./parser/out/grammar.c"
+        break;
+      case 27: /* type ::= T_F64 */
+#line 202 "./parser/grammar.y"
+{
+    log_debug("type ::= F64");
+}
+#line 1295 "./parser/out/grammar.c"
+        break;
+      case 28: /* type ::= function_type */
+#line 205 "./parser/grammar.y"
+{
+    log_debug("type ::= function_type");
+}
+#line 1302 "./parser/out/grammar.c"
+        break;
+      case 29: /* type ::= struct_def */
+#line 208 "./parser/grammar.y"
+{
+    log_debug("type ::= struct_def");
+}
+#line 1309 "./parser/out/grammar.c"
+        break;
+      case 30: /* block_statement ::= block_statement_opt T_R_C_BRACKET */
+#line 216 "./parser/grammar.y"
+{
+    log_debug("block_statement ::= block_statement_opt R_C_BRACKET");
+}
+#line 1316 "./parser/out/grammar.c"
+        break;
+      case 31: /* block_statement_opt ::= T_L_C_BRACKET */
+#line 220 "./parser/grammar.y"
+{
+    log_debug("block_statement_opt ::= L_C_BRACKET");
+}
+#line 1323 "./parser/out/grammar.c"
+        break;
+      case 32: /* block_statement_opt ::= block_statement_opt statement */
+#line 223 "./parser/grammar.y"
+{
+    log_debug("block_statement_opt ::= block_statement_opt statement");
+}
+#line 1330 "./parser/out/grammar.c"
+        break;
+      case 33: /* statement ::= T_SEMICOLON */
+#line 227 "./parser/grammar.y"
+{
+    log_debug("statement ::= SEMICOLON");
+}
+#line 1337 "./parser/out/grammar.c"
+        break;
+      case 34: /* statement ::= var_decl */
+#line 230 "./parser/grammar.y"
+{
+    log_debug("statement ::= var_decl");
+}
+#line 1344 "./parser/out/grammar.c"
+        break;
+      case 35: /* statement ::= var_def */
+#line 233 "./parser/grammar.y"
+{
+    log_debug("statement ::= var_def");
+}
+#line 1351 "./parser/out/grammar.c"
+        break;
+      case 36: /* statement ::= u_mnemonic operand */
+#line 236 "./parser/grammar.y"
+{
+    log_debug("statement ::= u_mnemonic operand");
+}
+#line 1358 "./parser/out/grammar.c"
+        break;
+      case 37: /* statement ::= d_mnemonic operand T_COMMA operand */
+#line 239 "./parser/grammar.y"
+{
+    log_debug("statement ::= d_mnemonic operand COMMA operand");
+}
+#line 1365 "./parser/out/grammar.c"
+        break;
+      case 38: /* u_mnemonic ::= T_PUSH */
+#line 243 "./parser/grammar.y"
+{
+    log_debug("u_mnemonic ::= PUSH");
+}
+#line 1372 "./parser/out/grammar.c"
+        break;
+      case 39: /* d_mnemonic ::= T_MOV */
+#line 247 "./parser/grammar.y"
+{
+    log_debug("d_mnemonic ::= MOV");
+}
+#line 1379 "./parser/out/grammar.c"
+        break;
+      case 40: /* d_mnemonic ::= T_ADD */
+#line 250 "./parser/grammar.y"
+{
+    log_debug("d_mnemonic ::= ADD");
+}
+#line 1386 "./parser/out/grammar.c"
+        break;
+      case 41: /* id ::= T_ID */
+#line 261 "./parser/grammar.y"
+{
+    log_debug("id ::= ID");
+    yylhsminor.yy180 = static_cast<id_token*>(*yymsp[0].minor.yy0);
+}
+#line 1394 "./parser/out/grammar.c"
+  yymsp[0].minor.yy180 = yylhsminor.yy180;
+        break;
+      case 42: /* string ::= T_STRING */
+#line 265 "./parser/grammar.y"
+{
+    log_debug("string ::= STRING");
+    yylhsminor.yy150 = static_cast<string_token*>(*yymsp[0].minor.yy0);
+}
+#line 1403 "./parser/out/grammar.c"
+  yymsp[0].minor.yy150 = yylhsminor.yy150;
+        break;
+      case 43: /* float ::= T_FLOAT */
+#line 269 "./parser/grammar.y"
+{
+    log_debug("float ::= FLOAT");
+    yylhsminor.yy17 = static_cast<float_token*>(*yymsp[0].minor.yy0);
+}
+#line 1412 "./parser/out/grammar.c"
+  yymsp[0].minor.yy17 = yylhsminor.yy17;
+        break;
+      case 44: /* integer ::= T_INTEGER */
+#line 273 "./parser/grammar.y"
+{
+    log_debug("integer ::= INTEGER");
+    yylhsminor.yy70 = static_cast<int_token*>(*yymsp[0].minor.yy0);
+}
+#line 1421 "./parser/out/grammar.c"
+  yymsp[0].minor.yy70 = yylhsminor.yy70;
+        break;
+      case 45: /* operand ::= ref_exp */
+#line 280 "./parser/grammar.y"
+{
+    log_debug("operand ::= ref_exp");
+}
+#line 1429 "./parser/out/grammar.c"
+        break;
+      case 46: /* operand ::= float */
+#line 283 "./parser/grammar.y"
+{
+    log_debug("operand ::= float");
+}
+#line 1436 "./parser/out/grammar.c"
+        break;
+      case 47: /* operand ::= scalar_exp */
+#line 286 "./parser/grammar.y"
+{
+    log_debug("operand ::= scalar_exp");
+}
+#line 1443 "./parser/out/grammar.c"
+        break;
+      case 48: /* operand ::= T_L_S_BRACKET scalar_exp T_R_S_BRACKET */
+#line 289 "./parser/grammar.y"
+{
+    log_debug("operand ::= L_S_BRACKET scalar_exp R_S_BRACKET");
+}
+#line 1450 "./parser/out/grammar.c"
+        break;
+      case 49: /* literal ::= literal_opt T_R_C_BRACKET */
+#line 295 "./parser/grammar.y"
+{
+    log_debug("literal ::= literal_opt R_C_BRACKET");
+}
+#line 1457 "./parser/out/grammar.c"
+        break;
+      case 50: /* literal_opt ::= T_L_C_BRACKET exp */
+#line 299 "./parser/grammar.y"
+{
+    log_debug("literal_opt ::= L_C_BRACKET exp");
+}
+#line 1464 "./parser/out/grammar.c"
+        break;
+      case 51: /* literal_opt ::= literal_opt T_COMMA exp */
+#line 302 "./parser/grammar.y"
+{
+    log_debug("literal_opt ::= literal_opt COMMA exp");
+}
+#line 1471 "./parser/out/grammar.c"
+        break;
+      case 52: /* exp ::= scalar_exp */
+#line 308 "./parser/grammar.y"
+{
+    log_debug("exp ::= scalar_exp");
+    yylhsminor.yy52 = yymsp[0].minor.yy42;
+}
+#line 1479 "./parser/out/grammar.c"
+  yymsp[0].minor.yy52 = yylhsminor.yy52;
+        break;
+      case 53: /* exp ::= float */
+#line 312 "./parser/grammar.y"
+{
+    log_debug("exp ::= float");
+    yylhsminor.yy52 = new float_exp(yymsp[0].minor.yy17);
+}
+#line 1488 "./parser/out/grammar.c"
+  yymsp[0].minor.yy52 = yylhsminor.yy52;
+        break;
+      case 54: /* exp ::= string */
+#line 316 "./parser/grammar.y"
+{
+    log_debug("exp ::= string");
+    yylhsminor.yy52 = new string_exp(yymsp[0].minor.yy150);
+}
+#line 1497 "./parser/out/grammar.c"
+  yymsp[0].minor.yy52 = yylhsminor.yy52;
+        break;
+      case 55: /* exp ::= ref_exp */
+#line 320 "./parser/grammar.y"
+{
+    log_debug("exp ::= ref_exp");
+    yylhsminor.yy52 = yymsp[0].minor.yy184;
+}
+#line 1506 "./parser/out/grammar.c"
+  yymsp[0].minor.yy52 = yylhsminor.yy52;
+        break;
+      case 56: /* ref_exp ::= id */
+#line 327 "./parser/grammar.y"
+{
+    log_debug("ref_exp ::= id");
+    yylhsminor.yy184 = new id_exp(yymsp[0].minor.yy180);
+}
+#line 1515 "./parser/out/grammar.c"
+  yymsp[0].minor.yy184 = yylhsminor.yy184;
+        break;
+      case 57: /* ref_exp ::= T_LESS_THAN type T_GREATER_THAN T_L_R_BRACKET ref_exp T_R_R_BRACKET */
+#line 331 "./parser/grammar.y"
+{
+    log_debug("ref_exp ::= CAST LESS_THAN type GREATER_THAN L_R_BRACKET ref_exp R_R_BRACKET");
+    yymsp[-5].minor.yy184 = new cast_exp(yymsp[-1].minor.yy184, yymsp[-4].minor.yy0);
+}
+#line 1524 "./parser/out/grammar.c"
+        break;
+      case 58: /* ref_exp ::= ref_exp T_L_S_BRACKET scalar_exp T_R_S_BRACKET */
+#line 335 "./parser/grammar.y"
+{
+    log_debug("ref_exp ::= ref_exp L_S_BRACKET scalar_exp R_S_BRACKET");
+    yylhsminor.yy184 = new acc_exp(yymsp[-3].minor.yy184, yymsp[-1].minor.yy42);
+}
+#line 1532 "./parser/out/grammar.c"
+  yymsp[-3].minor.yy184 = yylhsminor.yy184;
+        break;
+      case 59: /* ref_exp ::= ref_exp T_DOT id */
+#line 339 "./parser/grammar.y"
+{
+    log_debug("ref_exp ::= ref_exp DOT id");
+    yylhsminor.yy184 = new ref_acc_exp(yymsp[-2].minor.yy184, yymsp[0].minor.yy180, ref_acc_exp::REF_OP::DOT);
+}
+#line 1541 "./parser/out/grammar.c"
+  yymsp[-2].minor.yy184 = yylhsminor.yy184;
+        break;
+      case 60: /* ref_exp ::= ref_exp T_ARROW id */
+#line 343 "./parser/grammar.y"
+{
+    log_debug("ref_exp ::= ref_exp ARROW id");
+    yylhsminor.yy184 = new ref_acc_exp(yymsp[-2].minor.yy184, yymsp[0].minor.yy180, ref_acc_exp::REF_OP::ARROW);
+}
+#line 1550 "./parser/out/grammar.c"
+  yymsp[-2].minor.yy184 = yylhsminor.yy184;
+        break;
+      case 61: /* ref_exp ::= ref_exp T_PLUS scalar_exp */
+#line 347 "./parser/grammar.y"
+{
+    log_debug("ref_exp ::= ref_exp PLUS scalar_exp");
+    yylhsminor.yy184 = new ref_off_exp(yymsp[-2].minor.yy184, yymsp[0].minor.yy42, ref_off_exp::REF_OP::PLUS);
+}
+#line 1559 "./parser/out/grammar.c"
+  yymsp[-2].minor.yy184 = yylhsminor.yy184;
+        break;
+      case 62: /* ref_exp ::= ref_exp T_MINUS scalar_exp */
+#line 351 "./parser/grammar.y"
+{
+    log_debug("ref_exp ::= ref_exp MINUS scalar_exp");
+    yylhsminor.yy184 = new ref_off_exp(yymsp[-2].minor.yy184, yymsp[0].minor.yy42, ref_off_exp::REF_OP::MINUS);
+}
+#line 1568 "./parser/out/grammar.c"
+  yymsp[-2].minor.yy184 = yylhsminor.yy184;
+        break;
+      case 63: /* scalar_exp_int ::= integer */
+#line 358 "./parser/grammar.y"
+{
+    log_debug("scalar_exp_int ::= integer");
+    yylhsminor.yy189 = new int_exp(yymsp[0].minor.yy70);
+}
+#line 1577 "./parser/out/grammar.c"
+  yymsp[0].minor.yy189 = yylhsminor.yy189;
+        break;
+      case 64: /* multiplicative_exp ::= scalar_exp_int */
+#line 363 "./parser/grammar.y"
+{
+    log_debug("multiplicative_exp ::= scalar_exp_int");
+    yylhsminor.yy42 = yymsp[0].minor.yy189;
+}
+#line 1586 "./parser/out/grammar.c"
+  yymsp[0].minor.yy42 = yylhsminor.yy42;
+        break;
+      case 65: /* multiplicative_exp ::= multiplicative_exp T_ASTERIX scalar_exp */
+#line 367 "./parser/grammar.y"
+{
+    log_debug("multiplicative_exp ::= multiplicative_exp ASTERIX scalar_ex");
+    yylhsminor.yy42 = new infix_scalar_exp(yymsp[-2].minor.yy42, yymsp[0].minor.yy42, infix_scalar_exp::INFIX_OP::TIMES);
+}
+#line 1595 "./parser/out/grammar.c"
+  yymsp[-2].minor.yy42 = yylhsminor.yy42;
+        break;
+      case 66: /* multiplicative_exp ::= multiplicative_exp T_SLASH scalar_exp */
+#line 371 "./parser/grammar.y"
+{
+    log_debug("multiplicative_exp ::= multiplicative_exp SLASH scalar_exp");
+    yylhsminor.yy42 =new infix_scalar_exp(yymsp[-2].minor.yy42, yymsp[0].minor.yy42, infix_scalar_exp::INFIX_OP::DIV);
+}
+#line 1604 "./parser/out/grammar.c"
+  yymsp[-2].minor.yy42 = yylhsminor.yy42;
+        break;
+      case 67: /* multiplicative_exp ::= multiplicative_exp T_PERCENT scalar_exp */
+#line 375 "./parser/grammar.y"
+{
+    log_debug("multiplicative_exp ::= multiplicative_exp PERCENT scalar_exp");
+    yylhsminor.yy42 = new infix_scalar_exp(yymsp[-2].minor.yy42, yymsp[0].minor.yy42, infix_scalar_exp::INFIX_OP::MOD);
+}
+#line 1613 "./parser/out/grammar.c"
+  yymsp[-2].minor.yy42 = yylhsminor.yy42;
+        break;
+      case 68: /* additive_exp ::= multiplicative_exp */
+#line 380 "./parser/grammar.y"
+{
+    log_debug("additive_exp ::= multiplicative_exp");
+    yylhsminor.yy42 = yymsp[0].minor.yy42;
+}
+#line 1622 "./parser/out/grammar.c"
+  yymsp[0].minor.yy42 = yylhsminor.yy42;
+        break;
+      case 69: /* additive_exp ::= additive_exp T_PLUS multiplicative_exp */
+#line 384 "./parser/grammar.y"
+{
+    log_debug("additive_exp ::= additive_exp PLUS multiplicative_exp");
+    yylhsminor.yy42 = new infix_scalar_exp(yymsp[-2].minor.yy42, yymsp[0].minor.yy42, infix_scalar_exp::INFIX_OP::PLUS);
+}
+#line 1631 "./parser/out/grammar.c"
+  yymsp[-2].minor.yy42 = yylhsminor.yy42;
+        break;
+      case 70: /* additive_exp ::= additive_exp T_MINUS multiplicative_exp */
+#line 388 "./parser/grammar.y"
+{
+    log_debug("additive_exp ::= additive_exp MINUS multiplicative_exp");
+    yylhsminor.yy42 = new infix_scalar_exp(yymsp[-2].minor.yy42, yymsp[0].minor.yy42, infix_scalar_exp::INFIX_OP::MINUS);
+}
+#line 1640 "./parser/out/grammar.c"
+  yymsp[-2].minor.yy42 = yylhsminor.yy42;
+        break;
+      case 71: /* shift_exp ::= additive_exp */
+#line 393 "./parser/grammar.y"
+{
+    log_debug("shift_exp ::= additive_exp");
+    yylhsminor.yy42 = yymsp[0].minor.yy42;
+}
+#line 1649 "./parser/out/grammar.c"
+  yymsp[0].minor.yy42 = yylhsminor.yy42;
+        break;
+      case 72: /* shift_exp ::= shift_exp T_DOUBLE_LESS_THAN additive_exp */
+#line 397 "./parser/grammar.y"
+{
+    log_debug("shift_exp ::= shift_exp DOUBLE_LESS_THAN additive_exp");
+    yylhsminor.yy42 = new infix_scalar_exp(yymsp[-2].minor.yy42, yymsp[0].minor.yy42, infix_scalar_exp::INFIX_OP::SHIFT_LEFT);
+}
+#line 1658 "./parser/out/grammar.c"
+  yymsp[-2].minor.yy42 = yylhsminor.yy42;
+        break;
+      case 73: /* shift_exp ::= shift_exp T_DOUBLE_GREATER_THAN additive_exp */
+#line 401 "./parser/grammar.y"
+{
+    log_debug("shift_exp ::= shift_exp DOUBLE_GREATER_THAN additive_exp");
+    yylhsminor.yy42 = new infix_scalar_exp(yymsp[-2].minor.yy42, yymsp[0].minor.yy42, infix_scalar_exp::INFIX_OP::SHIFT_RIGHT);
+}
+#line 1667 "./parser/out/grammar.c"
+  yymsp[-2].minor.yy42 = yylhsminor.yy42;
+        break;
+      case 74: /* and_exp ::= shift_exp */
+#line 406 "./parser/grammar.y"
+{
+    log_debug("and_exp ::= shift_exp");
+    yylhsminor.yy42 = yymsp[0].minor.yy42;
+}
+#line 1676 "./parser/out/grammar.c"
+  yymsp[0].minor.yy42 = yylhsminor.yy42;
+        break;
+      case 75: /* and_exp ::= and_exp T_AMPERSAND shift_exp */
+#line 410 "./parser/grammar.y"
+{
+    log_debug("and_exp ::= and_exp T_AMPERSAND shift_exp");
+    yylhsminor.yy42 = new infix_scalar_exp(yymsp[-2].minor.yy42, yymsp[0].minor.yy42, infix_scalar_exp::INFIX_OP::AND);
+}
+#line 1685 "./parser/out/grammar.c"
+  yymsp[-2].minor.yy42 = yylhsminor.yy42;
+        break;
+      case 76: /* exclusive_or_exp ::= and_exp */
+#line 415 "./parser/grammar.y"
+{
+    log_debug("exclusive_or_exp ::= and_exp");
+    yylhsminor.yy42 = yymsp[0].minor.yy42;
+}
+#line 1694 "./parser/out/grammar.c"
+  yymsp[0].minor.yy42 = yylhsminor.yy42;
+        break;
+      case 77: /* exclusive_or_exp ::= exclusive_or_exp T_CIRCUMFLEX and_exp */
+#line 419 "./parser/grammar.y"
+{
+    log_debug("exclusive_or_exp ::= exclusive_or_exp CIRCUMFLEX and_exp");
+    yylhsminor.yy42 = new infix_scalar_exp(yymsp[-2].minor.yy42, yymsp[0].minor.yy42, infix_scalar_exp::INFIX_OP::NOR);
+}
+#line 1703 "./parser/out/grammar.c"
+  yymsp[-2].minor.yy42 = yylhsminor.yy42;
+        break;
+      case 78: /* inclusive_or_exp ::= exclusive_or_exp */
+#line 424 "./parser/grammar.y"
+{
+    log_debug("inclusive_or_exp ::= exclusive_or_exp");
+    yylhsminor.yy42 = yymsp[0].minor.yy42;
+}
+#line 1712 "./parser/out/grammar.c"
+  yymsp[0].minor.yy42 = yylhsminor.yy42;
+        break;
+      case 79: /* inclusive_or_exp ::= inclusive_or_exp T_PIPE exclusive_or_exp */
+#line 428 "./parser/grammar.y"
+{
+    log_debug("inclusive_or_exp ::= inclusive_or_exp PIPE exclusive_or_exp");
+    yylhsminor.yy42 = new infix_scalar_exp(yymsp[-2].minor.yy42, yymsp[0].minor.yy42, infix_scalar_exp::INFIX_OP::OR);
+}
+#line 1721 "./parser/out/grammar.c"
+  yymsp[-2].minor.yy42 = yylhsminor.yy42;
+        break;
+      case 80: /* scalar_exp ::= inclusive_or_exp */
+#line 433 "./parser/grammar.y"
+{
+    log_debug("scalar_exp ::= inclusive_or_exp");
+    yylhsminor.yy42 = yymsp[0].minor.yy42;
+}
+#line 1730 "./parser/out/grammar.c"
+  yymsp[0].minor.yy42 = yylhsminor.yy42;
+        break;
+      default:
+        break;
 };
 
 static void yy_accept(yyParser*);  /* Forward Declaration */
@@ -1124,7 +1762,7 @@ static YYACTIONTYPE yy_reduce(
   yymsp = yypParser->yytos;
 #ifndef NDEBUG
   if( yyTraceFILE && yyruleno<(int)(sizeof(yyRuleName)/sizeof(yyRuleName[0])) ){
-    yysize = yyRuleInfo[yyruleno].nrhs;
+    yysize = yyRuleInfoNRhs[yyruleno];
     if( yysize ){
       fprintf(yyTraceFILE, "%sReduce %d [%s], go to state %d.\n",
         yyTracePrompt,
@@ -1139,7 +1777,7 @@ static YYACTIONTYPE yy_reduce(
   /* Check that the stack is large enough to grow by a single entry
   ** if the RHS of the rule is empty.  This ensures that there is room
   ** enough on the stack to push the LHS value */
-  if( yyRuleInfo[yyruleno].nrhs==0 ){
+  if( yyRuleInfoNRhs[yyruleno]==0 ){
 #ifdef YYTRACKMAXSTACKDEPTH
     if( (int)(yypParser->yytos - yypParser->yystack)>yypParser->yyhwm ){
       yypParser->yyhwm++;
@@ -1178,646 +1816,11 @@ static YYACTIONTYPE yy_reduce(
   **     break;
   */
 /********** Begin reduce actions **********************************************/
-        YYMINORTYPE yylhsminor;
-      case 0: /* package ::= package_opt END */
-#line 91 "./parser/grammar.y"
-{
-    log_debug("package ::= package_opt  END");
-}
-#line 1188 "./parser/out/grammar.c"
-        break;
-      case 1: /* package_opt ::= */
-#line 95 "./parser/grammar.y"
-{
-    log_debug("package_opt ::= /* empty */");
-}
-#line 1195 "./parser/out/grammar.c"
-        break;
-      case 2: /* package_opt ::= package_opt function_def */
-#line 98 "./parser/grammar.y"
-{
-    log_debug("package_opt ::= package_opt function_def");
-}
-#line 1202 "./parser/out/grammar.c"
-        break;
-      case 3: /* package_opt ::= package_opt var_def */
-#line 101 "./parser/grammar.y"
-{
-    log_debug("package_opt ::= package_opt var_def");
-}
-#line 1209 "./parser/out/grammar.c"
-        break;
-      case 4: /* package_opt ::= package_opt var_decl */
-#line 104 "./parser/grammar.y"
-{
-    log_debug("package_opt ::= package_opt var_decl");
-}
-#line 1216 "./parser/out/grammar.c"
-        break;
-      case 5: /* package_opt ::= package_opt struct_def */
-#line 107 "./parser/grammar.y"
-{
-    log_debug("package_opt ::= package_opt struct_def");
-}
-#line 1223 "./parser/out/grammar.c"
-        break;
-      case 6: /* struct_def ::= struct_def_opt R_C_BRACKET */
-#line 115 "./parser/grammar.y"
-{
-    log_debug("struct_def ::= struct_def_opt R_C_BRACKET");
-}
-#line 1230 "./parser/out/grammar.c"
-        break;
-      case 7: /* struct_def_opt ::= id L_C_BRACKET var_decl */
-#line 118 "./parser/grammar.y"
-{
-    log_debug("struct_def_opt ::= id L_C_BRACKET var_decl");
-}
-#line 1237 "./parser/out/grammar.c"
-        break;
-      case 8: /* struct_def_opt ::= struct_def_opt var_decl */
-#line 121 "./parser/grammar.y"
-{
-    log_debug("struct_def_opt ::= struct_def_opt var_decl");
-}
-#line 1244 "./parser/out/grammar.c"
-        break;
-      case 9: /* function_def ::= id function_type block_statement */
-#line 129 "./parser/grammar.y"
-{
-    log_debug("function_def ::= id function_type block_statement");
-}
-#line 1251 "./parser/out/grammar.c"
-        break;
-      case 10: /* var_decl ::= id COLON type */
-#line 139 "./parser/grammar.y"
-{
-    log_debug("var_decl ::= id COLON type");
-}
-#line 1258 "./parser/out/grammar.c"
-        break;
-      case 11: /* var_def ::= var_decl literal */
-#line 143 "./parser/grammar.y"
-{
-    log_debug("var_def ::= var_decl literal");
-}
-#line 1265 "./parser/out/grammar.c"
-        break;
-      case 12: /* function_type ::= function_type_opt R_R_BRACKET */
-#line 153 "./parser/grammar.y"
-{
-    log_debug("function_type ::= function_type_opt R_R_BRACKET");
-}
-#line 1272 "./parser/out/grammar.c"
-        break;
-      case 13: /* function_type ::= L_R_BRACKET R_R_BRACKET */
-#line 156 "./parser/grammar.y"
-{
-    log_debug("function_type ::= L_R_BRACKET R_R_BRACKET");
-}
-#line 1279 "./parser/out/grammar.c"
-        break;
-      case 14: /* function_type_opt ::= L_R_BRACKET var_decl */
-#line 160 "./parser/grammar.y"
-{
-    log_debug("function_type_opt ::= L_R_BRACKET var_decl");
-}
-#line 1286 "./parser/out/grammar.c"
-        break;
-      case 15: /* function_type_opt ::= function_type_opt COMMA var_decl */
-#line 163 "./parser/grammar.y"
-{
-    log_debug("function_type_opt ::= function_type_opt COMMA var_decl");
-}
-#line 1293 "./parser/out/grammar.c"
-        break;
-      case 16: /* type ::= type ASTERIX */
-#line 169 "./parser/grammar.y"
-{
-    log_debug("type ::= type ASTERIX . [POINTER_TYP");
-}
-#line 1300 "./parser/out/grammar.c"
-        break;
-      case 17: /* type ::= L_S_BRACKET type COMMA integer R_S_BRACKET */
-#line 172 "./parser/grammar.y"
-{
-    log_debug("type ::= L_S_BRACKET type COMMA integer R_S_BRACKET");
-}
-#line 1307 "./parser/out/grammar.c"
-        break;
-      case 18: /* type ::= U8 */
-#line 175 "./parser/grammar.y"
-{
-    log_debug("type ::= U8");
-}
-#line 1314 "./parser/out/grammar.c"
-        break;
-      case 19: /* type ::= U16 */
-#line 178 "./parser/grammar.y"
-{
-    log_debug("type ::= U16");
-}
-#line 1321 "./parser/out/grammar.c"
-        break;
-      case 20: /* type ::= U32 */
-#line 181 "./parser/grammar.y"
-{
-    log_debug("type ::= U32");
-}
-#line 1328 "./parser/out/grammar.c"
-        break;
-      case 21: /* type ::= U64 */
-#line 184 "./parser/grammar.y"
-{
-    log_debug("type ::= U64");
-}
-#line 1335 "./parser/out/grammar.c"
-        break;
-      case 22: /* type ::= I8 */
-#line 187 "./parser/grammar.y"
-{
-    log_debug("type ::= I8");
-}
-#line 1342 "./parser/out/grammar.c"
-        break;
-      case 23: /* type ::= I16 */
-#line 190 "./parser/grammar.y"
-{
-    log_debug("type ::= I16");
-}
-#line 1349 "./parser/out/grammar.c"
-        break;
-      case 24: /* type ::= I32 */
-#line 193 "./parser/grammar.y"
-{
-    log_debug("type ::= I32");
-}
-#line 1356 "./parser/out/grammar.c"
-        break;
-      case 25: /* type ::= I64 */
-#line 196 "./parser/grammar.y"
-{
-    log_debug("type ::= I64");
-}
-#line 1363 "./parser/out/grammar.c"
-        break;
-      case 26: /* type ::= F32 */
-#line 199 "./parser/grammar.y"
-{
-    log_debug("type ::= F32");
-}
-#line 1370 "./parser/out/grammar.c"
-        break;
-      case 27: /* type ::= F64 */
-#line 202 "./parser/grammar.y"
-{
-    log_debug("type ::= F64");
-}
-#line 1377 "./parser/out/grammar.c"
-        break;
-      case 28: /* type ::= function_type */
-#line 205 "./parser/grammar.y"
-{
-    log_debug("type ::= function_type");
-}
-#line 1384 "./parser/out/grammar.c"
-        break;
-      case 29: /* type ::= struct_def */
-#line 208 "./parser/grammar.y"
-{
-    log_debug("type ::= struct_def");
-}
-#line 1391 "./parser/out/grammar.c"
-        break;
-      case 30: /* block_statement ::= block_statement_opt R_C_BRACKET */
-#line 216 "./parser/grammar.y"
-{
-    log_debug("block_statement ::= block_statement_opt R_C_BRACKET");
-}
-#line 1398 "./parser/out/grammar.c"
-        break;
-      case 31: /* block_statement_opt ::= L_C_BRACKET */
-#line 220 "./parser/grammar.y"
-{
-    log_debug("block_statement_opt ::= L_C_BRACKET");
-}
-#line 1405 "./parser/out/grammar.c"
-        break;
-      case 32: /* block_statement_opt ::= block_statement_opt statement */
-#line 223 "./parser/grammar.y"
-{
-    log_debug("block_statement_opt ::= block_statement_opt statement");
-}
-#line 1412 "./parser/out/grammar.c"
-        break;
-      case 33: /* statement ::= SEMICOLON */
-#line 227 "./parser/grammar.y"
-{
-    log_debug("statement ::= SEMICOLON");
-}
-#line 1419 "./parser/out/grammar.c"
-        break;
-      case 34: /* statement ::= var_decl */
-#line 230 "./parser/grammar.y"
-{
-    log_debug("statement ::= var_decl");
-}
-#line 1426 "./parser/out/grammar.c"
-        break;
-      case 35: /* statement ::= var_def */
-#line 233 "./parser/grammar.y"
-{
-    log_debug("statement ::= var_def");
-}
-#line 1433 "./parser/out/grammar.c"
-        break;
-      case 36: /* statement ::= u_mnemonic operand */
-#line 236 "./parser/grammar.y"
-{
-    log_debug("statement ::= u_mnemonic operand");
-}
-#line 1440 "./parser/out/grammar.c"
-        break;
-      case 37: /* statement ::= d_mnemonic operand COMMA operand */
-#line 239 "./parser/grammar.y"
-{
-    log_debug("statement ::= d_mnemonic operand COMMA operand");
-}
-#line 1447 "./parser/out/grammar.c"
-        break;
-      case 38: /* u_mnemonic ::= PUSH */
-#line 243 "./parser/grammar.y"
-{
-    log_debug("u_mnemonic ::= PUSH");
-}
-#line 1454 "./parser/out/grammar.c"
-        break;
-      case 39: /* d_mnemonic ::= MOV */
-#line 247 "./parser/grammar.y"
-{
-    log_debug("d_mnemonic ::= MOV");
-}
-#line 1461 "./parser/out/grammar.c"
-        break;
-      case 40: /* d_mnemonic ::= ADD */
-#line 250 "./parser/grammar.y"
-{
-    log_debug("d_mnemonic ::= ADD");
-}
-#line 1468 "./parser/out/grammar.c"
-        break;
-      case 41: /* id ::= ID */
-#line 261 "./parser/grammar.y"
-{
-    log_debug("id ::= ID");
-    yylhsminor.yy104 = static_cast<id_token*>(*yymsp[0].minor.yy0);
-}
-#line 1476 "./parser/out/grammar.c"
-  yymsp[0].minor.yy104 = yylhsminor.yy104;
-        break;
-      case 42: /* string ::= STRING */
-#line 265 "./parser/grammar.y"
-{
-    log_debug("string ::= STRING");
-    yylhsminor.yy22 = static_cast<string_token*>(*yymsp[0].minor.yy0);
-}
-#line 1485 "./parser/out/grammar.c"
-  yymsp[0].minor.yy22 = yylhsminor.yy22;
-        break;
-      case 43: /* float ::= FLOAT */
-#line 269 "./parser/grammar.y"
-{
-    log_debug("float ::= FLOAT");
-    yylhsminor.yy97 = static_cast<float_token*>(*yymsp[0].minor.yy0);
-}
-#line 1494 "./parser/out/grammar.c"
-  yymsp[0].minor.yy97 = yylhsminor.yy97;
-        break;
-      case 44: /* integer ::= INTEGER */
-#line 273 "./parser/grammar.y"
-{
-    log_debug("integer ::= INTEGER");
-    yylhsminor.yy74 = static_cast<int_token*>(*yymsp[0].minor.yy0);
-}
-#line 1503 "./parser/out/grammar.c"
-  yymsp[0].minor.yy74 = yylhsminor.yy74;
-        break;
-      case 45: /* operand ::= ref_exp */
-#line 280 "./parser/grammar.y"
-{
-    log_debug("operand ::= ref_exp");
-}
-#line 1511 "./parser/out/grammar.c"
-        break;
-      case 46: /* operand ::= float */
-#line 283 "./parser/grammar.y"
-{
-    log_debug("operand ::= float");
-}
-#line 1518 "./parser/out/grammar.c"
-        break;
-      case 47: /* operand ::= scalar_exp */
-#line 286 "./parser/grammar.y"
-{
-    log_debug("operand ::= scalar_exp");
-}
-#line 1525 "./parser/out/grammar.c"
-        break;
-      case 48: /* operand ::= L_S_BRACKET scalar_exp R_S_BRACKET */
-#line 289 "./parser/grammar.y"
-{
-    log_debug("operand ::= L_S_BRACKET scalar_exp R_S_BRACKET");
-}
-#line 1532 "./parser/out/grammar.c"
-        break;
-      case 49: /* literal ::= literal_opt R_C_BRACKET */
-#line 295 "./parser/grammar.y"
-{
-    log_debug("literal ::= literal_opt R_C_BRACKET");
-}
-#line 1539 "./parser/out/grammar.c"
-        break;
-      case 50: /* literal_opt ::= L_C_BRACKET exp */
-#line 299 "./parser/grammar.y"
-{
-    log_debug("literal_opt ::= L_C_BRACKET exp");
-}
-#line 1546 "./parser/out/grammar.c"
-        break;
-      case 51: /* literal_opt ::= literal_opt COMMA exp */
-#line 302 "./parser/grammar.y"
-{
-    log_debug("literal_opt ::= literal_opt COMMA exp");
-}
-#line 1553 "./parser/out/grammar.c"
-        break;
-      case 52: /* exp ::= scalar_exp */
-#line 308 "./parser/grammar.y"
-{
-    log_debug("exp ::= scalar_exp");
-    yylhsminor.yy86 = yymsp[0].minor.yy54;
-}
-#line 1561 "./parser/out/grammar.c"
-  yymsp[0].minor.yy86 = yylhsminor.yy86;
-        break;
-      case 53: /* exp ::= float */
-#line 312 "./parser/grammar.y"
-{
-    log_debug("exp ::= float");
-    yylhsminor.yy86 = new float_exp(yymsp[0].minor.yy97);
-}
-#line 1570 "./parser/out/grammar.c"
-  yymsp[0].minor.yy86 = yylhsminor.yy86;
-        break;
-      case 54: /* exp ::= string */
-#line 316 "./parser/grammar.y"
-{
-    log_debug("exp ::= string");
-    yylhsminor.yy86 = new string_exp(yymsp[0].minor.yy22);
-}
-#line 1579 "./parser/out/grammar.c"
-  yymsp[0].minor.yy86 = yylhsminor.yy86;
-        break;
-      case 55: /* exp ::= ref_exp */
-#line 320 "./parser/grammar.y"
-{
-    log_debug("exp ::= ref_exp");
-    yylhsminor.yy86 = yymsp[0].minor.yy128;
-}
-#line 1588 "./parser/out/grammar.c"
-  yymsp[0].minor.yy86 = yylhsminor.yy86;
-        break;
-      case 56: /* ref_exp ::= id */
-#line 327 "./parser/grammar.y"
-{
-    log_debug("ref_exp ::= id");
-    yylhsminor.yy128 = new id_exp(yymsp[0].minor.yy104);
-}
-#line 1597 "./parser/out/grammar.c"
-  yymsp[0].minor.yy128 = yylhsminor.yy128;
-        break;
-      case 57: /* ref_exp ::= LESS_THAN type GREATER_THAN L_R_BRACKET ref_exp R_R_BRACKET */
-#line 331 "./parser/grammar.y"
-{
-    log_debug("ref_exp ::= CAST LESS_THAN type GREATER_THAN L_R_BRACKET ref_exp R_R_BRACKET");
-    yymsp[-5].minor.yy128 = new cast_exp(yymsp[-1].minor.yy128, yymsp[-4].minor.yy0);
-}
-#line 1606 "./parser/out/grammar.c"
-        break;
-      case 58: /* ref_exp ::= ref_exp L_S_BRACKET scalar_exp R_S_BRACKET */
-#line 335 "./parser/grammar.y"
-{
-    log_debug("ref_exp ::= ref_exp L_S_BRACKET scalar_exp R_S_BRACKET");
-    yylhsminor.yy128 = new acc_exp(yymsp[-3].minor.yy128, yymsp[-1].minor.yy54);
-}
-#line 1614 "./parser/out/grammar.c"
-  yymsp[-3].minor.yy128 = yylhsminor.yy128;
-        break;
-      case 59: /* ref_exp ::= ref_exp DOT id */
-#line 339 "./parser/grammar.y"
-{
-    log_debug("ref_exp ::= ref_exp DOT id");
-    yylhsminor.yy128 = new ref_acc_exp(yymsp[-2].minor.yy128, yymsp[0].minor.yy104, ref_acc_exp::REF_OP::DOT);
-}
-#line 1623 "./parser/out/grammar.c"
-  yymsp[-2].minor.yy128 = yylhsminor.yy128;
-        break;
-      case 60: /* ref_exp ::= ref_exp ARROW id */
-#line 343 "./parser/grammar.y"
-{
-    log_debug("ref_exp ::= ref_exp ARROW id");
-    yylhsminor.yy128 = new ref_acc_exp(yymsp[-2].minor.yy128, yymsp[0].minor.yy104, ref_acc_exp::REF_OP::ARROW);
-}
-#line 1632 "./parser/out/grammar.c"
-  yymsp[-2].minor.yy128 = yylhsminor.yy128;
-        break;
-      case 61: /* ref_exp ::= ref_exp PLUS scalar_exp */
-#line 347 "./parser/grammar.y"
-{
-    log_debug("ref_exp ::= ref_exp PLUS scalar_exp");
-    yylhsminor.yy128 = new ref_off_exp(yymsp[-2].minor.yy128, yymsp[0].minor.yy54, ref_off_exp::REF_OP::PLUS);
-}
-#line 1641 "./parser/out/grammar.c"
-  yymsp[-2].minor.yy128 = yylhsminor.yy128;
-        break;
-      case 62: /* ref_exp ::= ref_exp MINUS scalar_exp */
-#line 351 "./parser/grammar.y"
-{
-    log_debug("ref_exp ::= ref_exp MINUS scalar_exp");
-    yylhsminor.yy128 = new ref_off_exp(yymsp[-2].minor.yy128, yymsp[0].minor.yy54, ref_off_exp::REF_OP::MINUS);
-}
-#line 1650 "./parser/out/grammar.c"
-  yymsp[-2].minor.yy128 = yylhsminor.yy128;
-        break;
-      case 63: /* scalar_exp_int ::= integer */
-#line 358 "./parser/grammar.y"
-{
-    log_debug("scalar_exp_int ::= integer");
-    yylhsminor.yy149 = new int_exp(yymsp[0].minor.yy74);
-}
-#line 1659 "./parser/out/grammar.c"
-  yymsp[0].minor.yy149 = yylhsminor.yy149;
-        break;
-      case 64: /* multiplicative_exp ::= scalar_exp_int */
-#line 363 "./parser/grammar.y"
-{
-    log_debug("multiplicative_exp ::= scalar_exp_int");
-    yylhsminor.yy54 = yymsp[0].minor.yy149;
-}
-#line 1668 "./parser/out/grammar.c"
-  yymsp[0].minor.yy54 = yylhsminor.yy54;
-        break;
-      case 65: /* multiplicative_exp ::= multiplicative_exp ASTERIX scalar_exp */
-#line 367 "./parser/grammar.y"
-{
-    log_debug("multiplicative_exp ::= multiplicative_exp ASTERIX scalar_ex");
-    yylhsminor.yy54 = new infix_scalar_exp(yymsp[-2].minor.yy54, yymsp[0].minor.yy54, infix_scalar_exp::INFIX_OP::TIMES);
-}
-#line 1677 "./parser/out/grammar.c"
-  yymsp[-2].minor.yy54 = yylhsminor.yy54;
-        break;
-      case 66: /* multiplicative_exp ::= multiplicative_exp SLASH scalar_exp */
-#line 371 "./parser/grammar.y"
-{
-    log_debug("multiplicative_exp ::= multiplicative_exp SLASH scalar_exp");
-    yylhsminor.yy54 =new infix_scalar_exp(yymsp[-2].minor.yy54, yymsp[0].minor.yy54, infix_scalar_exp::INFIX_OP::DIV);
-}
-#line 1686 "./parser/out/grammar.c"
-  yymsp[-2].minor.yy54 = yylhsminor.yy54;
-        break;
-      case 67: /* multiplicative_exp ::= multiplicative_exp PERCENT scalar_exp */
-#line 375 "./parser/grammar.y"
-{
-    log_debug("multiplicative_exp ::= multiplicative_exp PERCENT scalar_exp");
-    yylhsminor.yy54 = new infix_scalar_exp(yymsp[-2].minor.yy54, yymsp[0].minor.yy54, infix_scalar_exp::INFIX_OP::MOD);
-}
-#line 1695 "./parser/out/grammar.c"
-  yymsp[-2].minor.yy54 = yylhsminor.yy54;
-        break;
-      case 68: /* additive_exp ::= multiplicative_exp */
-#line 380 "./parser/grammar.y"
-{
-    log_debug("additive_exp ::= multiplicative_exp");
-    yylhsminor.yy54 = yymsp[0].minor.yy54;
-}
-#line 1704 "./parser/out/grammar.c"
-  yymsp[0].minor.yy54 = yylhsminor.yy54;
-        break;
-      case 69: /* additive_exp ::= additive_exp PLUS multiplicative_exp */
-#line 384 "./parser/grammar.y"
-{
-    log_debug("additive_exp ::= additive_exp PLUS multiplicative_exp");
-    yylhsminor.yy54 = new infix_scalar_exp(yymsp[-2].minor.yy54, yymsp[0].minor.yy54, infix_scalar_exp::INFIX_OP::PLUS);
-}
-#line 1713 "./parser/out/grammar.c"
-  yymsp[-2].minor.yy54 = yylhsminor.yy54;
-        break;
-      case 70: /* additive_exp ::= additive_exp MINUS multiplicative_exp */
-#line 388 "./parser/grammar.y"
-{
-    log_debug("additive_exp ::= additive_exp MINUS multiplicative_exp");
-    yylhsminor.yy54 = new infix_scalar_exp(yymsp[-2].minor.yy54, yymsp[0].minor.yy54, infix_scalar_exp::INFIX_OP::MINUS);
-}
-#line 1722 "./parser/out/grammar.c"
-  yymsp[-2].minor.yy54 = yylhsminor.yy54;
-        break;
-      case 71: /* shift_exp ::= additive_exp */
-#line 393 "./parser/grammar.y"
-{
-    log_debug("shift_exp ::= additive_exp");
-    yylhsminor.yy54 = yymsp[0].minor.yy54;
-}
-#line 1731 "./parser/out/grammar.c"
-  yymsp[0].minor.yy54 = yylhsminor.yy54;
-        break;
-      case 72: /* shift_exp ::= shift_exp DOUBLE_LESS_THAN additive_exp */
-#line 397 "./parser/grammar.y"
-{
-    log_debug("shift_exp ::= shift_exp DOUBLE_LESS_THAN additive_exp");
-    yylhsminor.yy54 = new infix_scalar_exp(yymsp[-2].minor.yy54, yymsp[0].minor.yy54, infix_scalar_exp::INFIX_OP::SHIFT_LEFT);
-}
-#line 1740 "./parser/out/grammar.c"
-  yymsp[-2].minor.yy54 = yylhsminor.yy54;
-        break;
-      case 73: /* shift_exp ::= shift_exp DOUBLE_GREATER_THAN additive_exp */
-#line 401 "./parser/grammar.y"
-{
-    log_debug("shift_exp ::= shift_exp DOUBLE_GREATER_THAN additive_exp");
-    yylhsminor.yy54 = new infix_scalar_exp(yymsp[-2].minor.yy54, yymsp[0].minor.yy54, infix_scalar_exp::INFIX_OP::SHIFT_RIGHT);
-}
-#line 1749 "./parser/out/grammar.c"
-  yymsp[-2].minor.yy54 = yylhsminor.yy54;
-        break;
-      case 74: /* and_exp ::= shift_exp */
-#line 406 "./parser/grammar.y"
-{
-    log_debug("and_exp ::= shift_exp");
-    yylhsminor.yy54 = yymsp[0].minor.yy54;
-}
-#line 1758 "./parser/out/grammar.c"
-  yymsp[0].minor.yy54 = yylhsminor.yy54;
-        break;
-      case 75: /* and_exp ::= and_exp AMPERSAND shift_exp */
-#line 410 "./parser/grammar.y"
-{
-    log_debug("and_exp ::= and_exp AMPERSAND shift_exp");
-    yylhsminor.yy54 = new infix_scalar_exp(yymsp[-2].minor.yy54, yymsp[0].minor.yy54, infix_scalar_exp::INFIX_OP::AND);
-}
-#line 1767 "./parser/out/grammar.c"
-  yymsp[-2].minor.yy54 = yylhsminor.yy54;
-        break;
-      case 76: /* exclusive_or_exp ::= and_exp */
-#line 415 "./parser/grammar.y"
-{
-    log_debug("exclusive_or_exp ::= and_exp");
-    yylhsminor.yy54 = yymsp[0].minor.yy54;
-}
-#line 1776 "./parser/out/grammar.c"
-  yymsp[0].minor.yy54 = yylhsminor.yy54;
-        break;
-      case 77: /* exclusive_or_exp ::= exclusive_or_exp CIRCUMFLEX and_exp */
-#line 419 "./parser/grammar.y"
-{
-    log_debug("exclusive_or_exp ::= exclusive_or_exp CIRCUMFLEX and_exp");
-    yylhsminor.yy54 = new infix_scalar_exp(yymsp[-2].minor.yy54, yymsp[0].minor.yy54, infix_scalar_exp::INFIX_OP::NOR);
-}
-#line 1785 "./parser/out/grammar.c"
-  yymsp[-2].minor.yy54 = yylhsminor.yy54;
-        break;
-      case 78: /* inclusive_or_exp ::= exclusive_or_exp */
-#line 424 "./parser/grammar.y"
-{
-    log_debug("inclusive_or_exp ::= exclusive_or_exp");
-    yylhsminor.yy54 = yymsp[0].minor.yy54;
-}
-#line 1794 "./parser/out/grammar.c"
-  yymsp[0].minor.yy54 = yylhsminor.yy54;
-        break;
-      case 79: /* inclusive_or_exp ::= inclusive_or_exp PIPE exclusive_or_exp */
-#line 428 "./parser/grammar.y"
-{
-    log_debug("inclusive_or_exp ::= inclusive_or_exp PIPE exclusive_or_exp");
-    yylhsminor.yy54 = new infix_scalar_exp(yymsp[-2].minor.yy54, yymsp[0].minor.yy54, infix_scalar_exp::INFIX_OP::OR);
-}
-#line 1803 "./parser/out/grammar.c"
-  yymsp[-2].minor.yy54 = yylhsminor.yy54;
-        break;
-      case 80: /* scalar_exp ::= inclusive_or_exp */
-#line 433 "./parser/grammar.y"
-{
-    log_debug("scalar_exp ::= inclusive_or_exp");
-    yylhsminor.yy54 = yymsp[0].minor.yy54;
-}
-#line 1812 "./parser/out/grammar.c"
-  yymsp[0].minor.yy54 = yylhsminor.yy54;
-        break;
-      default:
-        break;
 /********** End reduce actions ************************************************/
   };
-  assert( yyruleno<sizeof(yyRuleInfo)/sizeof(yyRuleInfo[0]) );
-  yygoto = yyRuleInfo[yyruleno].lhs;
-  yysize = yyRuleInfo[yyruleno].nrhs;
+  assert( yyruleno<sizeof(yyRuleInfoLhs)/sizeof(yyRuleInfoLhs[0]) );
+  yygoto = yyRuleInfoLhs[yyruleno];
+  yysize = yyRuleInfoNRhs[yyruleno];
   yyact = yy_find_reduce_action(yymsp[yysize].stateno,(YYCODETYPE)yygoto);
 
   /* There are no SHIFTREDUCE actions on nonterminals because the table
@@ -1853,6 +1856,10 @@ static void yy_parse_failed(
   /* Here code is inserted which will be executed whenever the
   ** parser fails */
 /************ Begin %parse_failure code ***************************************/
+#line 83 "./parser/grammar.y"
+
+    printf("syntax error\n");
+#line 1863 "./parser/out/grammar.c"
 /************ End %parse_failure code *****************************************/
   ImplParseARG_STORE /* Suppress warning about unused %extra_argument variable */
   ImplParseCTX_STORE
@@ -1871,10 +1878,6 @@ static void yy_syntax_error(
   ImplParseCTX_FETCH
 #define TOKEN yyminor
 /************ Begin %syntax_error code ****************************************/
-#line 83 "./parser/grammar.y"
-
-    printf("syntax error\n");
-#line 1878 "./parser/out/grammar.c"
 /************ End %syntax_error code ******************************************/
   ImplParseARG_STORE /* Suppress warning about unused %extra_argument variable */
   ImplParseCTX_STORE
@@ -1900,212 +1903,3 @@ static void yy_accept(
   /* Here code is inserted which will be executed whenever the
   ** parser accepts */
 /*********** Begin %parse_accept code *****************************************/
-/*********** End %parse_accept code *******************************************/
-  ImplParseARG_STORE /* Suppress warning about unused %extra_argument variable */
-  ImplParseCTX_STORE
-}
-
-/* The main parser program.
-** The first argument is a pointer to a structure obtained from
-** "ImplParseAlloc" which describes the current state of the parser.
-** The second argument is the major token number.  The third is
-** the minor token.  The fourth optional argument is whatever the
-** user wants (and specified in the grammar) and is available for
-** use by the action routines.
-**
-** Inputs:
-** <ul>
-** <li> A pointer to the parser (an opaque structure.)
-** <li> The major token number.
-** <li> The minor token number.
-** <li> An option argument of a grammar-specified type.
-** </ul>
-**
-** Outputs:
-** None.
-*/
-void ImplParse(
-  void *yyp,                   /* The parser */
-  int yymajor,                 /* The major token code number */
-  ImplParseTOKENTYPE yyminor       /* The value for the token */
-  ImplParseARG_PDECL               /* Optional %extra_argument parameter */
-){
-  YYMINORTYPE yyminorunion;
-  YYACTIONTYPE yyact;   /* The parser action. */
-#if !defined(YYERRORSYMBOL) && !defined(YYNOERRORRECOVERY)
-  int yyendofinput;     /* True if we are at the end of input */
-#endif
-#ifdef YYERRORSYMBOL
-  int yyerrorhit = 0;   /* True if yymajor has invoked an error */
-#endif
-  yyParser *yypParser = (yyParser*)yyp;  /* The parser */
-  ImplParseCTX_FETCH
-  ImplParseARG_STORE
-
-  assert( yypParser->yytos!=0 );
-#if !defined(YYERRORSYMBOL) && !defined(YYNOERRORRECOVERY)
-  yyendofinput = (yymajor==0);
-#endif
-
-  yyact = yypParser->yytos->stateno;
-#ifndef NDEBUG
-  if( yyTraceFILE ){
-    if( yyact < YY_MIN_REDUCE ){
-      fprintf(yyTraceFILE,"%sInput '%s' in state %d\n",
-              yyTracePrompt,yyTokenName[yymajor],yyact);
-    }else{
-      fprintf(yyTraceFILE,"%sInput '%s' with pending reduce %d\n",
-              yyTracePrompt,yyTokenName[yymajor],yyact-YY_MIN_REDUCE);
-    }
-  }
-#endif
-
-  do{
-    assert( yyact==yypParser->yytos->stateno );
-    yyact = yy_find_shift_action((YYCODETYPE)yymajor,yyact);
-    if( yyact >= YY_MIN_REDUCE ){
-      yyact = yy_reduce(yypParser,yyact-YY_MIN_REDUCE,yymajor,
-                        yyminor ImplParseCTX_PARAM);
-    }else if( yyact <= YY_MAX_SHIFTREDUCE ){
-      yy_shift(yypParser,yyact,(YYCODETYPE)yymajor,yyminor);
-#ifndef YYNOERRORRECOVERY
-      yypParser->yyerrcnt--;
-#endif
-      break;
-    }else if( yyact==YY_ACCEPT_ACTION ){
-      yypParser->yytos--;
-      yy_accept(yypParser);
-      return;
-    }else{
-      assert( yyact == YY_ERROR_ACTION );
-      yyminorunion.yy0 = yyminor;
-#ifdef YYERRORSYMBOL
-      int yymx;
-#endif
-#ifndef NDEBUG
-      if( yyTraceFILE ){
-        fprintf(yyTraceFILE,"%sSyntax Error!\n",yyTracePrompt);
-      }
-#endif
-#ifdef YYERRORSYMBOL
-      /* A syntax error has occurred.
-      ** The response to an error depends upon whether or not the
-      ** grammar defines an error token "ERROR".  
-      **
-      ** This is what we do if the grammar does define ERROR:
-      **
-      **  * Call the %syntax_error function.
-      **
-      **  * Begin popping the stack until we enter a state where
-      **    it is legal to shift the error symbol, then shift
-      **    the error symbol.
-      **
-      **  * Set the error count to three.
-      **
-      **  * Begin accepting and shifting new tokens.  No new error
-      **    processing will occur until three tokens have been
-      **    shifted successfully.
-      **
-      */
-      if( yypParser->yyerrcnt<0 ){
-        yy_syntax_error(yypParser,yymajor,yyminor);
-      }
-      yymx = yypParser->yytos->major;
-      if( yymx==YYERRORSYMBOL || yyerrorhit ){
-#ifndef NDEBUG
-        if( yyTraceFILE ){
-          fprintf(yyTraceFILE,"%sDiscard input token %s\n",
-             yyTracePrompt,yyTokenName[yymajor]);
-        }
-#endif
-        yy_destructor(yypParser, (YYCODETYPE)yymajor, &yyminorunion);
-        yymajor = YYNOCODE;
-      }else{
-        while( yypParser->yytos >= yypParser->yystack
-            && yymx != YYERRORSYMBOL
-            && (yyact = yy_find_reduce_action(
-                        yypParser->yytos->stateno,
-                        YYERRORSYMBOL)) >= YY_MIN_REDUCE
-        ){
-          yy_pop_parser_stack(yypParser);
-        }
-        if( yypParser->yytos < yypParser->yystack || yymajor==0 ){
-          yy_destructor(yypParser,(YYCODETYPE)yymajor,&yyminorunion);
-          yy_parse_failed(yypParser);
-#ifndef YYNOERRORRECOVERY
-          yypParser->yyerrcnt = -1;
-#endif
-          yymajor = YYNOCODE;
-        }else if( yymx!=YYERRORSYMBOL ){
-          yy_shift(yypParser,yyact,YYERRORSYMBOL,yyminor);
-        }
-      }
-      yypParser->yyerrcnt = 3;
-      yyerrorhit = 1;
-      if( yymajor==YYNOCODE ) break;
-      yyact = yypParser->yytos->stateno;
-#elif defined(YYNOERRORRECOVERY)
-      /* If the YYNOERRORRECOVERY macro is defined, then do not attempt to
-      ** do any kind of error recovery.  Instead, simply invoke the syntax
-      ** error routine and continue going as if nothing had happened.
-      **
-      ** Applications can set this macro (for example inside %include) if
-      ** they intend to abandon the parse upon the first syntax error seen.
-      */
-      yy_syntax_error(yypParser,yymajor, yyminor);
-      yy_destructor(yypParser,(YYCODETYPE)yymajor,&yyminorunion);
-      break;
-#else  /* YYERRORSYMBOL is not defined */
-      /* This is what we do if the grammar does not define ERROR:
-      **
-      **  * Report an error message, and throw away the input token.
-      **
-      **  * If the input token is $, then fail the parse.
-      **
-      ** As before, subsequent error messages are suppressed until
-      ** three input tokens have been successfully shifted.
-      */
-      if( yypParser->yyerrcnt<=0 ){
-        yy_syntax_error(yypParser,yymajor, yyminor);
-      }
-      yypParser->yyerrcnt = 3;
-      yy_destructor(yypParser,(YYCODETYPE)yymajor,&yyminorunion);
-      if( yyendofinput ){
-        yy_parse_failed(yypParser);
-#ifndef YYNOERRORRECOVERY
-        yypParser->yyerrcnt = -1;
-#endif
-      }
-      break;
-#endif
-    }
-  }while( yypParser->yytos>yypParser->yystack );
-#ifndef NDEBUG
-  if( yyTraceFILE ){
-    yyStackEntry *i;
-    char cDiv = '[';
-    fprintf(yyTraceFILE,"%sReturn. Stack=",yyTracePrompt);
-    for(i=&yypParser->yystack[1]; i<=yypParser->yytos; i++){
-      fprintf(yyTraceFILE,"%c%s", cDiv, yyTokenName[i->major]);
-      cDiv = ' ';
-    }
-    fprintf(yyTraceFILE,"]\n");
-  }
-#endif
-  return;
-}
-
-/*
-** Return the fallback token corresponding to canonical token iToken, or
-** 0 if iToken has no fallback.
-*/
-int ImplParseFallback(int iToken){
-#ifdef YYFALLBACK
-  if( iToken<(int)(sizeof(yyFallback)/sizeof(yyFallback[0])) ){
-    return yyFallback[iToken];
-  }
-#else
-  (void)iToken;
-#endif
-  return 0;
-}
