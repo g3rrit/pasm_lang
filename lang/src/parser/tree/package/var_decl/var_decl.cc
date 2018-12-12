@@ -11,4 +11,8 @@ namespace tree {
   var_decl::~var_decl() {
     delete t;
   }
+
+  std::size_t var_decl::size() {
+    return t->size();
+  }
 }

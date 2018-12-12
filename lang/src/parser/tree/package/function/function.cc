@@ -3,28 +3,27 @@
 #include "var_decl.h"
 #include "var_def.h"
 #include "statement.h"
+#include "function_type.h"
 
 #include "token.h"
 
 namespace tree {
 
-  function::function(id_token *_id)
-    : id(_id) {}
+  function::function(id_token *_id, function_type *_f_type)
+    : id(_id), f_type(_f_type) {}
 
   function::~function() {
-    for(auto elem : params) {
-      delete elem.first;
-    }
     for(auto elem : defs) {
-      delete elem.first;
+      delete elem.second;
     }
     for(statement *stm : stms) {
       delete stm;
     }
+    delete f_type;
   }
 
   void function::add_param(var_decl *_param) {
-    params.insert(std::make_pair(_param->id, _param));
+    f_type->add_param(_param);
   }
 
   void function::add_def(var_def *_def) {

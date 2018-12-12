@@ -1,5 +1,7 @@
 #pragma once
 
+#include <cstddef>
+
 struct id_token;
 
 namespace tree {
@@ -12,5 +14,7 @@ namespace tree {
 
     var_decl(id_token*, type*);
     ~var_decl();
+
+    std::size_t size();
   };
 }

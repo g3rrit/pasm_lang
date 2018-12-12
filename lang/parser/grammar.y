@@ -9,6 +9,9 @@
 #include "statement.h"
 #include "var_def.h"
 #include "var_decl.h"
+#include "function_type.h"
+#include "function.h"
+#include "type_def.h"
 
 using namespace tree;
 }
@@ -73,9 +76,18 @@ using namespace tree;
 %type float                         {float_token*}
 %type string                        {string_token*}
 
+%type struct_def                    {type_def*}
+%type struct_def_opt                {type_def*}
+
 %type var_decl                      {var_decl*}
 %type var_def                       {var_def*}
 
+%type function_def                  {function*}
+%type function_def_opt              {function*}
+%type function_def_opt_v            {function*}
+
+%type function_type                 {function_type*}
+%type function_type_opt             {function_type*}
 
 %type type                          {type*}
 
@@ -130,42 +142,57 @@ log_debug("package_opt ::= package_opt struct_def");
 |                       STRUCT                        |
 +----------------------------------------------------*/
 
-struct_def ::= struct_def_opt T_R_C_BRACKET . {
+struct_def(A) ::= struct_def_opt(B) T_R_C_BRACKET . {
 log_debug("struct_def ::= struct_def_opt R_C_BRACKET");
+A = B;
 }
-struct_def_opt ::= id T_L_C_BRACKET var_decl . {
+struct_def_opt(A) ::= id(B) T_L_C_BRACKET var_decl(C) . {
 log_debug("struct_def_opt ::= id L_C_BRACKET var_decl");
+A = new type_def(B);
+A->add_elem(C);
 }
-struct_def_opt ::= struct_def_opt var_decl . {
+struct_def_opt(A) ::= struct_def_opt(B) var_decl(C) . {
 log_debug("struct_def_opt ::= struct_def_opt var_decl");
+B->add_elem(C);
+A = B;
 }
 
 /*----------------------------------------------------+
 |                       FUNCTION                      |
 +----------------------------------------------------*/
 
-function_def ::= function_def_opt T_R_C_BRACKET . {
+function_def(A) ::= function_def_opt(B) T_R_C_BRACKET . {
 log_debug("function_def ::= function_def_opt T_R_C_BRACKET");
+A = B;
 }
 
-function_def_opt ::= function_def_opt_v statement . {
+function_def_opt(A) ::= function_def_opt_v(B) statement(C) . {
 log_debug("function_def_opt ::= function_def_opt_v statement");
+B->add_stm(C);
+A = B;
 }
 
-function_def_opt ::= function_def_opt statement . {
+function_def_opt(A) ::= function_def_opt(B) statement(C) . {
 log_debug("function_def_opt ::= function_def_opt_v statement");
+B->add_stm(C);
+A = B;
 }
 
-function_def_opt_v ::= id function_type T_L_C_BRACKET . {
+function_def_opt_v(A) ::= id(B) function_type(C) T_L_C_BRACKET . {
 log_debug("function_def_opt_v ::= id function_type L_C_BRACKET");
+A = new function(B, C);
 }
 
-function_def_opt_v ::= function_def_opt_v var_def . {
+function_def_opt_v(A) ::= function_def_opt_v(B) var_def(C) . {
 log_debug("function_def_opt_v ::= function_def_opt_v var_def");
+B->add_def(C);
+A = B;
 }
 
-function_def_opt_v ::= function_def_opt_v var_decl . {
+function_def_opt_v(A) ::= function_def_opt_v(B) var_decl(C) . {
 log_debug("function_def_opt_v ::= function_def_opt_v var_decl");
+B->add_def(new var_def(C, nullptr));
+A = B;
 }
 
 /*----------------------------------------------------+
@@ -174,12 +201,14 @@ log_debug("function_def_opt_v ::= function_def_opt_v var_decl");
 
 /* -------------------- VAR --------------------------- */
 
-var_decl ::= id T_COLON type . {
+var_decl(A) ::= id(B) T_COLON type(C) . {
 log_debug("var_decl ::= id COLON type");
+A = new var_decl(B, C);
 }
 
-var_def ::= var_decl literal . {
+var_def(A) ::= var_decl(B) literal(C) . {
 log_debug("var_def ::= var_decl literal");
+A = new var_def(B, C);
 }
 
 /*----------------------------------------------------+
@@ -188,63 +217,83 @@ log_debug("var_def ::= var_decl literal");
 
 /* -------------------- FUNCTION_TYPE ----------------- */
 
-function_type ::= function_type_opt T_R_R_BRACKET . {
+function_type(A) ::= function_type_opt(B) T_R_R_BRACKET . {
 log_debug("function_type ::= function_type_opt R_R_BRACKET");
+A = B;
 }
-function_type ::= T_L_R_BRACKET T_R_R_BRACKET . {
+function_type(A) ::= T_L_R_BRACKET T_R_R_BRACKET . {
 log_debug("function_type ::= L_R_BRACKET R_R_BRACKET");
+A = new function_type();
 }
 
-function_type_opt ::= T_L_R_BRACKET var_decl . {
+function_type_opt(A) ::= T_L_R_BRACKET var_decl(C) . {
 log_debug("function_type_opt ::= L_R_BRACKET var_decl");
+A = new function_type();
+A->add_param(C);
 }
-function_type_opt ::= function_type_opt T_COMMA var_decl . {
+function_type_opt(A) ::= function_type_opt(B) T_COMMA var_decl(C) . {
 log_debug("function_type_opt ::= function_type_opt COMMA var_decl");
+B->add_param(C);
+A = B;
 }
 
 /* -------------------- TYPE -------------------------- */
 
-type ::= type T_ASTERIX . [T_POINTER_TYPE] {
+type(A) ::= type(B) T_ASTERIX . [T_POINTER_TYPE] {
 log_debug("type ::= type ASTERIX . [POINTER_TYP");
+A = new pointer_type(B);
 }
-type ::= T_L_S_BRACKET type T_COMMA integer T_R_S_BRACKET . {
+type(A) ::= T_L_S_BRACKET type(B) T_COMMA integer(C) T_R_S_BRACKET . {
 log_debug("type ::= L_S_BRACKET type COMMA integer R_S_BRACKET");
+A = new array_type(B, C);
 }
-type ::= T_U8 . {
+type(A) ::= T_U8 . {
 log_debug("type ::= U8");
+A = new primative_type(primative_type::p_type::U8);
 }
-type ::= T_U16 . {
+type(A) ::= T_U16 . {
 log_debug("type ::= U16");
+A = new primative_type(primative_type::p_type::U16);
 }
-type ::= T_U32 . {
+type(A) ::= T_U32 . {
 log_debug("type ::= U32");
+A = new primative_type(primative_type::p_type::U32);
 }
-type ::= T_U64 . {
+type(A) ::= T_U64 . {
 log_debug("type ::= U64");
+A = new primative_type(primative_type::p_type::U64);
 }
-type ::= T_I8 . {
+type(A) ::= T_I8 . {
 log_debug("type ::= I8");
+A = new primative_type(primative_type::p_type::I8);
 }
-type ::= T_I16 . {
+type(A) ::= T_I16 . {
 log_debug("type ::= I16");
+A = new primative_type(primative_type::p_type::I16);
 }
-type ::= T_I32 . {
+type(A) ::= T_I32 . {
 log_debug("type ::= I32");
+A = new primative_type(primative_type::p_type::I32);
 }
-type ::= T_I64 . {
+type(A) ::= T_I64 . {
 log_debug("type ::= I64");
+A = new primative_type(primative_type::p_type::I64);
 }
-type ::= T_F32 . {
+type(A) ::= T_F32 . {
 log_debug("type ::= F32");
+A = new primative_type(primative_type::p_type::F32);
 }
-type ::= T_F64 . {
+type(A) ::= T_F64 . {
 log_debug("type ::= F64");
+A = new primative_type(primative_type::p_type::F64);
 }
-type ::= function_type . {
+type(A) ::= function_type(B) . {
 log_debug("type ::= function_type");
+A = B;
 }
-type ::= struct_def . {
-log_debug("type ::= struct_def");
+type(A) ::= id(B) . {
+log_debug("type ::= id");
+A = new unresolved_type(B);
 }
 
 /*----------------------------------------------------+
@@ -323,13 +372,13 @@ A = new acc_operand(B);
 
 /* -------------------- COMPOUND_LITERAL -------------- */
 
-literal(A) ::= literal_opt(B) T_R_C_BRACKET . {
-log_debug("literal ::= literal_opt R_C_BRACKET");
+literal(A) ::= literal_opt(B) T_R_R_BRACKET . {
+log_debug("literal ::= literal_opt R_R_BRACKET");
 A = B;
 }
 
-literal_opt(A) ::= T_L_C_BRACKET exp(B) . {
-log_debug("literal_opt ::= L_C_BRACKET exp");
+literal_opt(A) ::= T_L_R_BRACKET exp(B) . {
+log_debug("literal_opt ::= L_R_BRACKET exp");
 A = new literal();
 A->push_back(B);
 }

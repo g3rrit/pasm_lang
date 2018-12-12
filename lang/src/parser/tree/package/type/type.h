@@ -3,6 +3,7 @@
 #include <cstddef>
 
 struct id_token;
+struct int_token;
 
 namespace tree {
 
@@ -10,19 +11,20 @@ namespace tree {
 
   struct type {
 
-    virtual ~type();
+    virtual ~type() {}
     // size in bytes
-    virtual std::size_t size();
+    virtual std::size_t size() { return 0; }
   };
 
   struct unresolved_type : type {
     id_token *id;
 
     unresolved_type(id_token*);
+    ~unresolved_type();
   };
 
   struct primative_type : type {
-    enum {
+    enum p_type {
       I8,
       I16,
       I32,
@@ -33,22 +35,28 @@ namespace tree {
       U64,
       F32,
       F64
-    } type;
+    } t;
+
+    primative_type(p_type);
+    ~primative_type();
+
+    std::size_t size();
   };
 
   struct pointer_type : type {
     type *t;
 
     pointer_type(type*);
+    ~pointer_type();
 
     std::size_t size();
   };
 
   struct array_type : type {
     type *t;
-    std::size_t len;
+    int_token *len;
 
-    array_type(type*, std::size_t);
+    array_type(type*, int_token*);
     ~array_type();
 
     std::size_t size();
@@ -58,5 +66,8 @@ namespace tree {
     type_def *t_def;
 
     compound_type(type_def*);
+    ~compound_type();
+
+    std::size_t size();
   };
 }
