@@ -42,6 +42,13 @@ namespace tree {
     delete id;
   }
 
+  id_vec_exp::id_vec_exp(id_token_vec *_id_vec)
+    : id_vec(_id_vec) {}
+
+  id_vec_exp::~id_vec_exp() {
+    delete id_vec;
+  }
+
   ref_acc_exp::ref_acc_exp(ref_exp *_left, id_token *_right, REF_OP _op)
     : left(_left), right(_right), op(_op) {}
 

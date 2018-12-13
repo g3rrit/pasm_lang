@@ -21,8 +21,9 @@ struct id_token : primary_token {
   bool operator>(const id_token&) const;
 };
 
-struct id_token_vec : std::vector<id_token> {
+struct id_token_vec : std::vector<id_token*> {
   bool operator<(const id_token_vec&) const;
+  ~id_token_vec();
 };
 
 struct float_token : primary_token {

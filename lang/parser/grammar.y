@@ -12,6 +12,7 @@
 #include "function_type.h"
 #include "function.h"
 #include "type_def.h"
+#include "package.h"
 
 using namespace tree;
 }
@@ -31,7 +32,7 @@ using namespace tree;
 %right              T_WHITESPACE T_END T_OTHER T_TAB T_NEW_LINE T_CARRIAGE_RETURN T_CHAR T_MULTICHAR T_LINE_COMMENT
                     T_MULTILINE_COMMENT T_INTEGER T_FLOAT T_STRING T_USE T_AS T_RET
                     T_U8 T_U16 T_U32 T_U64 T_I8 T_I16 T_I32 T_I64 T_F32 T_F64
-                    T_EXCALAMATIONMARK_EQUALS
+                    T_EXCALAMATIONMARK_EQUALS T_PACKAGE
                     T_COLON T_SEMICOLON
                     T_EXCLAMATIONMARK T_QUESTIONMARK .
 
@@ -71,7 +72,13 @@ using namespace tree;
 |                      TYPES                          |
 +----------------------------------------------------*/
 
+%type package                       {package*}
+%type package_opt                   {package*}
+
+%type package_decl                  {id_token_vec*}
+
 %type id                            {id_token*}
+%type id_vec                        {id_token_vec*}
 %type integer                       {int_token*}
 %type float                         {float_token*}
 %type string                        {string_token*}
@@ -118,12 +125,18 @@ printf("syntax error\n");
 |                      GRAMMAR                        |
 +----------------------------------------------------*/
 
-package ::= package_opt T_END . {
+package(A) ::= package_opt(B) T_END . {
 log_debug("package ::= package_opt  END");
+A = B;
 }
 
-package_opt ::= /* empty */ . {
+package_opt(A) ::= package_decl(B) . {
+log_debug("package_opt ::= package_decl");
+A = new package(B);
+}
+package_opt(A) ::= /* empty */ . {
 log_debug("package_opt ::= /* empty */");
+A = new package(nullptr);
 }
 package_opt ::= package_opt function_def . {
 log_debug("package_opt ::= package_opt function_def");
@@ -137,6 +150,18 @@ log_debug("package_opt ::= package_opt var_decl");
 package_opt ::= package_opt struct_def . {
 log_debug("package_opt ::= package_opt struct_def");
 }
+
+package_decl(A) ::= T_PACKAGE id_vec(B) . {
+log_debug("package_decl ::= T_PACKAGE id");
+A = B;
+}
+
+package_decl(A) ::= T_PACKAGE id(B) . {
+log_debug("package_decl ::= T_PACKAGE id");
+A = new id_token_vec();
+A->push_back(B);
+}
+
 
 /*----------------------------------------------------+
 |                       STRUCT                        |
@@ -293,6 +318,12 @@ A = B;
 }
 type(A) ::= id(B) . {
 log_debug("type ::= id");
+id_token_vec *temp = new id_token_vec();
+temp->push_back(B);
+A = new unresolved_type(temp);
+}
+type(A) ::= id_vec(B) . {
+log_debug("type ::= id_vec");
 A = new unresolved_type(B);
 }
 
@@ -337,6 +368,16 @@ A = mnemonic::ADD;
 id(A) ::= T_ID(B) . {
 log_debug("id ::= ID");
 A = static_cast<id_token*>(*B);
+}
+id_vec(A) ::= id(B) T_DOUBLE_COLON . {
+log_debug("id_vec ::= id DOUBLE_COLON");
+A = new id_token_vec();
+A->push_back(B);
+}
+id_vec(A) ::= id_vec(B) T_DOUBLE_COLON id(C) . {
+log_debug("id_vec ::= id_vec T_DOUBLE_COLON id");
+A = B;
+B->push_back(C);
 }
 string(A) ::= T_STRING(B) . {
 log_debug("string ::= STRING");
@@ -412,6 +453,10 @@ A = B;
 ref_exp(A) ::= id(B) . [T_EXP] {
 log_debug("ref_exp ::= id");
 A = new id_exp(B);
+}
+ref_exp(A) ::= id_vec(B) . [T_EXP] {
+log_debug("ref_exp ::= id_vec");
+A = new id_vec_exp(B);
 }
 ref_exp(A) ::= T_LESS_THAN type(B) T_GREATER_THAN T_L_R_BRACKET ref_exp(C) T_R_R_BRACKET . {
 log_debug("ref_exp ::= CAST LESS_THAN type GREATER_THAN L_R_BRACKET ref_exp R_R_BRACKET");

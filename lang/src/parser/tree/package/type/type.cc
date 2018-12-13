@@ -5,11 +5,11 @@
 
 namespace tree {
 
-  unresolved_type::unresolved_type(id_token *_id)
-    : id(_id) {}
+  unresolved_type::unresolved_type(id_token_vec *_id_vec)
+    : id_vec(_id_vec) {}
 
   unresolved_type::~unresolved_type() {
-    delete id;
+    delete id_vec;
   }
 
   primative_type::primative_type(p_type _t)

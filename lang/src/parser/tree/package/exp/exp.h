@@ -4,6 +4,7 @@ struct id_token;
 struct int_token;
 struct float_token;
 struct string_token;
+struct id_token_vec;
 
 namespace tree {
 
@@ -63,6 +64,12 @@ namespace tree {
     id_token *id;
     id_exp(id_token*);
     ~id_exp();
+  };
+
+  struct id_vec_exp : ref_exp {
+    id_token_vec *id_vec;
+    id_vec_exp(id_token_vec*);
+    ~id_vec_exp();
   };
 
   struct ref_acc_exp : ref_exp {

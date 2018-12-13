@@ -3,6 +3,7 @@
 #include <cstddef>
 
 struct id_token;
+struct id_token_vec;
 struct int_token;
 
 namespace tree {
@@ -17,9 +18,9 @@ namespace tree {
   };
 
   struct unresolved_type : type {
-    id_token *id;
+    id_token_vec *id_vec;
 
-    unresolved_type(id_token*);
+    unresolved_type(id_token_vec*);
     ~unresolved_type();
   };
 

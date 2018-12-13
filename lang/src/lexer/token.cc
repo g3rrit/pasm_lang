@@ -26,14 +26,20 @@ bool id_token_vec::operator<(const id_token_vec& rhs) const {
     return false;
   } else {
     for(size_t i = 0; i < lhs_size; i++) {
-      if(this->at(i) < rhs.at(i)) {
+      if(*this->at(i) < *rhs.at(i)) {
         return true;
-      } else if(this->at(i) > rhs.at(i)) {
+      } else if(*this->at(i) > *rhs.at(i)) {
         return false;
       }
     }
   }
   return false;
+}
+
+id_token_vec::~id_token_vec() {
+  for(id_token *elem : *this) {
+    delete elem;
+  }
 }
 
 
