@@ -13,13 +13,16 @@
 #include "function.h"
 #include "type_def.h"
 #include "package.h"
+#include "parser.h"
+#include "program.h"
+
 
 using namespace tree;
 }
 
-%name ImplParse
+%name FParse
 
-%extra_argument { void *state }
+%extra_argument { prog::prog_state *state }
 
 %token_type {token*}
 %default_type {token*}
@@ -116,6 +119,9 @@ using namespace tree;
 %type inclusive_or_exp              {infix_scalar_exp*}
 %type scalar_exp                    {infix_scalar_exp*}
 
+%destructor package {
+(void)state;
+}
 
 %syntax_error {
 printf("syntax error\n");
@@ -127,6 +133,7 @@ printf("syntax error\n");
 
 package(A) ::= package_opt(B) T_END . {
 log_debug("package ::= package_opt  END");
+(void)state;
 A = B;
 }
 
@@ -134,12 +141,10 @@ package_opt(A) ::= package_decl(B) . {
 log_debug("package_opt ::= package_decl");
 A = new package(B);
 }
-package_opt(A) ::= /* empty */ . {
-log_debug("package_opt ::= /* empty */");
-A = new package(nullptr);
-}
-package_opt ::= package_opt function_def . {
+package_opt(A) ::= package_opt(B) function_def(C) . {
 log_debug("package_opt ::= package_opt function_def");
+B->add_function(C);
+A = B;
 }
 package_opt ::= package_opt var_def . {
 log_debug("package_opt ::= package_opt var_def");

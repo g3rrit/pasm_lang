@@ -25,6 +25,8 @@ namespace tree {
     void add_param(var_decl*);
     void add_def(var_def*);
     void add_stm(statement*);
+
+    id_token& get_id();
   };
 
 }

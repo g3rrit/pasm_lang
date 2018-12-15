@@ -26,4 +26,9 @@ namespace tree {
   void type_def::add_elem(var_decl *_elem) {
     elems.insert(std::make_pair(_elem->id, _elem));
   }
+
+  id_token& type_def::get_id() {
+    
+    return *id;
+  }
 }

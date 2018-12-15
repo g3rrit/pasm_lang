@@ -1,5 +1,6 @@
 #include <iostream>
 
+#include "compiler.h"
 
 int main(int argc, char **argv) {
 
@@ -10,6 +11,9 @@ int main(int argc, char **argv) {
             << "| Author:  Gerrit Proessl          |" << std::endl
             << "| mail:    grproessl@web.de        |" << std::endl
             << "+----------------------------------+" << std::endl;
+
+  comp::comp c;
+  c.start();
 
   return 0;
 }

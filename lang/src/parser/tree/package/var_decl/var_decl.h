@@ -16,5 +16,7 @@ namespace tree {
     ~var_decl();
 
     std::size_t size();
+
+    id_token& get_id();
   };
 }

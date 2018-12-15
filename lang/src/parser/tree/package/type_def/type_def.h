@@ -22,5 +22,7 @@ namespace tree {
     std::size_t size();
 
     void add_elem(var_decl*);
+
+    id_token& get_id();
   };
 }

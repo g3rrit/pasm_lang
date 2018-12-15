@@ -1,6 +1,7 @@
 #include "exp.h"
 
 #include "type.h"
+#include "var_decl.h"
 
 #include "token.h"
 
@@ -47,6 +48,13 @@ namespace tree {
 
   id_vec_exp::~id_vec_exp() {
     delete id_vec;
+  }
+
+  var_exp::var_exp(var_decl *_var)
+    : var(_var) {}
+
+  var_exp::~var_exp() {
+    delete var;
   }
 
   ref_acc_exp::ref_acc_exp(ref_exp *_left, id_token *_right, REF_OP _op)

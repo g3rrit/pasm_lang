@@ -9,6 +9,7 @@ struct id_token_vec;
 namespace tree {
 
   struct type;
+  struct var_decl;
 
   struct exp {
     virtual ~exp() {}
@@ -60,6 +61,7 @@ namespace tree {
     virtual ~ref_exp() {}
   };
 
+  // unresolved
   struct id_exp : ref_exp {
     id_token *id;
     id_exp(id_token*);
@@ -70,6 +72,12 @@ namespace tree {
     id_token_vec *id_vec;
     id_vec_exp(id_token_vec*);
     ~id_vec_exp();
+  };
+
+  struct var_exp : ref_exp {
+    var_decl *var;
+    var_exp(var_decl*);
+    ~var_exp();
   };
 
   struct ref_acc_exp : ref_exp {

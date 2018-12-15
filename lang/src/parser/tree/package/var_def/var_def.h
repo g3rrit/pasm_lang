@@ -1,5 +1,7 @@
 #pragma once
 
+struct id_token;
+
 namespace tree {
 
   struct var_decl;
@@ -11,5 +13,7 @@ namespace tree {
 
     var_def(var_decl*, literal*);
     ~var_def();
+
+    id_token& get_id();
   };
 };

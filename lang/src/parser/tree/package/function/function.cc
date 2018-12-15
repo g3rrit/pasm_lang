@@ -1,5 +1,7 @@
 #include "function.h"
 
+#include <iostream>
+
 #include "var_decl.h"
 #include "var_def.h"
 #include "statement.h"
@@ -10,7 +12,12 @@
 namespace tree {
 
   function::function(id_token *_id, function_type *_f_type)
-    : id(_id), f_type(_f_type) {}
+    : id(_id), f_type(_f_type) {
+      if(id == nullptr) {
+        std::cerr << "invalid id token" << std::endl;
+        //TODO: throw error
+      }
+    }
 
   function::~function() {
     for(auto elem : defs) {
@@ -32,5 +39,9 @@ namespace tree {
 
   void function::add_stm(statement *_stm) {
     stms.push_back(_stm);
+  }
+
+  id_token& function::get_id() {
+    return *id;
   }
 }

@@ -11,4 +11,4 @@
 #include "token.h"
 #include "token_types.h"
 
-token& lex(std::ifstream &in, bool keep);
+token *lex(std::ifstream &in, bool keep);
