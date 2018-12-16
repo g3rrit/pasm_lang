@@ -7,6 +7,7 @@
 #include <cstring>
 #include <typeinfo>
 #include <vector>
+#include <ostream>
 
 struct primary_token {
   int type;
@@ -19,27 +20,32 @@ struct id_token : primary_token {
   ~id_token();
   bool operator<(const id_token&) const;
   bool operator>(const id_token&) const;
+  friend std::ostream& operator<<(std::ostream&, const id_token&);
 };
 
 struct id_token_vec : std::vector<id_token*> {
   bool operator<(const id_token_vec&) const;
   ~id_token_vec();
+  friend std::ostream& operator<<(std::ostream&, const id_token_vec&);
 };
 
 struct float_token : primary_token {
   float val;
   float_token(float _val);
+  friend std::ostream& operator<<(std::ostream&, const float_token&);
 };
 
 struct string_token : primary_token {
   char *val;
   string_token(char *_val);
   ~string_token();
+  friend std::ostream& operator<<(std::ostream&, const string_token&);
 };
 
 struct int_token : primary_token {
   int val;
   int_token(int _val);
+  friend std::ostream& operator<<(std::ostream&, const int_token&);
 };
 
 struct token {

@@ -13,7 +13,7 @@ token *lex(std::ifstream &in, bool keep)
     static size_t token_buffer_pos = 0;
     static token* current_token = nullptr;
 
-    current_token = &token_buffer[token_buffer_pos];
+    current_token = &(token_buffer[token_buffer_pos]);
 
     if(keep) {
         token_buffer_pos++;
@@ -58,6 +58,11 @@ token *lex(std::ifstream &in, bool keep)
 
         "ret"                               {
                                                 *current_token = token(T_RET);
+                                                return current_token;
+                                            }
+
+        "package"                           {
+                                                *current_token = token(T_PACKAGE);
                                                 return current_token;
                                             }
 
@@ -125,6 +130,12 @@ token *lex(std::ifstream &in, bool keep)
                                                 *current_token = token(T_COLON);
                                                 return current_token;
                                             }
+
+        "::"                                {
+                                                *current_token = token(T_DOUBLE_COLON);
+                                                return current_token;
+                                            }
+
 
         [;]                                 {
                                                 *current_token = token(T_SEMICOLON);
@@ -226,6 +237,28 @@ token *lex(std::ifstream &in, bool keep)
                                                 return current_token;
                                             }
 
+
+        /*                     MNEMONICS                     */
+
+        "push"                              {
+                                                *current_token = token(T_PUSH);
+                                                return current_token;
+                                            }
+
+
+        "add"                               {
+                                                *current_token = token(T_ADD);
+                                                return current_token;
+                                            }
+
+
+        "mov"                              {
+                                                *current_token = token(T_MOV);
+                                                return current_token;
+                                            }
+
+        /*                     ---------                     */
+
         [0-9]+		                        {
                                                 *current_token = token(T_INTEGER);
                                                 current_token->set_int_val(atoi(buffer));
@@ -241,25 +274,6 @@ token *lex(std::ifstream &in, bool keep)
         [a-zA-Z_][a-zA-Z0-9_]*              {
                                                 *current_token = token(T_ID);
                                                 current_token->set_str_val(buffer);
-                                                return current_token;
-                                            }
-
-        /*                     MNEMONICS                     */
-
-        "PUSH"                              {
-                                                *current_token = token(T_PUSH);
-                                                return current_token;
-                                            }
-
-
-        "ADD"                               {
-                                                *current_token = token(T_ADD);
-                                                return current_token;
-                                            }
-
-
-        "MOV"                              {
-                                                *current_token = token(T_MOV);
                                                 return current_token;
                                             }
 

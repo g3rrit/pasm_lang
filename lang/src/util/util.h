@@ -3,6 +3,8 @@
 #include "token.h"
 #include "iostream"
 
+#define DEBUG
+
 #ifdef DEBUG
 
 #define log_debug(msg) \

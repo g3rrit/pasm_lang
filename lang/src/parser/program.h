@@ -24,5 +24,7 @@ namespace prog {
     void parse_file(void*, prog_state&, std::string& file);
 
     void resolve();
+
+    void print();
   };
 }

@@ -27,7 +27,7 @@ namespace prog {
 
     std::cout << "+----------------------------------+" << std::endl;
     for(std::string& file : files) {
-      std::cout << "| Parsing file: " << file << std::left << std::setw(20) << "|";
+      std::cout << "| Parsing file: " << std::left << std::setw(19) << file << "|";
       parse_file(parser, p_state, file);
       std::cout << "\r";
     }
@@ -50,7 +50,7 @@ namespace prog {
       t = lex(in, keep);
 
       if(t->type == T_OTHER) {
-        keep = false;
+        keep = true; //bug!
         continue;
       } else if(t->type == T_END) {
         return;
@@ -58,7 +58,7 @@ namespace prog {
 
       keep = true;
 
-      std::cout << t << std::endl;
+      //std::cout << *t << std::endl;
 
       parser_parse(parser, t->type, t, &p_state);
     }
@@ -67,5 +67,9 @@ namespace prog {
 
   void prog::resolve() {
 
+  }
+
+  void prog::print() {
+    std::cout << t << std::endl;
   }
 }

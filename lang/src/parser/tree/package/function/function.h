@@ -27,6 +27,8 @@ namespace tree {
     void add_stm(statement*);
 
     id_token& get_id();
+
+    friend std::ostream& operator<<(std::ostream&, const function&);
   };
 
 }

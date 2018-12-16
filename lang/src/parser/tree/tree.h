@@ -3,6 +3,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include <ostream>
 
 #include "util.h"
 
@@ -19,5 +20,6 @@ namespace tree {
       package* package_get(id_token_vec*);
       bool package_exists(id_token_vec*);
 
+      friend std::ostream& operator<<(std::ostream&, const tree&);
   };
 }

@@ -19,4 +19,14 @@ namespace tree {
     return package_map.count(token_vec);
   }
 
+  std::ostream& operator<<(std::ostream& os, const tree &t) {
+    os << "syntax tree-{" << std::endl;
+    os << "packages-{" << std::endl;
+    for(auto *p : t.package_map) {
+      os << *p.second << std::endl
+    }
+
+    os << "}" << std::endl << "}";
+    return os;
+  }
 }

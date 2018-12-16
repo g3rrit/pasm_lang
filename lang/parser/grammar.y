@@ -351,15 +351,15 @@ A = new label_statement(B);
 }
 
 mnemonic(A) ::= T_PUSH . {
-log_debug("u_mnemonic ::= PUSH");
+log_debug("mnemonic ::= PUSH");
 A = mnemonic::PUSH;
 }
 mnemonic(A) ::= T_MOV . {
-log_debug("d_mnemonic ::= MOV");
+log_debug("mnemonic ::= MOV");
 A = mnemonic::MOV;
 }
 mnemonic(A) ::= T_ADD . {
-log_debug("d_mnemonic ::= ADD");
+log_debug("mnemonic ::= ADD");
 A = mnemonic::ADD;
 }
 
@@ -411,6 +411,10 @@ operand(A) ::= scalar_exp(B) . {
 log_debug("operand ::= scalar_exp");
 A = new scalar_operand(B);
 }
+operand(A) ::= scalar_exp_int(B) . {
+log_debug("operand ::= scalar_exp_int");
+A = new scalar_operand(B);
+}
 operand(A) ::= T_L_S_BRACKET scalar_exp(B) T_R_S_BRACKET . {
 log_debug("operand ::= L_S_BRACKET scalar_exp R_S_BRACKET");
 A = new acc_operand(B);
@@ -438,6 +442,10 @@ A = B;
 
 exp(A) ::= scalar_exp(B) . {
 log_debug("exp ::= scalar_exp");
+A = B;
+}
+exp(A) ::= scalar_exp_int(B) . {
+log_debug("exp ::= scalar_exp_int");
 A = B;
 }
 exp(A) ::= float(B) . {

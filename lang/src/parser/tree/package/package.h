@@ -2,6 +2,7 @@
 
 #include <vector>
 #include <map>
+#include <ostream>
 
 #include "util.h"
 
@@ -31,6 +32,8 @@ namespace tree {
     void add_type(type_def*);
 
     id_token_vec& get_ids();
+
+    friend std::ostream& operator<<(std::ostream&, const package&);
   };
 
 }

@@ -44,4 +44,21 @@ namespace tree {
   id_token& function::get_id() {
     return *id;
   }
+
+  std::ostream& operator<<(std::ostream& os, const function &f) {
+    os << "function-{" << std::endl;
+    os << *f.id << std::endl;
+    os << *f.f_type << std::endl;
+    os << "defs-{" << std::endl;
+    for(const auto *d : f.defs) {
+      os << *d.second << std::endl;
+    }
+    os << "}" << std::endl << "statements-{" << std::endl;
+    for(const statement *s : f.stms) {
+      os << *s << std::endl;
+    }
+    os << "}" << std::endl;
+
+    return os;
+  }
 }
