@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cstddef>
+#include <ostream>
 
 struct id_token;
 struct id_token_vec;
@@ -15,6 +16,7 @@ namespace tree {
     virtual ~type() {}
     // size in bytes
     virtual std::size_t size() { return 0; }
+    virtual friend std::ostream& operator<<(std::ostream&, const type&) { return os; }
   };
 
   struct unresolved_type : type {
@@ -22,6 +24,8 @@ namespace tree {
 
     unresolved_type(id_token_vec*);
     ~unresolved_type();
+
+    friend std::ostream& operator<<(std::ostream&, const unresolved_type&);
   };
 
   struct primative_type : type {
@@ -42,6 +46,8 @@ namespace tree {
     ~primative_type();
 
     std::size_t size();
+
+    friend std::ostream& operator<<(std::ostream&, const primative_type&);
   };
 
   struct pointer_type : type {
@@ -51,6 +57,8 @@ namespace tree {
     ~pointer_type();
 
     std::size_t size();
+
+    friend std::ostream& operator<<(std::ostream&, const pointer_type&);
   };
 
   struct array_type : type {
@@ -61,6 +69,8 @@ namespace tree {
     ~array_type();
 
     std::size_t size();
+
+    friend std::ostream& operator<<(std::ostream&, const array_type&);
   };
 
   struct compound_type : type {
@@ -70,5 +80,7 @@ namespace tree {
     ~compound_type();
 
     std::size_t size();
+
+    friend std::ostream& operator<<(std::ostream&, const compound_type&);
   };
 }

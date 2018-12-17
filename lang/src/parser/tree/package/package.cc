@@ -46,19 +46,19 @@ namespace tree {
   std::ostream& operator<<(std::ostream& os, const package &p) {
     os << "package-{" << std::endl;
     os << "functions-{" << std::endl;
-    for(const auto *f : p.functions) {
+    for(const auto& f : p.functions) {
       os << *f.second << std::endl;
     }
     os << "}" << std::endl << "var_defs-{" << std::endl;
-    for(const auto *v : p.var_defs) {
+    for(const auto& v : p.var_defs) {
       os << *v.second << std::endl;
     }
     os << "}" << std::endl << "var_decls-{" << std::endl;
-    for(const auto *v : p.var_decls) {
+    for(const auto& v : p.var_decls) {
       os << *v.second << std::endl;
     }
     os << "}" << std::endl << "types-{" << std::endl;
-    for(const auto *t : p.types) {
+    for(const auto& t : p.types) {
       os << *t.second << std::endl;
     }
     os << "}" << std::endl << "}";

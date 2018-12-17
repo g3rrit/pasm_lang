@@ -1,5 +1,7 @@
 #pragma once
 
+#include <ostream>
+
 struct id_token;
 
 namespace tree {
@@ -15,5 +17,7 @@ namespace tree {
     ~var_def();
 
     id_token& get_id();
+
+    friend std::ostream& operator<<(std::ostream&, const var_def&);
   };
 };

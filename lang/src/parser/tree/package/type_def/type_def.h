@@ -2,6 +2,7 @@
 
 #include "util.h"
 #include <cstddef>
+#include <ostream>
 #include <map>
 
 struct id_token;
@@ -24,5 +25,7 @@ namespace tree {
     void add_elem(var_decl*);
 
     id_token& get_id();
+
+    friend std::ostream& operator<<(std::ostream&, const type_def&);
   };
 }

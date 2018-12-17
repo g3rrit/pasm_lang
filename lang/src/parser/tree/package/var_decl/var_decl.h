@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cstddef>
+#include <ostream>
 
 struct id_token;
 
@@ -18,5 +19,7 @@ namespace tree {
     std::size_t size();
 
     id_token& get_id();
+
+    friend std::ostream& operator<<(std::operator&, const var_decl&);
   };
 }

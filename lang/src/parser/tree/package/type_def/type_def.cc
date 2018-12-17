@@ -28,7 +28,19 @@ namespace tree {
   }
 
   id_token& type_def::get_id() {
-    
+
     return *id;
+  }
+
+  std::ostream& operator<<(std::ostream& os, const type_def& t) {
+    os << "type_def-{" << std::endl;
+    os << "id: " << t.get_id() << std::endl;
+    os << "size: " << t.size() << std::endl;
+    os << "elems-{" << std::endl;
+    for(const auto *elem : t.elems) {
+      os << *elem.second << std::endl;
+    }
+    os << "}";
+    return os;
   }
 }

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <map>
+#include <ostream>
 #include "util.h"
 
 #include "type.h"
@@ -19,5 +20,7 @@ namespace tree {
     void add_param(var_decl* _param);
 
     std::size_t size();
+
+    friend std::ostream& operator<<(std::ostream&, const function_type&);
   };
 }

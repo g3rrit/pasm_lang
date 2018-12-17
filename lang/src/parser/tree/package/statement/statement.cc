@@ -15,6 +15,11 @@ namespace tree {
     delete id;
   }
 
+  std::ostream& operator<<(std::ostream& os, const label_statement& s) {
+    os << "label_statement: " << *s.id;
+    return os;
+  }
+
   mnemonic_statement::mnemonic_statement(mnemonic _mem, operand *_first, operand *_second)
     : mem(_mem), first(_first), second(_second) {}
 
@@ -23,4 +28,14 @@ namespace tree {
     delete second;
   }
 
+  std::ostream& operator<<(std::ostream& os, const mnemonic_statement& s) {
+    os << "mnemonic_statement-{" << std::endl;
+    os << "mnemonic: ";
+    switch(s.mem) {
+      default:
+        os << "unknown";
+    }
+    os << std::endl << *s.first << std::endl << *s.second;
+    return os;
+  }
 }

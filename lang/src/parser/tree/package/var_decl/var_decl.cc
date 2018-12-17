@@ -26,4 +26,12 @@ namespace tree {
   id_token& var_decl::get_id() {
     return *id;
   }
+
+  std::ostream& operator<<(std::operator& os, const var_decl& v) {
+    os << "var_decl-{" << std::endl;
+    os << "id: " << v.get_id() << std::endl;
+    os << *v.t << std::endl;
+    os << "}";
+    return os;
+  }
 }
