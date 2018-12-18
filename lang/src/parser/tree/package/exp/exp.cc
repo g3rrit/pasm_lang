@@ -146,6 +146,24 @@ namespace tree {
     delete left;
     delete right;
   }
+  
+  std::ostream& operator<<(std::ostream& os, const ref_acc_exp& e) {
+    os << "ref_acc_exp-{" << std::endl;
+    os << "left: " << *e.left << std::endl;
+    os << "right: " << *e.right << std::endl;
+
+    os << "op: ";
+    switch(e.op) {
+      case DOT:
+        os << "DOT";
+        break;
+      case ARROW:
+        os << "ARROW";
+        break;
+    }
+    os << std::endl << "}";
+    return os;
+  }
 
   ref_off_exp::ref_off_exp(ref_exp *_left, scalar_exp *_right, REF_OP _op)
   : left(_left), right(_right), op(_op) {}
@@ -153,6 +171,24 @@ namespace tree {
   ref_off_exp::~ref_off_exp() {
     delete left;
     delete right;
+  }
+
+  std::ostream& operator<<(std::ostream& os, const ref_off_exp& e) {
+    os << "ref_off_exp-{" << std::endl;
+    os << "left: " << *e.left << std::endl;
+    os << "right: " << *e.right << std::endl;
+
+    os << "op: ";
+    switch(e.op) {
+      case PLUS:
+        os << "PLUS";
+        break;
+      case MINUS:
+        os << "MINUS";
+        break;
+    }
+    os << std::endl << "}";
+    return os;
   }
 
   acc_exp::acc_exp(ref_exp *_ref, scalar_exp *_index)
@@ -163,6 +199,14 @@ namespace tree {
     delete index;
   }
 
+  std::ostream& operator<<(std::ostream& os, const acc_exp& e) {
+    os << "acc_exp-{" << std::endl;
+    os << "ref: " << *e.ref << std::endl;
+    os << "index: " << *e.index << std::endl;
+    os << std::endl << "}";
+    return os;
+  }
+
   cast_exp::cast_exp(ref_exp *_ref, type *_t)
   : ref(_ref), t(_t) {}
 
@@ -170,4 +214,13 @@ namespace tree {
     delete ref;
     delete t;
   }
+
+  std::ostream& operator<<(std::ostream& os, const cast_exp& e) {
+    os << "cast_exp-{" << std::endl;
+    os << "ref: " << *e.ref << std::endl;
+    os << "type: " << *e.t << std::endl;
+    os << std::endl << "}";
+    return os;
+  }
+
 }
